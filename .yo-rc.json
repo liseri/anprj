@@ -1,0 +1,28 @@
+{
+  "generator-jhipster": {
+    "jhipsterVersion": "3.8.0",
+    "baseName": "anprj",
+    "packageName": "com.liseri.anprj",
+    "packageFolder": "com/liseri/anprj",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "buildTool": "gradle",
+    "enableSocialSignIn": false,
+    "jwtSecretKey": "2b8e173701bdd48939e678af6c2d73ed50931b2d",
+    "useSass": false,
+    "applicationType": "monolith",
+    "testFrameworks": [
+      "gatling"
+    ],
+    "jhiPrefix": "jhi",
+    "enableTranslation": false
+  }
+}

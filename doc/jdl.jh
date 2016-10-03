@@ -1,0 +1,110 @@
+/*商户信息JDL描述*/
+
+/*商户状态枚举*/
+enum PrjStatu {
+    CREATED,    //创建
+    NORMAL,     //正常（经激活或审核，或暂时停后重启）
+    SUSPEND,    //暂停
+    COMPLETED   //完成
+}
+/*用户类型*/
+enum UserType {
+	PERSONAL,    //个人用户
+    ENTERPRISE   //企业用户
+}
+/*借款还款方式*/
+enum REPAYMENTTYPE {
+	MONTH01,   //按月付息到期一次性还本
+    QUARTER01, //按季度还本息
+    QUARTER02  //按季度还息
+}
+/*地址绑定*/
+entity Address(AN_ADDRESS) {
+	login String required maxlength(16),      //账户名
+	address String required maxlength(64),    //地址
+    name String required maxlength(16),       //姓名
+    phone String required maxlength(16),      //电话
+    postcode String maxlength(6)              //邮编
+}
+/*电话绑定*/
+entity Phone(AN_PHONE) {
+	login String required maxlength(16),       //账户名
+    phone String required maxlength(16),      //电话
+    activated Boolean required                //是否绑定激活
+    activateDate LocalDate                    //绑定时间
+}
+/*身份证实名绑定*/
+entity RealIdentity(AN_REALNAME) {
+	login String required maxlength(16),      //账户名
+    name String required maxlength(16),       //姓名
+    identityNumber String required maxlength(18),//身份证号 唯一
+    identityPicPath String required maxlength(255),//身份证图片路径
+    activated Boolean required,                //是否绑定实名身份证
+    activateDate LocalDate                     //绑定时间
+}
+entity Enterprise(AN_ENTERPRISE) {
+	login String required maxlength(16),      //账户名
+	name String required maxlength(16),      //企业名称
+	address String required maxlength(64),   //企业地址
+    postcode String maxlength(6),            //企业邮编
+    phone String maxlength(16)               //企业联系电话
+}
+/*网点*/
+entity Branch(AN_BRANCH) {
+	name String required maxlength(32),        //网点名称
+    address String maxlength(64),              //网点地址
+    phone String maxlength(16)                 //网点电话
+}
+/*贷款项目*/
+entity LoanPrj(AN_LOAN) {
+	name String required maxlength(32),        //贷款项目名称
+    balance BigDecimal required min(0),        //贷款金额
+    rate BigDecimal required min(0) max(1),    //贷款利率
+    durationUnit String required maxlength(16),//贷款期限单位，如天
+    durationNum Integer required min(0),       //贷款期限数值，如180， 和单位合起来就是180天
+    replayType REPAYMENTTYPE required,         //还款方式
+    //是不是还应该把预算的利润也放进来
+    activated Boolean required,                //是否发布  发布，停止发布
+    activateDate LocalDate                     //发布时间
+}
+/*商户信息表*/
+entity Merchant(ISS_MERCHANT) {
+	merId String required maxlength(11),     //商户号 todo 要加唯一值检测
+    merName String required maxlength(255),  //商户名称
+    mccType String required maxlength(6),    //商户类型
+    address String  maxlength(255),          //商户地址
+    postcode String  maxlength(10),          //商户邮编
+    unmerNo String  maxlength(20),          //银联商户号
+    hostNo String  maxlength(20),           //核心客户号
+    certType String  maxlength(3),          //商户证件类型
+    certNo String  maxlength(32),          //商户证件号码
+    certNo String  maxlength(32),          //结算账号
+    certNo String  maxlength(255),          //结算账号户名
+    status MerchantStatu,                   //状态（0：正常  1：销户）
+    liquidUnit String maxlength(20) ,       //ChronoUnit,     //清算周期单位, 如天
+    liquidCount Integer min(0),             //清算周期数， 如3天
+    limit Long min(0),                      //限额
+    regDate LocalDate ,                   //注册日期
+    branchNo String  maxlength(11),          //机构号
+    tellerId String  maxlength(11),          //新增操作员ID
+    cancelDate LocalDate ,                   //注销日期
+    legalFirstName String  maxlength(32),          //法人firstname
+    legalSecondName String  maxlength(32),          //法人secondname
+    legalLastName String  maxlength(32),          //法人lastname
+    legalCertType String  maxlength(3),          //法人证件类型
+    legalCertNo String  maxlength(32),          //法人证件号码
+    conFirstName String  maxlength(32),          //联系人firstname
+    conSecondName String  maxlength(32),          //联系人secondname
+    conLastName String  maxlength(32),          //联系人lastname
+    conCertType String  maxlength(3),          //联系人证件类型
+    conCertNo String  maxlength(32),          //联系人证件号码
+    conPhone String  maxlength(32),          //联系人联系方式
+    remark String  maxlength(255)          //备注，商户描述
+}
+
+service all with serviceClass
+
+// Set pagination options
+paginate Merchant with pagination
+
+angularSuffix * with pospSuffix
