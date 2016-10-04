@@ -110,7 +110,7 @@ public class UserService {
         user.setLastName(managedUserVM.getLastName());
         user.setEmail(managedUserVM.getEmail());
         if (managedUserVM.getLangKey() == null) {
-            user.setLangKey("en"); // default language
+            user.setLangKey("zh-cn"); // default language
         } else {
             user.setLangKey(managedUserVM.getLangKey());
         }

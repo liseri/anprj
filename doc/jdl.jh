@@ -1,10 +1,17 @@
 /*商户信息JDL描述*/
 
-/*商户状态枚举*/
-enum PrjStatu {
-    CREATED,    //创建
-    NORMAL,     //正常（经激活或审核，或暂时停后重启）
-    SUSPEND,    //暂停
+/*贷款申请状态枚举*/
+enum LoanApplyStatu {
+    APPLYED,    //创建
+    PASSED,     //通过
+    REJECTED,   //驳回
+    LOANED,    //已放款
+    COMPLETED   //完成
+}
+/*理财申请状态枚举*/
+enum LendApplyStatu {
+    APPLYED,    //创建
+    STARTED,     //起息
     COMPLETED   //完成
 }
 /*用户类型*/
@@ -14,9 +21,17 @@ enum UserType {
 }
 /*借款还款方式*/
 enum REPAYMENTTYPE {
-	MONTH01,   //按月付息到期一次性还本
-    QUARTER01, //按季度还本息
-    QUARTER02  //按季度还息
+	MONTH,         //每月等额本息
+    MONTHANDDUE,   //每月付息到期一次性还本
+    QUARTER,       //每季度等额本息
+    QUARTERANDDUE, //每季度付息到期一次性还本
+    DUE            //到期一次性还本付息
+}
+enum LOANPRJTYPE {
+    SMALL,       //小额
+    GENERAL,     //一般
+    LARGE,       //大额
+    HUGE         //超大额
 }
 /*地址绑定*/
 entity Address(AN_ADDRESS) {
@@ -42,6 +57,7 @@ entity RealIdentity(AN_REALNAME) {
     activated Boolean required,                //是否绑定实名身份证
     activateDate LocalDate                     //绑定时间
 }
+/*企业信息*/
 entity Enterprise(AN_ENTERPRISE) {
 	login String required maxlength(16),      //账户名
 	name String required maxlength(16),      //企业名称
@@ -55,9 +71,16 @@ entity Branch(AN_BRANCH) {
     address String maxlength(64),              //网点地址
     phone String maxlength(16)                 //网点电话
 }
+/*贷款额度设置*/
+entity LoanLimit(AN_LOANLIMIT) {
+	loanType LOANPRJTYPE required,             //贷款额度种类
+    minLinit BigDecimal required min(0),       //起始额度
+    maxLinit BigDecimal required min(0)        //最大额度
+}
 /*贷款项目*/
 entity LoanPrj(AN_LOAN) {
 	name String required maxlength(32),        //贷款项目名称
+    loanType LOANPRJTYPE required,             //贷款额度种类
     balance BigDecimal required min(0),        //贷款金额
     rate BigDecimal required min(0) max(1),    //贷款利率
     durationUnit String required maxlength(16),//贷款期限单位，如天
@@ -67,44 +90,58 @@ entity LoanPrj(AN_LOAN) {
     activated Boolean required,                //是否发布  发布，停止发布
     activateDate LocalDate                     //发布时间
 }
-/*商户信息表*/
-entity Merchant(ISS_MERCHANT) {
-	merId String required maxlength(11),     //商户号 todo 要加唯一值检测
-    merName String required maxlength(255),  //商户名称
-    mccType String required maxlength(6),    //商户类型
-    address String  maxlength(255),          //商户地址
-    postcode String  maxlength(10),          //商户邮编
-    unmerNo String  maxlength(20),          //银联商户号
-    hostNo String  maxlength(20),           //核心客户号
-    certType String  maxlength(3),          //商户证件类型
-    certNo String  maxlength(32),          //商户证件号码
-    certNo String  maxlength(32),          //结算账号
-    certNo String  maxlength(255),          //结算账号户名
-    status MerchantStatu,                   //状态（0：正常  1：销户）
-    liquidUnit String maxlength(20) ,       //ChronoUnit,     //清算周期单位, 如天
-    liquidCount Integer min(0),             //清算周期数， 如3天
-    limit Long min(0),                      //限额
-    regDate LocalDate ,                   //注册日期
-    branchNo String  maxlength(11),          //机构号
-    tellerId String  maxlength(11),          //新增操作员ID
-    cancelDate LocalDate ,                   //注销日期
-    legalFirstName String  maxlength(32),          //法人firstname
-    legalSecondName String  maxlength(32),          //法人secondname
-    legalLastName String  maxlength(32),          //法人lastname
-    legalCertType String  maxlength(3),          //法人证件类型
-    legalCertNo String  maxlength(32),          //法人证件号码
-    conFirstName String  maxlength(32),          //联系人firstname
-    conSecondName String  maxlength(32),          //联系人secondname
-    conLastName String  maxlength(32),          //联系人lastname
-    conCertType String  maxlength(3),          //联系人证件类型
-    conCertNo String  maxlength(32),          //联系人证件号码
-    conPhone String  maxlength(32),          //联系人联系方式
-    remark String  maxlength(255)          //备注，商户描述
+
+/*贷款申请*/
+entity LoanApply(AN_LOANAPPLY) {
+	login String required maxlength(16),       //账户名
+    loanPrjId Long required,                   //贷款项目ID
+    balance BigDecimal required min(0),        //贷款金额
+    applyStatu LoanApplyStatu required,        //贷款申请状态
+    applyDate LocalDate required,               //贷款申请时间
+    auditDate LocalDate,                       //贷款审核时间（通过或驳回）
+    loanDate LocalDate,                        //放款时间
+    completeDate LocalDate                     //完成时间
+}
+/*理财项目*/
+entity LendPrj(AN_LOAN) {
+	name String required maxlength(32),        //理财项目名称
+    amount BigDecimal required min(0),         //理财金额
+    rate BigDecimal required min(0) max(1),    //理财预期利率
+    durationUnit String required maxlength(16),//投资期限单位，如天
+    durationNum Integer required min(0),       //投资期限数值，如180， 和单位合起来就是180天
+    returnType REPAYMENTTYPE required,         //收益方式
+    //是不是还应该把预算的利润也放进来
+    activated Boolean required,                //是否发布  发布，停止发布
+    activateDate LocalDate                     //发布时间
+}
+
+/*理财申请*/
+entity LendApply(AN_LOANAPPLY) {
+	login String required maxlength(16),       //账户名
+    lendPrjId Long required,                   //理财项目ID
+    amount BigDecimal required min(0),         //投资金额
+    lendStatu LendApplyStatu required,         //理财申请状态
+    applyDate LocalDate required,              //理财申请时间
+    startDate LocalDate,                      //起息时间
+    completeDate LocalDate                     //完成时间
+}
+/*预约提款申请*/
+entity DrawApply(AN_DRAWAPPLY) {
+	login String required maxlength(16),            //账户名
+    orderAmount BigDecimal required min(0),         //预约提款金额
+    actualAmount BigDecimal required min(0),         //预约提款金额
+    orderDrawDate String required maxlength(32),     //预约提款时间
+    canceled Boolean required,                 //是否取消
+    completed Boolean required,                //是否完成
+    applyDate LocalDate,                       //申请时间
+    canceledDate LocalDate,                    //取消时间
+    completedDate LocalDate                    //提款完成时间
 }
 
 service all with serviceClass
 
 // Set pagination options
-paginate Merchant with pagination
-
-angularSuffix * with pospSuffix
+skipClient for Address,Phone
+paginate RealIdentity,Enterprise,Branch,LoanApply,LendApply,DrawApply with pagination
+paginate LoanLimit,LoanPrj,LendPrj with infinite-scroll
+angularSuffix * with anprjSuffix

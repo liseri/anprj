@@ -16,13 +16,17 @@
     "messageBroker": false,
     "buildTool": "gradle",
     "enableSocialSignIn": false,
-    "jwtSecretKey": "2b8e173701bdd48939e678af6c2d73ed50931b2d",
+    "jwtSecretKey": "c96518cddfac74ab595f8f98b400893457119012",
     "useSass": false,
     "applicationType": "monolith",
     "testFrameworks": [
       "gatling"
     ],
     "jhiPrefix": "jhi",
-    "enableTranslation": false
+    "enableTranslation": true,
+    "nativeLanguage": "zh-cn",
+    "languages": [
+      "zh-cn"
+    ]
   }
 }
