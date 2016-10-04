@@ -1,0 +1,24 @@
+{
+    "anprjApp": {
+        "loanLimit" : {
+            "home": {
+                "title": "Loan Limits",
+                "createLabel": "Create a new Loan Limit",
+                "createOrEditLabel": "Create or edit a Loan Limit",
+                "search": "Search for Loan Limit"
+            },
+            "created": "A new Loan Limit is created with identifier {{ param }}",
+            "updated": "A Loan Limit is updated with identifier {{ param }}",
+            "deleted": "A Loan Limit is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Loan Limit {{ id }}?"
+            },
+            "detail": {
+                "title": "Loan Limit"
+            },
+            "loanType": "Loan Type",
+            "minLimit": "Min Limit",
+            "maxLimit": "Max Limit"
+        }
+    }
+}

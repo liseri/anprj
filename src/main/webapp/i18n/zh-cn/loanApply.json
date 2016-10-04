@@ -1,0 +1,29 @@
+{
+    "anprjApp": {
+        "loanApply" : {
+            "home": {
+                "title": "Loan Applies",
+                "createLabel": "Create a new Loan Apply",
+                "createOrEditLabel": "Create or edit a Loan Apply",
+                "search": "Search for Loan Apply"
+            },
+            "created": "A new Loan Apply is created with identifier {{ param }}",
+            "updated": "A Loan Apply is updated with identifier {{ param }}",
+            "deleted": "A Loan Apply is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Loan Apply {{ id }}?"
+            },
+            "detail": {
+                "title": "Loan Apply"
+            },
+            "login": "Login",
+            "loanPrjId": "Loan Prj Id",
+            "amount": "Amount",
+            "applyStatu": "Apply Statu",
+            "applyDate": "Apply Date",
+            "auditDate": "Audit Date",
+            "loanDate": "Loan Date",
+            "completeDate": "Complete Date"
+        }
+    }
+}

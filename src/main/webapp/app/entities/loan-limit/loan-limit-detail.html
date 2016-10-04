@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="anprjApp.loanLimit.detail.title">Loan Limit</span> {{vm.loanLimit.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="anprjApp.loanLimit.loanType">Loan Type</span></dt>
+        <dd>
+            <span data-translate="{{'anprjApp.LOANPRJTYPE.' + vm.loanLimit.loanType}}">{{vm.loanLimit.loanType}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.loanLimit.minLimit">Min Limit</span></dt>
+        <dd>
+            <span>{{vm.loanLimit.minLimit}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.loanLimit.maxLimit">Max Limit</span></dt>
+        <dd>
+            <span>{{vm.loanLimit.maxLimit}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="loan-limit-detail.edit({id:vm.loanLimit.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,75 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "login",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 16
+        },
+        {
+            "fieldName": "orderAmount",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "actualAmount",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "orderDrawDate",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 32
+        },
+        {
+            "fieldName": "canceled",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "completed",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "applyDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "canceledDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "completedDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20161004134625",
+    "javadoc": "预约提款申请",
+    "entityTableName": "an_drawapply",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "angularSuffix": "anprjSuffix"
+}

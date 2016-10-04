@@ -1,0 +1,28 @@
+{
+    "anprjApp": {
+        "lendApply" : {
+            "home": {
+                "title": "Lend Applies",
+                "createLabel": "Create a new Lend Apply",
+                "createOrEditLabel": "Create or edit a Lend Apply",
+                "search": "Search for Lend Apply"
+            },
+            "created": "A new Lend Apply is created with identifier {{ param }}",
+            "updated": "A Lend Apply is updated with identifier {{ param }}",
+            "deleted": "A Lend Apply is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Lend Apply {{ id }}?"
+            },
+            "detail": {
+                "title": "Lend Apply"
+            },
+            "login": "Login",
+            "lendPrjId": "Lend Prj Id",
+            "amount": "Amount",
+            "lendStatu": "Lend Statu",
+            "applyDate": "Apply Date",
+            "startDate": "Start Date",
+            "completeDate": "Complete Date"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "anprjApp": {
+        "LendApplyStatu" : {
+            "null": "",
+            "APPLYED": "APPLYED",
+            "STARTED": "STARTED",
+            "COMPLETED": "COMPLETED"
+        }
+    }
+}

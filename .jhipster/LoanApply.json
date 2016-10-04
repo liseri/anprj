@@ -1,0 +1,65 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "login",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 16
+        },
+        {
+            "fieldName": "loanPrjId",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "applyStatu",
+            "fieldType": "LoanApplyStatu",
+            "fieldValues": "APPLYED,PASSED,REJECTED,LOANED,COMPLETED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "applyDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "auditDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "loanDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "completeDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20161004134622",
+    "javadoc": "贷款申请",
+    "entityTableName": "an_loanapply",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "angularSuffix": "anprjSuffix"
+}

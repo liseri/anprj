@@ -1,0 +1,12 @@
+{
+    "anprjApp": {
+        "REPAYMENTTYPE" : {
+            "null": "",
+            "MONTH": "MONTH",
+            "MONTHANDDUE": "MONTHANDDUE",
+            "QUARTER": "QUARTER",
+            "QUARTERANDDUE": "QUARTERANDDUE",
+            "DUE": "DUE"
+        }
+    }
+}

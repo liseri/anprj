@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="anprjApp.drawApply.detail.title">Draw Apply</span> {{vm.drawApply.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="anprjApp.drawApply.login">Login</span></dt>
+        <dd>
+            <span>{{vm.drawApply.login}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.drawApply.orderAmount">Order Amount</span></dt>
+        <dd>
+            <span>{{vm.drawApply.orderAmount}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.drawApply.actualAmount">Actual Amount</span></dt>
+        <dd>
+            <span>{{vm.drawApply.actualAmount}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.drawApply.orderDrawDate">Order Draw Date</span></dt>
+        <dd>
+            <span>{{vm.drawApply.orderDrawDate}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.drawApply.canceled">Canceled</span></dt>
+        <dd>
+            <span>{{vm.drawApply.canceled}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.drawApply.completed">Completed</span></dt>
+        <dd>
+            <span>{{vm.drawApply.completed}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.drawApply.applyDate">Apply Date</span></dt>
+        <dd>
+            <span>{{vm.drawApply.applyDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.drawApply.canceledDate">Canceled Date</span></dt>
+        <dd>
+            <span>{{vm.drawApply.canceledDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.drawApply.completedDate">Completed Date</span></dt>
+        <dd>
+            <span>{{vm.drawApply.completedDate | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="draw-apply-detail.edit({id:vm.drawApply.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

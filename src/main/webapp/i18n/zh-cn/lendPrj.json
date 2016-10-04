@@ -1,0 +1,29 @@
+{
+    "anprjApp": {
+        "lendPrj" : {
+            "home": {
+                "title": "Lend Prjs",
+                "createLabel": "Create a new Lend Prj",
+                "createOrEditLabel": "Create or edit a Lend Prj",
+                "search": "Search for Lend Prj"
+            },
+            "created": "A new Lend Prj is created with identifier {{ param }}",
+            "updated": "A Lend Prj is updated with identifier {{ param }}",
+            "deleted": "A Lend Prj is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Lend Prj {{ id }}?"
+            },
+            "detail": {
+                "title": "Lend Prj"
+            },
+            "name": "Name",
+            "startAmount": "Start Amount",
+            "rate": "Rate",
+            "durationUnit": "Duration Unit",
+            "durationNum": "Duration Num",
+            "returnType": "Return Type",
+            "activated": "Activated",
+            "activateDate": "Activate Date"
+        }
+    }
+}

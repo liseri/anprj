@@ -1,12 +1,23 @@
 {
     "global": {
-        "title": "Anprj",
+        "title": "汾阳农商银行金融平台",
         "browsehappy": "您目前使用<strong>过于老旧</strong>的浏览器, 建议您<a href=\"http://browsehappy.com/?locale=en\">升级浏览器</a>让您有更佳的上网体验.",
         "menu": {
             "home": "首页",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "数据",
+                "address": "Address",
+                "phone": "Phone",
+                "realIdentity": "Real Identity",
+                "enterprise": "Enterprise",
+                "branch": "Branch",
+                "loanLimit": "Loan Limit",
+                "loanPrj": "Loan Prj",
+                "loanApply": "Loan Apply",
+                "lendPrj": "Lend Prj",
+                "lendApply": "Lend Apply",
+                "drawApply": "Draw Apply",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -119,5 +130,5 @@
         "emailexists": "该邮箱已被使用!",
         "idexists": "新建的 {{entityName}} 的ID已经存在"
     },
-    "footer": "这里是页脚"
+    "footer": "山西省农村信用社（汾阳） 版权所有 2016"
 }

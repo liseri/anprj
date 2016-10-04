@@ -1,0 +1,76 @@
+<div>
+    <h2 data-translate="anprjApp.drawApply.home.title">Draw Applies</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="draw-apply.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="anprjApp.drawApply.home.createLabel">
+                        Create new Draw Apply
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="login"><span data-translate="anprjApp.drawApply.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orderAmount"><span data-translate="anprjApp.drawApply.orderAmount">Order Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actualAmount"><span data-translate="anprjApp.drawApply.actualAmount">Actual Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orderDrawDate"><span data-translate="anprjApp.drawApply.orderDrawDate">Order Draw Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="canceled"><span data-translate="anprjApp.drawApply.canceled">Canceled</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="completed"><span data-translate="anprjApp.drawApply.completed">Completed</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="applyDate"><span data-translate="anprjApp.drawApply.applyDate">Apply Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="canceledDate"><span data-translate="anprjApp.drawApply.canceledDate">Canceled Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="completedDate"><span data-translate="anprjApp.drawApply.completedDate">Completed Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="drawApply in vm.drawApplies track by drawApply.id">
+                    <td><a ui-sref="draw-apply-detail({id:drawApply.id})">{{drawApply.id}}</a></td>
+                    <td>{{drawApply.login}}</td>
+                    <td>{{drawApply.orderAmount}}</td>
+                    <td>{{drawApply.actualAmount}}</td>
+                    <td>{{drawApply.orderDrawDate}}</td>
+                    <td>{{drawApply.canceled}}</td>
+                    <td>{{drawApply.completed}}</td>
+                        <td>{{drawApply.applyDate | date:'mediumDate'}}</td>
+                        <td>{{drawApply.canceledDate | date:'mediumDate'}}</td>
+                        <td>{{drawApply.completedDate | date:'mediumDate'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="draw-apply-detail({id:drawApply.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="draw-apply.edit({id:drawApply.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="draw-apply.delete({id:drawApply.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

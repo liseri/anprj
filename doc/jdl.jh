@@ -103,7 +103,7 @@ entity LoanApply(AN_LOANAPPLY) {
     completeDate LocalDate                     //完成时间
 }
 /*理财项目*/
-entity LendPrj(AN_LOAN) {
+entity LendPrj(AN_LEND) {
 	name String required maxlength(32),        //理财项目名称
     startAmount BigDecimal required min(0),         //理财起投金额
     rate BigDecimal required min(0) max(1),    //理财预期利率
@@ -116,7 +116,7 @@ entity LendPrj(AN_LOAN) {
 }
 
 /*理财申请*/
-entity LendApply(AN_LOANAPPLY) {
+entity LendApply(AN_LENDAPPLY) {
 	login String required maxlength(16),       //账户名
     lendPrjId Long required,                   //理财项目ID
     amount BigDecimal required min(0),     //投资金额

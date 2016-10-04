@@ -1,0 +1,11 @@
+{
+    "anprjApp": {
+        "LOANPRJTYPE" : {
+            "null": "",
+            "SMALL": "SMALL",
+            "GENERAL": "GENERAL",
+            "LARGE": "LARGE",
+            "HUGE": "HUGE"
+        }
+    }
+}

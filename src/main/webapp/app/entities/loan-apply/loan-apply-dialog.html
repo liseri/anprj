@@ -1,0 +1,140 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myLoanApplyLabel" data-translate="anprjApp.loanApply.home.createOrEditLabel">Create or edit a Loan Apply</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.loanApply.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.loanApply.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanApply.login" for="field_login">Login</label>
+            <input type="text" class="form-control" name="login" id="field_login"
+                    ng-model="vm.loanApply.login"
+                    required ng-maxlength="16" />
+            <div ng-show="editForm.login.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.login.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.login.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="16">
+                    This field cannot be longer than 16 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanApply.loanPrjId" for="field_loanPrjId">Loan Prj Id</label>
+            <input type="number" class="form-control" name="loanPrjId" id="field_loanPrjId"
+                    ng-model="vm.loanApply.loanPrjId"
+                    required />
+            <div ng-show="editForm.loanPrjId.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.loanPrjId.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.loanPrjId.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanApply.amount" for="field_amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="field_amount"
+                    ng-model="vm.loanApply.amount"
+                    required min="0" />
+            <div ng-show="editForm.amount.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.amount.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.amount.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.amount.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanApply.applyStatu" for="field_applyStatu">Apply Statu</label>
+            <select class="form-control" name="applyStatu" ng-model="vm.loanApply.applyStatu" id="field_applyStatu" required>
+                <option value="APPLYED" data-translate="anprjApp.LoanApplyStatu.APPLYED">APPLYED</option>
+                <option value="PASSED" data-translate="anprjApp.LoanApplyStatu.PASSED">PASSED</option>
+                <option value="REJECTED" data-translate="anprjApp.LoanApplyStatu.REJECTED">REJECTED</option>
+                <option value="LOANED" data-translate="anprjApp.LoanApplyStatu.LOANED">LOANED</option>
+                <option value="COMPLETED" data-translate="anprjApp.LoanApplyStatu.COMPLETED">COMPLETED</option>
+            </select>
+            <div ng-show="editForm.applyStatu.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.applyStatu.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanApply.applyDate" for="field_applyDate">Apply Date</label>
+                <div class="input-group">
+                    <input id="field_applyDate" type="text" class="form-control" name="applyDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.loanApply.applyDate" is-open="vm.datePickerOpenStatus.applyDate"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('applyDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.applyDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.applyDate.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanApply.auditDate" for="field_auditDate">Audit Date</label>
+                <div class="input-group">
+                    <input id="field_auditDate" type="text" class="form-control" name="auditDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.loanApply.auditDate" is-open="vm.datePickerOpenStatus.auditDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('auditDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanApply.loanDate" for="field_loanDate">Loan Date</label>
+                <div class="input-group">
+                    <input id="field_loanDate" type="text" class="form-control" name="loanDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.loanApply.loanDate" is-open="vm.datePickerOpenStatus.loanDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('loanDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanApply.completeDate" for="field_completeDate">Complete Date</label>
+                <div class="input-group">
+                    <input id="field_completeDate" type="text" class="form-control" name="completeDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.loanApply.completeDate" is-open="vm.datePickerOpenStatus.completeDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('completeDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

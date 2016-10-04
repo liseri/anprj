@@ -97,11 +97,11 @@ Main page styles
     letter-spacing: -1px;
 }
 
-.hipster {
+.srcu {
     display: inline-block;
     width: 347px;
     height: 497px;
-    background: url("../images/hipster.png") no-repeat center top;
+    background: url("../images/srcu-img1.jpg") no-repeat center top;
     background-size: contain;
 }
 
@@ -329,6 +329,3 @@ ui bootstrap tweaks
     outline: none;
 }
 
-
-
-/* jhipster-needle-css-add-main JHipster will add new css style */

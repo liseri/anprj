@@ -1,0 +1,30 @@
+{
+    "anprjApp": {
+        "drawApply" : {
+            "home": {
+                "title": "Draw Applies",
+                "createLabel": "Create a new Draw Apply",
+                "createOrEditLabel": "Create or edit a Draw Apply",
+                "search": "Search for Draw Apply"
+            },
+            "created": "A new Draw Apply is created with identifier {{ param }}",
+            "updated": "A Draw Apply is updated with identifier {{ param }}",
+            "deleted": "A Draw Apply is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Draw Apply {{ id }}?"
+            },
+            "detail": {
+                "title": "Draw Apply"
+            },
+            "login": "Login",
+            "orderAmount": "Order Amount",
+            "actualAmount": "Actual Amount",
+            "orderDrawDate": "Order Draw Date",
+            "canceled": "Canceled",
+            "completed": "Completed",
+            "applyDate": "Apply Date",
+            "canceledDate": "Canceled Date",
+            "completedDate": "Completed Date"
+        }
+    }
+}

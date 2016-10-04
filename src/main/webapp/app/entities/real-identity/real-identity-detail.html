@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span data-translate="anprjApp.realIdentity.detail.title">Real Identity</span> {{vm.realIdentity.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="anprjApp.realIdentity.login">Login</span></dt>
+        <dd>
+            <span>{{vm.realIdentity.login}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.realIdentity.name">Name</span></dt>
+        <dd>
+            <span>{{vm.realIdentity.name}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.realIdentity.identityNumber">Identity Number</span></dt>
+        <dd>
+            <span>{{vm.realIdentity.identityNumber}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.realIdentity.identityPicPath">Identity Pic Path</span></dt>
+        <dd>
+            <span>{{vm.realIdentity.identityPicPath}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.realIdentity.activated">Activated</span></dt>
+        <dd>
+            <span>{{vm.realIdentity.activated}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.realIdentity.activateDate">Activate Date</span></dt>
+        <dd>
+            <span>{{vm.realIdentity.activateDate | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="real-identity-detail.edit({id:vm.realIdentity.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

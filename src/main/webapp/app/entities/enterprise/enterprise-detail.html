@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="anprjApp.enterprise.detail.title">Enterprise</span> {{vm.enterprise.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="anprjApp.enterprise.login">Login</span></dt>
+        <dd>
+            <span>{{vm.enterprise.login}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.enterprise.name">Name</span></dt>
+        <dd>
+            <span>{{vm.enterprise.name}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.enterprise.address">Address</span></dt>
+        <dd>
+            <span>{{vm.enterprise.address}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.enterprise.postcode">Postcode</span></dt>
+        <dd>
+            <span>{{vm.enterprise.postcode}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.enterprise.phone">Phone</span></dt>
+        <dd>
+            <span>{{vm.enterprise.phone}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="enterprise-detail.edit({id:vm.enterprise.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

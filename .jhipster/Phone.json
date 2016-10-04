@@ -1,0 +1,42 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "login",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 16
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 16
+        },
+        {
+            "fieldName": "activated",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "activateDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20161004134616",
+    "javadoc": "电话绑定",
+    "entityTableName": "an_phone",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularSuffix": "anprjSuffix"
+}

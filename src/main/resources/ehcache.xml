@@ -37,5 +37,49 @@
            timeToLiveSeconds="3600">
     </cache>
     
+    <cache name="com.liseri.anprj.domain.Address"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.Phone"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.RealIdentity"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.Enterprise"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.Branch"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.LoanLimit"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.LoanPrj"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.LoanApply"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.LendPrj"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.LendApply"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.liseri.anprj.domain.DrawApply"
+        timeToLiveSeconds="3600">
+    </cache>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

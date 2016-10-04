@@ -1,0 +1,81 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myLoanLimitLabel" data-translate="anprjApp.loanLimit.home.createOrEditLabel">Create or edit a Loan Limit</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.loanLimit.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.loanLimit.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanLimit.loanType" for="field_loanType">Loan Type</label>
+            <select class="form-control" name="loanType" ng-model="vm.loanLimit.loanType" id="field_loanType" required>
+                <option value="SMALL" data-translate="anprjApp.LOANPRJTYPE.SMALL">SMALL</option>
+                <option value="GENERAL" data-translate="anprjApp.LOANPRJTYPE.GENERAL">GENERAL</option>
+                <option value="LARGE" data-translate="anprjApp.LOANPRJTYPE.LARGE">LARGE</option>
+                <option value="HUGE" data-translate="anprjApp.LOANPRJTYPE.HUGE">HUGE</option>
+            </select>
+            <div ng-show="editForm.loanType.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.loanType.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanLimit.minLimit" for="field_minLimit">Min Limit</label>
+            <input type="number" class="form-control" name="minLimit" id="field_minLimit"
+                    ng-model="vm.loanLimit.minLimit"
+                    required min="0" />
+            <div ng-show="editForm.minLimit.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.minLimit.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.minLimit.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.minLimit.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="anprjApp.loanLimit.maxLimit" for="field_maxLimit">Max Limit</label>
+            <input type="number" class="form-control" name="maxLimit" id="field_maxLimit"
+                    ng-model="vm.loanLimit.maxLimit"
+                    required min="0" />
+            <div ng-show="editForm.maxLimit.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.maxLimit.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.maxLimit.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.maxLimit.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

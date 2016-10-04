@@ -1,0 +1,30 @@
+{
+    "anprjApp": {
+        "loanPrj" : {
+            "home": {
+                "title": "Loan Prjs",
+                "createLabel": "Create a new Loan Prj",
+                "createOrEditLabel": "Create or edit a Loan Prj",
+                "search": "Search for Loan Prj"
+            },
+            "created": "A new Loan Prj is created with identifier {{ param }}",
+            "updated": "A Loan Prj is updated with identifier {{ param }}",
+            "deleted": "A Loan Prj is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Loan Prj {{ id }}?"
+            },
+            "detail": {
+                "title": "Loan Prj"
+            },
+            "name": "Name",
+            "loanType": "Loan Type",
+            "maxAmount": "Max Amount",
+            "rate": "Rate",
+            "durationUnit": "Duration Unit",
+            "durationNum": "Duration Num",
+            "replayType": "Replay Type",
+            "activated": "Activated",
+            "activateDate": "Activate Date"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "anprjApp": {
+        "realIdentity" : {
+            "home": {
+                "title": "Real Identities",
+                "createLabel": "Create a new Real Identity",
+                "createOrEditLabel": "Create or edit a Real Identity",
+                "search": "Search for Real Identity"
+            },
+            "created": "A new Real Identity is created with identifier {{ param }}",
+            "updated": "A Real Identity is updated with identifier {{ param }}",
+            "deleted": "A Real Identity is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Real Identity {{ id }}?"
+            },
+            "detail": {
+                "title": "Real Identity"
+            },
+            "login": "Login",
+            "name": "Name",
+            "identityNumber": "Identity Number",
+            "identityPicPath": "Identity Pic Path",
+            "activated": "Activated",
+            "activateDate": "Activate Date"
+        }
+    }
+}

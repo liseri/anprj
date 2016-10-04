@@ -1,0 +1,51 @@
+
+<div>
+    <h2><span data-translate="anprjApp.loanApply.detail.title">Loan Apply</span> {{vm.loanApply.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="anprjApp.loanApply.login">Login</span></dt>
+        <dd>
+            <span>{{vm.loanApply.login}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.loanApply.loanPrjId">Loan Prj Id</span></dt>
+        <dd>
+            <span>{{vm.loanApply.loanPrjId}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.loanApply.amount">Amount</span></dt>
+        <dd>
+            <span>{{vm.loanApply.amount}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.loanApply.applyStatu">Apply Statu</span></dt>
+        <dd>
+            <span data-translate="{{'anprjApp.LoanApplyStatu.' + vm.loanApply.applyStatu}}">{{vm.loanApply.applyStatu}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.loanApply.applyDate">Apply Date</span></dt>
+        <dd>
+            <span>{{vm.loanApply.applyDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.loanApply.auditDate">Audit Date</span></dt>
+        <dd>
+            <span>{{vm.loanApply.auditDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.loanApply.loanDate">Loan Date</span></dt>
+        <dd>
+            <span>{{vm.loanApply.loanDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="anprjApp.loanApply.completeDate">Complete Date</span></dt>
+        <dd>
+            <span>{{vm.loanApply.completeDate | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="loan-apply-detail.edit({id:vm.loanApply.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

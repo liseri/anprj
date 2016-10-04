@@ -1,0 +1,12 @@
+{
+    "anprjApp": {
+        "LoanApplyStatu" : {
+            "null": "",
+            "APPLYED": "APPLYED",
+            "PASSED": "PASSED",
+            "REJECTED": "REJECTED",
+            "LOANED": "LOANED",
+            "COMPLETED": "COMPLETED"
+        }
+    }
+}
