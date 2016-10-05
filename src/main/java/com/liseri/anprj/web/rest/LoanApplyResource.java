@@ -30,7 +30,7 @@ import java.util.Optional;
 public class LoanApplyResource {
 
     private final Logger log = LoggerFactory.getLogger(LoanApplyResource.class);
-        
+
     @Inject
     private LoanApplyService loanApplyService;
 
@@ -50,35 +50,12 @@ public class LoanApplyResource {
         if (loanApply.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("loanApply", "idexists", "A new loanApply cannot already have an ID")).body(null);
         }
-        LoanApply result = loanApplyService.save(loanApply);
+        LoanApply result = loanApplyService.create(loanApply);
         return ResponseEntity.created(new URI("/api/loan-applies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("loanApply", result.getId().toString()))
             .body(result);
     }
 
-    /**
-     * PUT  /loan-applies : Updates an existing loanApply.
-     *
-     * @param loanApply the loanApply to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated loanApply,
-     * or with status 400 (Bad Request) if the loanApply is not valid,
-     * or with status 500 (Internal Server Error) if the loanApply couldnt be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @RequestMapping(value = "/loan-applies",
-        method = RequestMethod.PUT,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<LoanApply> updateLoanApply(@Valid @RequestBody LoanApply loanApply) throws URISyntaxException {
-        log.debug("REST request to update LoanApply : {}", loanApply);
-        if (loanApply.getId() == null) {
-            return createLoanApply(loanApply);
-        }
-        LoanApply result = loanApplyService.save(loanApply);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("loanApply", loanApply.getId().toString()))
-            .body(result);
-    }
 
     /**
      * GET  /loan-applies : get all the loanApplies.

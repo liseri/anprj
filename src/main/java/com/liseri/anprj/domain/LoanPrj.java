@@ -9,6 +9,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 import com.liseri.anprj.domain.enumeration.LOANPRJTYPE;
@@ -16,8 +17,8 @@ import com.liseri.anprj.domain.enumeration.LOANPRJTYPE;
 import com.liseri.anprj.domain.enumeration.REPAYMENTTYPE;
 
 /**
- * 贷款项目                                                                        
- * 
+ * 贷款项目
+ *
  */
 @ApiModel(description = ""
     + "贷款项目                                                                   "
@@ -44,9 +45,9 @@ public class LoanPrj implements Serializable {
     private LOANPRJTYPE loanType;
 
     @NotNull
-    @DecimalMin(value = "0")
-    @Column(name = "max_amount", precision=10, scale=2, nullable = false)
-    private BigDecimal maxAmount;
+    @Min(value = 100)
+    @Column(name = "max_amount", nullable = false)
+    private Long maxAmount;
 
     @NotNull
     @DecimalMin(value = "0")
@@ -55,12 +56,12 @@ public class LoanPrj implements Serializable {
     private BigDecimal rate;
 
     @NotNull
-    @Size(max = 16)
-    @Column(name = "duration_unit", length = 16, nullable = false)
-    private String durationUnit;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "duration_unit", nullable = false)
+    private ChronoUnit durationUnit;
 
     @NotNull
-    @Min(value = 0)
+    @Min(value = 1)
     @Column(name = "duration_num", nullable = false)
     private Integer durationNum;
 
@@ -110,16 +111,16 @@ public class LoanPrj implements Serializable {
         this.loanType = loanType;
     }
 
-    public BigDecimal getMaxAmount() {
+    public Long getMaxAmount() {
         return maxAmount;
     }
 
-    public LoanPrj maxAmount(BigDecimal maxAmount) {
+    public LoanPrj maxAmount(Long maxAmount) {
         this.maxAmount = maxAmount;
         return this;
     }
 
-    public void setMaxAmount(BigDecimal maxAmount) {
+    public void setMaxAmount(Long maxAmount) {
         this.maxAmount = maxAmount;
     }
 
@@ -136,16 +137,16 @@ public class LoanPrj implements Serializable {
         this.rate = rate;
     }
 
-    public String getDurationUnit() {
+    public ChronoUnit getDurationUnit() {
         return durationUnit;
     }
 
-    public LoanPrj durationUnit(String durationUnit) {
+    public LoanPrj durationUnit(ChronoUnit durationUnit) {
         this.durationUnit = durationUnit;
         return this;
     }
 
-    public void setDurationUnit(String durationUnit) {
+    public void setDurationUnit(ChronoUnit durationUnit) {
         this.durationUnit = durationUnit;
     }
 

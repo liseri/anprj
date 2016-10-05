@@ -25,17 +25,19 @@ public final class HeaderUtil {
         headers.add("X-anprjApp-params", param);
         return headers;
     }
-
+    public static HttpHeaders createEntityOperationAlert(String entityName, String operateName, String param) {
+        return createAlert("anprjApp." + entityName + "." + operateName, param);
+    }
     public static HttpHeaders createEntityCreationAlert(String entityName, String param) {
-        return createAlert("anprjApp." + entityName + ".created", param);
+        return createEntityOperationAlert(entityName, "created", param);
     }
 
     public static HttpHeaders createEntityUpdateAlert(String entityName, String param) {
-        return createAlert("anprjApp." + entityName + ".updated", param);
+        return createEntityOperationAlert(entityName, "updated", param);
     }
 
     public static HttpHeaders createEntityDeletionAlert(String entityName, String param) {
-        return createAlert("anprjApp." + entityName + ".deleted", param);
+        return createEntityOperationAlert(entityName, "deleted", param);
     }
 
     public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {

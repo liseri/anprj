@@ -1,6 +1,7 @@
 package com.liseri.anprj.service;
 
 import com.liseri.anprj.domain.LoanApply;
+import com.liseri.anprj.domain.enumeration.LoanApplyStatu;
 import com.liseri.anprj.repository.LoanApplyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -20,29 +22,30 @@ import java.util.List;
 public class LoanApplyService {
 
     private final Logger log = LoggerFactory.getLogger(LoanApplyService.class);
-    
+
     @Inject
     private LoanApplyRepository loanApplyRepository;
 
     /**
-     * Save a loanApply.
+     * 申请创建
      *
      * @param loanApply the entity to save
      * @return the persisted entity
      */
-    public LoanApply save(LoanApply loanApply) {
+    public LoanApply create(LoanApply loanApply) {
         log.debug("Request to save LoanApply : {}", loanApply);
+        loanApply.applyStatu(LoanApplyStatu.APPLYED).applyDate(LocalDate.now());
         LoanApply result = loanApplyRepository.save(loanApply);
         return result;
     }
 
     /**
      *  Get all the loanApplies.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<LoanApply> findAll(Pageable pageable) {
         log.debug("Request to get all LoanApplies");
         Page<LoanApply> result = loanApplyRepository.findAll(pageable);
@@ -55,7 +58,7 @@ public class LoanApplyService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public LoanApply findOne(Long id) {
         log.debug("Request to get LoanApply : {}", id);
         LoanApply loanApply = loanApplyRepository.findOne(id);
@@ -70,5 +73,45 @@ public class LoanApplyService {
     public void delete(Long id) {
         log.debug("Request to delete LoanApply : {}", id);
         loanApplyRepository.delete(id);
+    }
+
+    /**
+     * 审核通过
+     * @param id
+     */
+    public void auditPass(Long id) {
+        log.debug("Request to auditPass LoanApply : {}", id);
+        LoanApply loanApply = loanApplyRepository.findOne(id);
+        loanApply.applyStatu(LoanApplyStatu.PASSED).auditDate(LocalDate.now());
+    }
+
+    /**
+     * 审核未通过
+     * @param id
+     */
+    public void auditReject(Long id) {
+        log.debug("Request to auditReject LoanApply : {}", id);
+        LoanApply loanApply = loanApplyRepository.findOne(id);
+        loanApply.applyStatu(LoanApplyStatu.REJECTED).auditDate(LocalDate.now());
+    }
+
+    /**
+     * 放款完成
+     * @param id
+     */
+    public void loan(Long id) {
+        log.debug("Request to loan LoanApply : {}", id);
+        LoanApply loanApply = loanApplyRepository.findOne(id);
+        loanApply.applyStatu(LoanApplyStatu.LOANED).loanDate(LocalDate.now());
+    }
+
+    /**
+     * 还完借款，本次借款完成
+     * @param id
+     */
+    public void complete(Long id) {
+        log.debug("Request to complete LoanApply : {}", id);
+        LoanApply loanApply = loanApplyRepository.findOne(id);
+        loanApply.applyStatu(LoanApplyStatu.COMPLETED).completeDate(LocalDate.now());
     }
 }

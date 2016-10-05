@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ import java.util.List;
 public class LoanPrjService {
 
     private final Logger log = LoggerFactory.getLogger(LoanPrjService.class);
-    
+
     @Inject
     private LoanPrjRepository loanPrjRepository;
 
@@ -38,11 +39,11 @@ public class LoanPrjService {
 
     /**
      *  Get all the loanPrjs.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<LoanPrj> findAll(Pageable pageable) {
         log.debug("Request to get all LoanPrjs");
         Page<LoanPrj> result = loanPrjRepository.findAll(pageable);
@@ -55,7 +56,7 @@ public class LoanPrjService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public LoanPrj findOne(Long id) {
         log.debug("Request to get LoanPrj : {}", id);
         LoanPrj loanPrj = loanPrjRepository.findOne(id);
@@ -70,5 +71,31 @@ public class LoanPrjService {
     public void delete(Long id) {
         log.debug("Request to delete LoanPrj : {}", id);
         loanPrjRepository.delete(id);
+    }
+
+    /**
+     * 启动
+     * @param id
+     */
+    public void activate(Long id) {
+        log.debug("Request to activate LoanPrj : {}", id);
+        LoanPrj loanPrj = loanPrjRepository.findOne(id);
+        if (loanPrj.isActivated() == false) {
+            loanPrj.activated(true).activateDate(LocalDate.now());
+        }
+        loanPrjRepository.save(loanPrj);
+    }
+
+    /**
+     * 停止
+     * @param id
+     */
+    public void unactivate(Long id) {
+        log.debug("Request to activate LoanPrj : {}", id);
+        LoanPrj loanPrj = loanPrjRepository.findOne(id);
+        if (loanPrj.isActivated() == true) {
+            loanPrj.activated(false).activateDate(LocalDate.now());
+        }
+        loanPrjRepository.save(loanPrj);
     }
 }

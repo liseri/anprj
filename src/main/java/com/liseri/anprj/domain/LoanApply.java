@@ -14,8 +14,8 @@ import java.util.Objects;
 import com.liseri.anprj.domain.enumeration.LoanApplyStatu;
 
 /**
- * 贷款申请                                                                        
- * 
+ * 贷款申请
+ *
  */
 @ApiModel(description = ""
     + "贷款申请                                                                   "
@@ -41,9 +41,9 @@ public class LoanApply implements Serializable {
     private Long loanPrjId;
 
     @NotNull
-    @DecimalMin(value = "0")
-    @Column(name = "amount", precision=10, scale=2, nullable = false)
-    private BigDecimal amount;
+    @Min(value = 100)
+    @Column(name = "amount", nullable = false)
+    private Long amount;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -97,16 +97,16 @@ public class LoanApply implements Serializable {
         this.loanPrjId = loanPrjId;
     }
 
-    public BigDecimal getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public LoanApply amount(BigDecimal amount) {
+    public LoanApply amount(Long amount) {
         this.amount = amount;
         return this;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 

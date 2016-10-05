@@ -14,8 +14,8 @@ import java.util.Objects;
 import com.liseri.anprj.domain.enumeration.REPAYMENTTYPE;
 
 /**
- * 理财项目                                                                        
- * 
+ * 理财项目
+ *
  */
 @ApiModel(description = ""
     + "理财项目                                                                   "
@@ -37,9 +37,9 @@ public class LendPrj implements Serializable {
     private String name;
 
     @NotNull
-    @DecimalMin(value = "0")
-    @Column(name = "start_amount", precision=10, scale=2, nullable = false)
-    private BigDecimal startAmount;
+    @Min(value = 100)
+    @Column(name = "start_amount", nullable = false)
+    private Long startAmount;
 
     @NotNull
     @DecimalMin(value = "0")
@@ -53,7 +53,7 @@ public class LendPrj implements Serializable {
     private String durationUnit;
 
     @NotNull
-    @Min(value = 0)
+    @Min(value = 1)
     @Column(name = "duration_num", nullable = false)
     private Integer durationNum;
 
@@ -90,16 +90,16 @@ public class LendPrj implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getStartAmount() {
+    public Long getStartAmount() {
         return startAmount;
     }
 
-    public LendPrj startAmount(BigDecimal startAmount) {
+    public LendPrj startAmount(Long startAmount) {
         this.startAmount = startAmount;
         return this;
     }
 
-    public void setStartAmount(BigDecimal startAmount) {
+    public void setStartAmount(Long startAmount) {
         this.startAmount = startAmount;
     }
 

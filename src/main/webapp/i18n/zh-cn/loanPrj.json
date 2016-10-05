@@ -10,6 +10,8 @@
             "created": "A new Loan Prj is created with identifier {{ param }}",
             "updated": "A Loan Prj is updated with identifier {{ param }}",
             "deleted": "A Loan Prj is deleted with identifier {{ param }}",
+            "activated": "借款项目已经启用",
+            "unactivated": "借款项目已经停用",
             "delete": {
                 "question": "Are you sure you want to delete Loan Prj {{ id }}?"
             },

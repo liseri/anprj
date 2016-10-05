@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ import java.util.Optional;
 public class LoanPrjResource {
 
     private final Logger log = LoggerFactory.getLogger(LoanPrjResource.class);
-        
+
     @Inject
     private LoanPrjService loanPrjService;
 
@@ -50,6 +51,8 @@ public class LoanPrjResource {
         if (loanPrj.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("loanPrj", "idexists", "A new loanPrj cannot already have an ID")).body(null);
         }
+        //
+        loanPrj.activated(false).activateDate(null);
         LoanPrj result = loanPrjService.save(loanPrj);
         return ResponseEntity.created(new URI("/api/loan-prjs/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("loanPrj", result.getId().toString()))
@@ -74,6 +77,8 @@ public class LoanPrjResource {
         if (loanPrj.getId() == null) {
             return createLoanPrj(loanPrj);
         }
+        LoanPrj loanPrjOld = loanPrjService.findOne(loanPrj.getId());
+        loanPrj.activated(loanPrjOld.isActivated()).activateDate(loanPrjOld.getActivateDate());
         LoanPrj result = loanPrjService.save(loanPrj);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("loanPrj", loanPrj.getId().toString()))
@@ -133,6 +138,26 @@ public class LoanPrjResource {
         log.debug("REST request to delete LoanPrj : {}", id);
         loanPrjService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("loanPrj", id.toString())).build();
+    }
+
+    @RequestMapping(value = "/loan-prjs/activate/{id}",
+        method = RequestMethod.DELETE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Void> activateLoanPrj(@PathVariable Long id) {
+        log.debug("REST request to delete LoanPrj : {}", id);
+        loanPrjService.activate(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanPrj", "activated", id.toString())).build();
+    }
+
+    @RequestMapping(value = "/loan-prjs/unactivate/{id}",
+        method = RequestMethod.DELETE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Void> unactivateLoanPrj(@PathVariable Long id) {
+        log.debug("REST request to delete LoanPrj : {}", id);
+        loanPrjService.unactivate(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanPrj", "unactivated", id.toString())).build();
     }
 
 }
