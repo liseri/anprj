@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Service Implementation for managing Phone.
@@ -31,24 +32,39 @@ public class PhoneService {
      */
     public void bandingApply(String login, String phoneNum) {
         log.debug("Request to Phone bandingApply");
+        //生成6位验证码
+        String key = getRandNum(6);
+        //先写死
+        key = "123456";
         //给手机发送绑定验证码
+        Phone phone = new Phone();
+        phone.login(login)
+            .phone(phoneNum)
+            .key(key);
+        phoneRepository.save(phone);
     }
 
     /**
      * 根据验证码绑定手机号
-     * @param login
-     * @param phoneNum
-     * @param bindingKey
      * @return
      */
-    public Phone banding(String login, String phoneNum, String bindingKey) {
+    public Phone banding(Phone phone) {
         log.debug("Request to Phone banding");
         //验证验证码
-        Phone phone = new Phone();
-        phone.login(login)
-            .phone(phoneNum)
-            .activated(true)
+        phone.activated(true)
             .activateDate(LocalDate.now());
+        return phoneRepository.save(phone);
+    }
+
+    /**
+     * 解绑
+     * @param phone
+     * @return
+     */
+    public Phone unbanding(Phone phone) {
+        log.debug("Request to Phone unbanding");
+        //验证验证码
+        phone.activated(false);
         return phoneRepository.save(phone);
     }
 
@@ -88,5 +104,19 @@ public class PhoneService {
         phoneRepository.delete(id);
     }
 
+    //region 生成6位验证码
+    public String getRandNum(int charCount) {
+        String charValue = "";
+        for (int i = 0; i < charCount; i++) {
+            char c = (char) (randomInt(0, 10) + '0');
+            charValue += String.valueOf(c);
+        }
+        return charValue;
+    }
+    public int randomInt(int from, int to) {
+        Random r = new Random();
+        return from + r.nextInt(to - from);
+    }
+    //endregion
 
 }

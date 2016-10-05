@@ -6,17 +6,18 @@ import com.liseri.anprj.domain.enumeration.GenderType;
  * Created by Administrator on 2016/10/5.
  */
 public class RealIdentityVM {
-    private final String login;
-    private final String name;
-    private final GenderType genderType;
-    private final String identityCard;
-    private final String picPath;
-    public RealIdentityVM(String login, String name, GenderType genderType, String identityCard, String picPath) {
+    private String login;
+    private String name;
+    private GenderType gender;
+    private String card;
+
+    public RealIdentityVM() {}
+
+    public RealIdentityVM(String login, String name, GenderType gender, String card) {
         this.login = login;
         this.name = name;
-        this.genderType = genderType;
-        this.identityCard = identityCard;
-        this.picPath = picPath;
+        this.gender = gender;
+        this.card = card;
     }
 
     public String getLogin() {
@@ -27,15 +28,27 @@ public class RealIdentityVM {
         return name;
     }
 
-    public GenderType getGenderType() {
-        return genderType;
+    public GenderType getGender() {
+        return gender;
     }
 
-    public String getPicPath() {
-        return picPath;
+    public String getCard() {
+        return card;
     }
 
-    public String getIdentityCard() {
-        return identityCard;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGender(GenderType gender) {
+        this.gender = gender;
+    }
+
+    public void setCard(String card) {
+        this.card = card;
     }
 }

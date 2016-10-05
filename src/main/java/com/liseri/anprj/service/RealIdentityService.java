@@ -32,17 +32,16 @@ public class RealIdentityService {
      * @param login
      * @param identityCard
      * @param gender
-     * @param picPath
      * @return
      */
-    public RealIdentity binding(String login, String name,  GenderType gender, String identityCard, String picPath) {
+    public RealIdentity binding(String login, String name,  GenderType gender, String identityCard) {
         log.debug("Request to save RealIdentity");
         RealIdentity realIdentity = new RealIdentity();
         realIdentity.login(login)
             .name(name)
             .gender(gender)
             .identityNumber(identityCard)
-            .identityPicPath(picPath);
+            .activated(false);
         RealIdentity result = realIdentityRepository.save(realIdentity);
         return result;
     }

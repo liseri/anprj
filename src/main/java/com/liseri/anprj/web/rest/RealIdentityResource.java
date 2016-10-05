@@ -2,6 +2,8 @@ package com.liseri.anprj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.liseri.anprj.domain.RealIdentity;
+import com.liseri.anprj.repository.RealIdentityRepository;
+import com.liseri.anprj.security.SecurityUtils;
 import com.liseri.anprj.service.RealIdentityService;
 import com.liseri.anprj.web.rest.util.HeaderUtil;
 import com.liseri.anprj.web.rest.util.PaginationUtil;
@@ -40,22 +42,30 @@ public class RealIdentityResource {
     private final Logger log = LoggerFactory.getLogger(RealIdentityResource.class);
 
     @Inject
+    private RealIdentityRepository realIdentityRepository;
+
+    @Inject
     private RealIdentityService realIdentityService;
 
 
     @RequestMapping(value = "/real-identities/upload",
-        method = RequestMethod.POST,
-        produces = MediaType.APPLICATION_JSON_VALUE)
+        method = RequestMethod.POST)
     @Timed
     public ResponseEntity<Void> uploadFile(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
+                //最好判断一下文件的大小
                 Path path = Paths.get(IDENTITY_PATH, file.getOriginalFilename());
+                if (Paths.get(IDENTITY_PATH).toFile().exists() == false)
+                    Files.createDirectories(Paths.get(IDENTITY_PATH));
                 Files.copy(file.getInputStream(), path);
+                RealIdentity realIdentity = realIdentityRepository.findByLogin(SecurityUtils.getCurrentUserLogin());
+                realIdentity.identityPicPath(path.toString()).identityPicType(file.getContentType());
+                realIdentityRepository.save(realIdentity);
                 return ResponseEntity.ok().headers(HeaderUtil.createUploadResultHead("success",path.toString())).build();
             } catch (IOException | RuntimeException e) {
                 e.printStackTrace();
-                return ResponseEntity.badRequest().headers(HeaderUtil.createUploadResultHead("error", e.getMessage())).build();
+                return ResponseEntity.badRequest().headers(HeaderUtil.createUploadResultHead("error",e.getMessage())).build();
             }
         }
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -68,7 +78,7 @@ public class RealIdentityResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new realIdentity, or with status 400 (Bad Request) if the realIdentity has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(value = "/real-identities/bind",
+    @RequestMapping(value = "/real-identities",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -76,7 +86,7 @@ public class RealIdentityResource {
         log.debug("REST request to createRealIdentity");
 
         RealIdentity result = realIdentityService.binding(realIdentityVM.getLogin(), realIdentityVM.getName(),
-            realIdentityVM.getGenderType(), realIdentityVM.getIdentityCard(), realIdentityVM.getPicPath());
+            realIdentityVM.getGender(), realIdentityVM.getCard());
         return ResponseEntity.ok().build();
     }
 

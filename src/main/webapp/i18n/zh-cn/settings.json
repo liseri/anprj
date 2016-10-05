@@ -18,9 +18,24 @@
             }
         },
         "phone": {
-            "title": "手机号设置",
+            "title": "手机号绑定",
             "placeholder": "您的手机号",
-            "success": "<strong>手机号设置保存成功!</strong>"
+            "success": "<strong>手机号绑定成功!</strong>"
+        },
+        "identity": {
+            "title": "身份证绑定",
+            "nameplaceholder": "您身份证上的名字",
+            "genderplaceholder": "性别",
+            "cardplaceholder": "您的身份证号",
+            "success": "<strong>身份证信息上传成功，等待审核!</strong>"
+        },
+        "address": {
+            "title": "地址设置",
+            "addressplaceholder": "您的居住地址",
+            "nameplaceholder": "联系人",
+            "phoneplaceholder": "联系电话",
+            "postcodeplaceholder": "邮编",
+            "success": "<strong>地址设置保存成功!</strong>"
         },
         "messages": {
             "error": {

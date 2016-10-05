@@ -2,6 +2,7 @@ package com.liseri.anprj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.liseri.anprj.domain.Phone;
+import com.liseri.anprj.repository.PhoneRepository;
 import com.liseri.anprj.service.PhoneService;
 import com.liseri.anprj.web.rest.util.HeaderUtil;
 import com.liseri.anprj.web.rest.vm.PhoneVM;
@@ -29,6 +30,8 @@ public class PhoneResource {
 
     private final Logger log = LoggerFactory.getLogger(PhoneResource.class);
 
+    @Inject
+    private PhoneRepository phoneRepository;
     @Inject
     private PhoneService phoneService;
 
@@ -62,8 +65,11 @@ public class PhoneResource {
     @Timed
     public ResponseEntity<Void> binding(@Valid @RequestBody PhoneVM phoneVM) throws URISyntaxException {
         log.debug("REST request to save Phone : {}", phoneVM);
-        phoneService.banding(phoneVM.getLogin(), phoneVM.getPhone(), phoneVM.getKey());
-        return ResponseEntity.ok().build();
+        Phone phone = phoneRepository.findByLogin(phoneVM.getLogin());
+        if (phone == null || !phone.getPhone().equalsIgnoreCase(phoneVM.getLogin()) || !phone.getKey().equalsIgnoreCase(phoneVM.getKey()))
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("phone", "invalidkey", "invalidkey")).body(null);
+        phoneService.banding(phone);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert("phone", "")).build();
     }
 
     /**

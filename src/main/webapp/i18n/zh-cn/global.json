@@ -128,6 +128,7 @@
         "Size": "域 {{fieldName}} 不满足最大/最小值限制!",
         "userexists": "该用户名已存在!",
         "emailexists": "该邮箱已被使用!",
+        "invalidkey":"验证码无效",
         "idexists": "新建的 {{entityName}} 的ID已经存在"
     },
     "footer": "山西省农村信用社（汾阳） 版权所有 2016"

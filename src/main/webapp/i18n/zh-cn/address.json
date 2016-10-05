@@ -2,7 +2,7 @@
     "anprjApp": {
         "address" : {
             "home": {
-                "title": "Addresses",
+                "title": "地址管理",
                 "createLabel": "Create a new Address",
                 "createOrEditLabel": "Create or edit a Address",
                 "search": "Search for Address"
@@ -14,13 +14,13 @@
                 "question": "Are you sure you want to delete Address {{ id }}?"
             },
             "detail": {
-                "title": "Address"
+                "title": "地址管理"
             },
-            "login": "Login",
-            "address": "Address",
-            "name": "Name",
-            "phone": "Phone",
-            "postcode": "Postcode"
+            "login": "账号",
+            "address": "地址",
+            "name": "户主",
+            "phone": "电话",
+            "postcode": "邮编"
         }
     }
 }

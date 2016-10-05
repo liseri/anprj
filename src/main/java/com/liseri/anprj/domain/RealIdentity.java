@@ -40,9 +40,8 @@ public class RealIdentity implements Serializable {
     private String name;
 
     @NotNull
-    @Size(max = 5)
     @Enumerated(EnumType.STRING)
-    @Column(name = "identity_gender", length = 5, nullable = false)
+    @Column(name = "identity_gender", nullable = false)
     private GenderType gender;
 
     @NotNull
@@ -50,10 +49,13 @@ public class RealIdentity implements Serializable {
     @Column(name = "identity_number", length = 18, nullable = false)
     private String identityNumber;
 
-    @NotNull
     @Size(max = 255)
-    @Column(name = "identity_pic_path", length = 255, nullable = false)
+    @Column(name = "identity_pic_path", length = 255, nullable = true)
     private String identityPicPath;
+
+    @Size(max = 64)
+    @Column(name = "identity_pic_type", length = 64, nullable = true)
+    private String identityPicType;
 
     @NotNull
     @Column(name = "activated", nullable = false)
@@ -141,7 +143,16 @@ public class RealIdentity implements Serializable {
         this.activated = activated;
         return this;
     }
-
+    public String getIdentityPicType() {
+        return identityPicType;
+    }
+    public RealIdentity identityPicType(String identityPicType) {
+        this.identityPicType = identityPicType;
+        return this;
+    }
+    public void setIdentityPicType(String identityPicType) {
+        this.identityPicType = identityPicType;
+    }
     public void setActivated(Boolean activated) {
         this.activated = activated;
     }
@@ -187,11 +198,10 @@ public class RealIdentity implements Serializable {
             ", name='" + name + "'" +
             ", gender='" + gender + "'" +
             ", identityNumber='" + identityNumber + "'" +
+            ", identityPicType='" + identityPicType + "'" +
             ", identityPicPath='" + identityPicPath + "'" +
             ", activated='" + activated + "'" +
             ", activateDate='" + activateDate + "'" +
             '}';
     }
-
-
 }

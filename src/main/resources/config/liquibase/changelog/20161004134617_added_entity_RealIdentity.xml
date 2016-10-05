@@ -33,12 +33,16 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="identity_gender" type="varchar(5)">
+            <column name="identity_gender" type="varchar(6)">
                 <constraints nullable="false" />
             </column>
 
             <column name="identity_pic_path" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
+            </column>
+
+            <column name="identity_pic_type" type="varchar(64)">
+                <constraints nullable="true" />
             </column>
 
             <column name="activated" type="bit">

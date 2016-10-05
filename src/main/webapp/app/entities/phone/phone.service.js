@@ -29,7 +29,16 @@
                     return angular.toJson(copy);
                 }
             },
-            'bind': {
+            'bindApply': {
+                url: 'api/phones/apply',
+                method: 'POST',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                    return angular.toJson(copy);
+                }
+            },
+            'bindKey': {
+                url: 'api/phones/bind',
                 method: 'POST',
                 transformRequest: function (data) {
                     var copy = angular.copy(data);

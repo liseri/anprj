@@ -11,5 +11,5 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface PhoneRepository extends JpaRepository<Phone,Long> {
-
+    Phone findByLogin(String login);
 }

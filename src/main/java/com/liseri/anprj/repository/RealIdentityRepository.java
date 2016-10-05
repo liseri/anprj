@@ -11,5 +11,5 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface RealIdentityRepository extends JpaRepository<RealIdentity,Long> {
-
+    RealIdentity findByLogin(String login);
 }

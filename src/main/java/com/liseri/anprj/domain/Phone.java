@@ -11,8 +11,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * 电话绑定                                                                        
- * 
+ * 电话绑定
+ *
  */
 @ApiModel(description = ""
     + "电话绑定                                                                   "
@@ -37,6 +37,11 @@ public class Phone implements Serializable {
     @Size(max = 16)
     @Column(name = "phone", length = 16, nullable = false)
     private String phone;
+
+    @NotNull
+    @Size(max = 8)
+    @Column(name = "key", length = 8, nullable = false)
+    private String key;
 
     @NotNull
     @Column(name = "activated", nullable = false)
@@ -77,6 +82,19 @@ public class Phone implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public Phone key(String key) {
+        this.key = key;
+        return this;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Boolean isActivated() {
@@ -135,4 +153,5 @@ public class Phone implements Serializable {
             ", activateDate='" + activateDate + "'" +
             '}';
     }
+
 }

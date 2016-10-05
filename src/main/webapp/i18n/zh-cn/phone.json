@@ -7,7 +7,7 @@
                 "createOrEditLabel": "Create or edit a Phone",
                 "search": "Search for Phone"
             },
-            "created": "A new Phone is created with identifier {{ param }}",
+            "created": "手机号绑定成功",
             "updated": "A Phone is updated with identifier {{ param }}",
             "deleted": "手机号绑定 {{ param }} 被删除",
             "delete": {

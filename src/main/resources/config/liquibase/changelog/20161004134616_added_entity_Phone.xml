@@ -24,21 +24,25 @@
             <column name="login" type="varchar(16)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="phone" type="varchar(16)">
                 <constraints nullable="false" />
             </column>
-            
+
+            <column name="key" type="varchar(8)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="activated" type="bit">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="activate_date" type="date">
                 <constraints nullable="true" />
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
 </databaseChangeLog>
