@@ -13,7 +13,12 @@ public final class HeaderUtil {
 
     private HeaderUtil(){
     }
-
+    public static HttpHeaders createUploadResultHead(String result, String message) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-anprjApp-upload-result", result);
+        headers.add("X-anprjApp-upload-message", message);
+        return headers;
+    }
     public static HttpHeaders createAlert(String message, String param) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-anprjApp-alert", message);

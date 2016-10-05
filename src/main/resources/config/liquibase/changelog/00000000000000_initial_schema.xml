@@ -31,6 +31,9 @@
             <column name="email" type="varchar(100)">
                 <constraints unique="true" nullable="true"/>
             </column>
+            <column name="is_enterprise" type="boolean" valueBoolean="false">
+                <constraints nullable="false" />
+            </column>
             <column name="activated" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />
             </column>
@@ -95,6 +98,7 @@
                   separator=";"
                   tableName="an_user">
             <column name="activated" type="boolean"/>
+            <column name="is_enterprise" type="boolean"/>
             <column name="created_date" type="timestamp"/>
         </loadData>
         <dropDefaultValue tableName="an_user" columnName="created_date" columnDataType="datetime"/>

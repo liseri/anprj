@@ -2,24 +2,25 @@
     "anprjApp": {
         "phone" : {
             "home": {
-                "title": "Phones",
+                "title": "手机号绑定",
                 "createLabel": "Create a new Phone",
                 "createOrEditLabel": "Create or edit a Phone",
                 "search": "Search for Phone"
             },
             "created": "A new Phone is created with identifier {{ param }}",
             "updated": "A Phone is updated with identifier {{ param }}",
-            "deleted": "A Phone is deleted with identifier {{ param }}",
+            "deleted": "手机号绑定 {{ param }} 被删除",
             "delete": {
-                "question": "Are you sure you want to delete Phone {{ id }}?"
+                "question": "你确定要删除该手机号绑定?"
             },
             "detail": {
-                "title": "Phone"
+                "title": "手机号绑定"
             },
-            "login": "Login",
-            "phone": "Phone",
-            "activated": "Activated",
-            "activateDate": "Activate Date"
+            "login": "账号",
+            "phone": "手机号",
+            "activated": "已绑定",
+            "deactivated": "未绑定",
+            "activateDate": "绑定日期"
         }
     }
 }

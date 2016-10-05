@@ -57,6 +57,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String email;
 
     @NotNull
+    @Column(name = "is_enterprise" ,nullable = false)
+    private boolean isEnterprise = false;
+
+    @NotNull
     @Column(nullable = false)
     private boolean activated = false;
 
@@ -132,6 +136,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public boolean isEnterprise() {
+        return isEnterprise;
+    }
+
+    public void setEnterprise(boolean enterprise) {
+        isEnterprise = enterprise;
     }
 
     public boolean getActivated() {
@@ -212,9 +225,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", isEnterprise" + isEnterprise + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
             "}";
     }
+
 }

@@ -27,7 +27,7 @@ import java.util.Optional;
 public class AddressResource {
 
     private final Logger log = LoggerFactory.getLogger(AddressResource.class);
-        
+
     @Inject
     private AddressService addressService;
 
@@ -53,29 +53,6 @@ public class AddressResource {
             .body(result);
     }
 
-    /**
-     * PUT  /addresses : Updates an existing address.
-     *
-     * @param address the address to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated address,
-     * or with status 400 (Bad Request) if the address is not valid,
-     * or with status 500 (Internal Server Error) if the address couldnt be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @RequestMapping(value = "/addresses",
-        method = RequestMethod.PUT,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<Address> updateAddress(@Valid @RequestBody Address address) throws URISyntaxException {
-        log.debug("REST request to update Address : {}", address);
-        if (address.getId() == null) {
-            return createAddress(address);
-        }
-        Address result = addressService.save(address);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("address", address.getId().toString()))
-            .body(result);
-    }
 
     /**
      * GET  /addresses : get all the addresses.

@@ -1,5 +1,6 @@
 package com.liseri.anprj.domain;
 
+import com.liseri.anprj.domain.enumeration.GenderType;
 import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -11,8 +12,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * 身份证实名绑定                                                                     
- * 
+ * 身份证实名绑定
+ *
  */
 @ApiModel(description = ""
     + "身份证实名绑定                                                                "
@@ -37,6 +38,12 @@ public class RealIdentity implements Serializable {
     @Size(max = 16)
     @Column(name = "name", length = 16, nullable = false)
     private String name;
+
+    @NotNull
+    @Size(max = 5)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "identity_gender", length = 5, nullable = false)
+    private GenderType gender;
 
     @NotNull
     @Size(max = 18)
@@ -100,6 +107,17 @@ public class RealIdentity implements Serializable {
 
     public void setIdentityNumber(String identityNumber) {
         this.identityNumber = identityNumber;
+    }
+
+    public GenderType getGender() {
+        return gender;
+    }
+    public RealIdentity gender(GenderType gender) {
+        this.gender = gender;
+        return this;
+    }
+    public void setGender(GenderType gender) {
+        this.gender = gender;
     }
 
     public String getIdentityPicPath() {
@@ -167,10 +185,13 @@ public class RealIdentity implements Serializable {
             "id=" + id +
             ", login='" + login + "'" +
             ", name='" + name + "'" +
+            ", gender='" + gender + "'" +
             ", identityNumber='" + identityNumber + "'" +
             ", identityPicPath='" + identityPicPath + "'" +
             ", activated='" + activated + "'" +
             ", activateDate='" + activateDate + "'" +
             '}';
     }
+
+
 }

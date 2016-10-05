@@ -3,9 +3,11 @@ package com.liseri.anprj.web.rest;
 import com.liseri.anprj.config.Constants;
 import com.codahale.metrics.annotation.Timed;
 import com.liseri.anprj.domain.User;
+import com.liseri.anprj.repository.PhoneRepository;
 import com.liseri.anprj.repository.UserRepository;
 import com.liseri.anprj.security.AuthoritiesConstants;
 import com.liseri.anprj.service.MailService;
+import com.liseri.anprj.service.PhoneService;
 import com.liseri.anprj.service.UserService;
 import com.liseri.anprj.web.rest.vm.ManagedUserVM;
 import com.liseri.anprj.web.rest.util.HeaderUtil;
@@ -98,6 +100,8 @@ public class UserResource {
                 .headers(HeaderUtil.createFailureAlert("userManagement", "emailexists", "Email already in use"))
                 .body(null);
         } else {
+            //默认设置为中文
+            managedUserVM.setLangKey("zh-cn");
             User newUser = userService.createUser(managedUserVM);
             String baseUrl = request.getScheme() + // "http"
             "://" +                                // "://"
@@ -136,7 +140,7 @@ public class UserResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("userManagement", "userexists", "Login already in use")).body(null);
         }
         userService.updateUser(managedUserVM.getId(), managedUserVM.getLogin(), managedUserVM.getFirstName(),
-            managedUserVM.getLastName(), managedUserVM.getEmail(), managedUserVM.isActivated(),
+            managedUserVM.getLastName(), managedUserVM.getEmail(), managedUserVM.isActivated(), managedUserVM.isEnterprise(),
             managedUserVM.getLangKey(), managedUserVM.getAuthorities());
 
         return ResponseEntity.ok()
@@ -146,7 +150,7 @@ public class UserResource {
 
     /**
      * GET  /users : get all users.
-     * 
+     *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and with body all users
      * @throws URISyntaxException if the pagination headers couldn't be generated

@@ -3,6 +3,7 @@ package com.liseri.anprj.service;
 import com.liseri.anprj.domain.Authority;
 import com.liseri.anprj.domain.User;
 import com.liseri.anprj.repository.AuthorityRepository;
+import com.liseri.anprj.repository.PhoneRepository;
 import com.liseri.anprj.repository.UserRepository;
 import com.liseri.anprj.security.AuthoritiesConstants;
 import com.liseri.anprj.security.SecurityUtils;
@@ -37,47 +38,10 @@ public class UserService {
     @Inject
     private AuthorityRepository authorityRepository;
 
-    public Optional<User> activateRegistration(String key) {
-        log.debug("Activating user for activation key {}", key);
-        return userRepository.findOneByActivationKey(key)
-            .map(user -> {
-                // activate given user for the registration key.
-                user.setActivated(true);
-                user.setActivationKey(null);
-                userRepository.save(user);
-                log.debug("Activated user: {}", user);
-                return user;
-            });
-    }
+    @Inject
+    private PhoneRepository phoneRepository;
 
-    public Optional<User> completePasswordReset(String newPassword, String key) {
-       log.debug("Reset user password for reset key {}", key);
-
-       return userRepository.findOneByResetKey(key)
-            .filter(user -> {
-                ZonedDateTime oneDayAgo = ZonedDateTime.now().minusHours(24);
-                return user.getResetDate().isAfter(oneDayAgo);
-           })
-           .map(user -> {
-                user.setPassword(passwordEncoder.encode(newPassword));
-                user.setResetKey(null);
-                user.setResetDate(null);
-                userRepository.save(user);
-                return user;
-           });
-    }
-
-    public Optional<User> requestPasswordReset(String mail) {
-        return userRepository.findOneByEmail(mail)
-            .filter(User::getActivated)
-            .map(user -> {
-                user.setResetKey(RandomUtil.generateResetKey());
-                user.setResetDate(ZonedDateTime.now());
-                userRepository.save(user);
-                return user;
-            });
-    }
-
+    //region 用户增删改
     public User createUser(String login, String password, String firstName, String lastName, String email,
         String langKey) {
 
@@ -143,7 +107,7 @@ public class UserService {
     }
 
     public void updateUser(Long id, String login, String firstName, String lastName, String email,
-        boolean activated, String langKey, Set<String> authorities) {
+        boolean activated, boolean enterprise, String langKey, Set<String> authorities) {
 
         userRepository
             .findOneById(id)
@@ -153,6 +117,7 @@ public class UserService {
                 u.setLastName(lastName);
                 u.setEmail(email);
                 u.setActivated(activated);
+                u.setEnterprise(enterprise);
                 u.setLangKey(langKey);
                 Set<Authority> managedAuthorities = u.getAuthorities();
                 managedAuthorities.clear();
@@ -169,16 +134,9 @@ public class UserService {
             log.debug("Deleted User: {}", u);
         });
     }
+    //endregion
 
-    public void changePassword(String password) {
-        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
-            String encryptedPassword = passwordEncoder.encode(password);
-            u.setPassword(encryptedPassword);
-            userRepository.save(u);
-            log.debug("Changed password for User: {}", u);
-        });
-    }
-
+    //region 用户查询
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneByLogin(login).map(u -> {
@@ -193,7 +151,12 @@ public class UserService {
         user.getAuthorities().size(); // eagerly load the association
         return user;
     }
+    //endregion
 
+    /**
+     * 获得登录用户
+     * @return
+     */
     @Transactional(readOnly = true)
     public User getUserWithAuthorities() {
         Optional<User> optionalUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
@@ -205,7 +168,62 @@ public class UserService {
          return user;
     }
 
+    //region 邮箱激活
+    public Optional<User> activateRegistration(String key) {
+        log.debug("Activating user for activation key {}", key);
+        return userRepository.findOneByActivationKey(key)
+            .map(user -> {
+                // activate given user for the registration key.
+                user.setActivated(true);
+                user.setActivationKey(null);
+                userRepository.save(user);
+                log.debug("Activated user: {}", user);
+                return user;
+            });
+    }
+    //endregion
 
+    //region 密码管理
+    public Optional<User> completePasswordReset(String newPassword, String key) {
+        log.debug("Reset user password for reset key {}", key);
+
+        return userRepository.findOneByResetKey(key)
+            .filter(user -> {
+                ZonedDateTime oneDayAgo = ZonedDateTime.now().minusHours(24);
+                return user.getResetDate().isAfter(oneDayAgo);
+            })
+            .map(user -> {
+                user.setPassword(passwordEncoder.encode(newPassword));
+                user.setResetKey(null);
+                user.setResetDate(null);
+                userRepository.save(user);
+                return user;
+            });
+    }
+
+    public Optional<User> requestPasswordReset(String mail) {
+        return userRepository.findOneByEmail(mail)
+            .filter(User::getActivated)
+            .map(user -> {
+                user.setResetKey(RandomUtil.generateResetKey());
+                user.setResetDate(ZonedDateTime.now());
+                userRepository.save(user);
+                return user;
+            });
+    }
+    public void changePassword(String password) {
+        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
+            String encryptedPassword = passwordEncoder.encode(password);
+            u.setPassword(encryptedPassword);
+            userRepository.save(u);
+            log.debug("Changed password for User: {}", u);
+        });
+    }
+    //endregion
+
+
+
+    //region 周期性任务
     /**
      * Not activated users should be automatically deleted after 3 days.
      * <p>
@@ -221,4 +239,5 @@ public class UserService {
             userRepository.delete(user);
         }
     }
+    //endregion
 }

@@ -5,6 +5,7 @@ import com.liseri.anprj.domain.RealIdentity;
 import com.liseri.anprj.service.RealIdentityService;
 import com.liseri.anprj.web.rest.util.HeaderUtil;
 import com.liseri.anprj.web.rest.util.PaginationUtil;
+import com.liseri.anprj.web.rest.vm.RealIdentityVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,12 +15,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -28,57 +35,52 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class RealIdentityResource {
+    public static final String IDENTITY_PATH = "identity-dir";
 
     private final Logger log = LoggerFactory.getLogger(RealIdentityResource.class);
-        
+
     @Inject
     private RealIdentityService realIdentityService;
+
+
+    @RequestMapping(value = "/real-identities/upload",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Void> uploadFile(@RequestParam("file") MultipartFile file) {
+        if (!file.isEmpty()) {
+            try {
+                Path path = Paths.get(IDENTITY_PATH, file.getOriginalFilename());
+                Files.copy(file.getInputStream(), path);
+                return ResponseEntity.ok().headers(HeaderUtil.createUploadResultHead("success",path.toString())).build();
+            } catch (IOException | RuntimeException e) {
+                e.printStackTrace();
+                return ResponseEntity.badRequest().headers(HeaderUtil.createUploadResultHead("error", e.getMessage())).build();
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
     /**
      * POST  /real-identities : Create a new realIdentity.
      *
-     * @param realIdentity the realIdentity to create
+     * @param realIdentityVM the realIdentity to create
      * @return the ResponseEntity with status 201 (Created) and with body the new realIdentity, or with status 400 (Bad Request) if the realIdentity has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(value = "/real-identities",
+    @RequestMapping(value = "/real-identities/bind",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<RealIdentity> createRealIdentity(@Valid @RequestBody RealIdentity realIdentity) throws URISyntaxException {
-        log.debug("REST request to save RealIdentity : {}", realIdentity);
-        if (realIdentity.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("realIdentity", "idexists", "A new realIdentity cannot already have an ID")).body(null);
-        }
-        RealIdentity result = realIdentityService.save(realIdentity);
-        return ResponseEntity.created(new URI("/api/real-identities/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("realIdentity", result.getId().toString()))
-            .body(result);
+    public ResponseEntity<Void> binding(@Valid @RequestBody RealIdentityVM realIdentityVM) throws URISyntaxException {
+        log.debug("REST request to createRealIdentity");
+
+        RealIdentity result = realIdentityService.binding(realIdentityVM.getLogin(), realIdentityVM.getName(),
+            realIdentityVM.getGenderType(), realIdentityVM.getIdentityCard(), realIdentityVM.getPicPath());
+        return ResponseEntity.ok().build();
     }
 
-    /**
-     * PUT  /real-identities : Updates an existing realIdentity.
-     *
-     * @param realIdentity the realIdentity to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated realIdentity,
-     * or with status 400 (Bad Request) if the realIdentity is not valid,
-     * or with status 500 (Internal Server Error) if the realIdentity couldnt be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @RequestMapping(value = "/real-identities",
-        method = RequestMethod.PUT,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<RealIdentity> updateRealIdentity(@Valid @RequestBody RealIdentity realIdentity) throws URISyntaxException {
-        log.debug("REST request to update RealIdentity : {}", realIdentity);
-        if (realIdentity.getId() == null) {
-            return createRealIdentity(realIdentity);
-        }
-        RealIdentity result = realIdentityService.save(realIdentity);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("realIdentity", realIdentity.getId().toString()))
-            .body(result);
-    }
+
 
     /**
      * GET  /real-identities : get all the realIdentities.

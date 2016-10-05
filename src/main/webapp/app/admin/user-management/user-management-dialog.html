@@ -89,6 +89,12 @@
                 <span data-translate="userManagement.activated">Activated</span>
             </label>
         </div>
+        <div class="form-group">
+            <label for="enterprise">
+                <input ng-disabled="vm.user.id === null" type="checkbox" id="enterprise" name="enterprise" ng-model="vm.user.enterprise">
+                <span data-translate="userManagement.isEnterprise">IsEnterprise</span>
+            </label>
+        </div>
         <!--
         <div class="form-group">
             <label data-translate="userManagement.langKey">Lang Key</label>

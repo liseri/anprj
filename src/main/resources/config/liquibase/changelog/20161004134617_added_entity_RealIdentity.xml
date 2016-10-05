@@ -24,29 +24,33 @@
             <column name="login" type="varchar(16)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="name" type="varchar(16)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="identity_number" type="varchar(18)">
                 <constraints nullable="false" />
             </column>
-            
+
+            <column name="identity_gender" type="varchar(5)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="identity_pic_path" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="activated" type="bit">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="activate_date" type="date">
                 <constraints nullable="true" />
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
 </databaseChangeLog>

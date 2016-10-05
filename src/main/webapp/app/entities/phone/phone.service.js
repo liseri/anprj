@@ -29,11 +29,10 @@
                     return angular.toJson(copy);
                 }
             },
-            'save': {
+            'bind': {
                 method: 'POST',
                 transformRequest: function (data) {
                     var copy = angular.copy(data);
-                    copy.activateDate = DateUtils.convertLocalDateToServer(copy.activateDate);
                     return angular.toJson(copy);
                 }
             }

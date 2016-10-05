@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.liseri.anprj.domain.Phone;
 import com.liseri.anprj.service.PhoneService;
 import com.liseri.anprj.web.rest.util.HeaderUtil;
+import com.liseri.anprj.web.rest.vm.PhoneVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -27,54 +28,42 @@ import java.util.Optional;
 public class PhoneResource {
 
     private final Logger log = LoggerFactory.getLogger(PhoneResource.class);
-        
+
     @Inject
     private PhoneService phoneService;
 
     /**
-     * POST  /phones : Create a new phone.
+     * 请求验证码
      *
-     * @param phone the phone to create
+     * @param phoneVM the phoneVM to create
      * @return the ResponseEntity with status 201 (Created) and with body the new phone, or with status 400 (Bad Request) if the phone has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(value = "/phones",
+    @RequestMapping(value = "/phones/apply",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Phone> createPhone(@Valid @RequestBody Phone phone) throws URISyntaxException {
-        log.debug("REST request to save Phone : {}", phone);
-        if (phone.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("phone", "idexists", "A new phone cannot already have an ID")).body(null);
-        }
-        Phone result = phoneService.save(phone);
-        return ResponseEntity.created(new URI("/api/phones/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("phone", result.getId().toString()))
-            .body(result);
+    public ResponseEntity<Void> bindingApply(@Valid @RequestBody PhoneVM phoneVM) throws URISyntaxException {
+        log.debug("REST request to save Phone : {}", phoneVM);
+        phoneService.bandingApply(phoneVM.getLogin(), phoneVM.getPhone());
+        return ResponseEntity.ok().build();
     }
 
     /**
-     * PUT  /phones : Updates an existing phone.
+     * 绑定验证码
      *
-     * @param phone the phone to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated phone,
-     * or with status 400 (Bad Request) if the phone is not valid,
-     * or with status 500 (Internal Server Error) if the phone couldnt be updated
+     * @param phoneVM the phoneVM to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new phone, or with status 400 (Bad Request) if the phone has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(value = "/phones",
-        method = RequestMethod.PUT,
+    @RequestMapping(value = "/phones/bind",
+        method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Phone> updatePhone(@Valid @RequestBody Phone phone) throws URISyntaxException {
-        log.debug("REST request to update Phone : {}", phone);
-        if (phone.getId() == null) {
-            return createPhone(phone);
-        }
-        Phone result = phoneService.save(phone);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("phone", phone.getId().toString()))
-            .body(result);
+    public ResponseEntity<Void> binding(@Valid @RequestBody PhoneVM phoneVM) throws URISyntaxException {
+        log.debug("REST request to save Phone : {}", phoneVM);
+        phoneService.banding(phoneVM.getLogin(), phoneVM.getPhone(), phoneVM.getKey());
+        return ResponseEntity.ok().build();
     }
 
     /**

@@ -61,7 +61,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: anprj@localhost
+        from: lishuai061@126.com
     swagger:
         title: anprj API
         description: anprj API documentation

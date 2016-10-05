@@ -9,6 +9,19 @@
             "language": "语言",
             "button": "保存"
         },
+        "email": {
+            "title": "电子邮件设置",
+            "success": "<strong>电子邮件设置保存成功!</strong>",
+            "error": {
+                "fail": "<strong>发生错误!</strong> 设置无法保存.",
+                "emailexists": "<strong>该邮件地址已被使用!</strong> 请使用另外的邮件地址."
+            }
+        },
+        "phone": {
+            "title": "手机号设置",
+            "placeholder": "您的手机号",
+            "success": "<strong>手机号设置保存成功!</strong>"
+        },
         "messages": {
             "error": {
                 "fail": "<strong>发生错误!</strong> 设置无法保存.",

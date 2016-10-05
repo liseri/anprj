@@ -30,6 +30,8 @@ public class UserDTO {
     @Size(min = 5, max = 100)
     private String email;
 
+    private boolean enterprise = false;
+
     private boolean activated = false;
 
     @Size(min = 2, max = 5)
@@ -42,18 +44,19 @@ public class UserDTO {
 
     public UserDTO(User user) {
         this(user.getLogin(), user.getFirstName(), user.getLastName(),
-            user.getEmail(), user.getActivated(), user.getLangKey(),
+            user.getEmail(), user.getActivated(), user.isEnterprise(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()));
     }
 
     public UserDTO(String login, String firstName, String lastName,
-        String email, boolean activated, String langKey, Set<String> authorities) {
+        String email, boolean activated, boolean isEnterprise, String langKey, Set<String> authorities) {
 
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.enterprise = isEnterprise;
         this.activated = activated;
         this.langKey = langKey;
         this.authorities = authorities;
@@ -75,6 +78,8 @@ public class UserDTO {
         return email;
     }
 
+    public boolean isEnterprise() { return enterprise;}
+
     public boolean isActivated() {
         return activated;
     }
@@ -82,7 +87,7 @@ public class UserDTO {
     public String getLangKey() {
         return langKey;
     }
-
+    public void setLangKey(String langKey) {this.langKey = langKey;}
     public Set<String> getAuthorities() {
         return authorities;
     }
@@ -94,9 +99,12 @@ public class UserDTO {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", isEnterprise=" + enterprise + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
             ", authorities=" + authorities +
             "}";
     }
+
+
 }

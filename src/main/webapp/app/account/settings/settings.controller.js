@@ -5,14 +5,16 @@
         .module('anprjApp')
         .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['Principal', 'Auth', 'JhiLanguageService', '$translate'];
+    SettingsController.$inject = ['Principal', 'Auth', 'Phone', 'JhiLanguageService', '$translate'];
 
-    function SettingsController (Principal, Auth, JhiLanguageService, $translate) {
+    function SettingsController (Principal, Auth, Phone, JhiLanguageService, $translate) {
         var vm = this;
 
         vm.error = null;
-        vm.save = save;
+        vm.emailSave = emailSave;
+        vm.phoneBind = phoneBind;
         vm.settingsAccount = null;
+        vm.settingsPhone = {login:null, phone:null, key:null};
         vm.success = null;
 
         /**
@@ -31,9 +33,10 @@
 
         Principal.identity().then(function(account) {
             vm.settingsAccount = copyAccount(account);
+            vm.settingsPhone.login = account.login;
         });
 
-        function save () {
+        function emailSave () {
             Auth.updateAccount(vm.settingsAccount).then(function() {
                 vm.error = null;
                 vm.success = 'OK';
@@ -45,6 +48,18 @@
                         $translate.use(vm.settingsAccount.langKey);
                     }
                 });
+            }).catch(function() {
+                vm.success = null;
+                vm.error = 'ERROR';
+            });
+        }
+        function phoneKeyApply() {
+
+        }
+        function phoneBind() {
+            Phone.bind(vm.phoneBind).then(function() {
+                vm.error = null;
+                vm.success = 'OK';
             }).catch(function() {
                 vm.success = null;
                 vm.error = 'ERROR';
