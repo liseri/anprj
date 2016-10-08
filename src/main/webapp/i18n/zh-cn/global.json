@@ -5,20 +5,27 @@
         "menu": {
             "home": "首页",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
-            "entities": {
-                "main": "数据",
-                "address": "Address",
-                "phone": "Phone",
-                "realIdentity": "Real Identity",
-                "enterprise": "Enterprise",
-                "branch": "Branch",
-                "loanLimit": "Loan Limit",
-                "loanPrj": "Loan Prj",
-                "loanApply": "Loan Apply",
-                "lendPrj": "Lend Prj",
-                "lendApply": "Lend Apply",
-                "drawApply": "Draw Apply",
-                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+            "loan": {
+                "main": "借款管理",
+                "loanLimit": "借款额度管理",
+                "loanPrj": "借款项目管理",
+                "loanApply": "用户借款管理"
+            },
+            "lend": {
+                "main": "理财管理",
+                "lendPrj": "理财项目管理",
+                "lendApply": "用户理财管理"
+            },
+            "draw": {
+                "main": "预约提款管理",
+                "drawApply": "用户预约提款管理"
+            },
+            "audit": {
+                "main": "用户审核",
+                "address": "地址审核",
+                "phone": "手机号审核",
+                "realIdentity": "身份证审核",
+                "enterprise": "企业信息审核"
             },
             "account": {
                 "main": "账号",
@@ -32,6 +39,7 @@
             "admin": {
                 "main": "管理",
                 "userManagement": "用户管理",
+                "branch": "网点管理",
                 "tracker": "追踪使用者",
                 "metrics": "资源监控",
                 "health": "服务状态",

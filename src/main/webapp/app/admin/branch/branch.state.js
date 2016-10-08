@@ -10,7 +10,7 @@
     function stateConfig($stateProvider) {
         $stateProvider
         .state('branch', {
-            parent: 'entity',
+            parent: 'admin',
             url: '/branch?page&sort&search',
             data: {
                 authorities: ['ROLE_USER'],
@@ -18,7 +18,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/branch/branches.html',
+                    templateUrl: 'app/admin/branch/branches.html',
                     controller: 'BranchController',
                     controllerAs: 'vm'
                 }
@@ -52,7 +52,7 @@
             }
         })
         .state('branch-detail', {
-            parent: 'entity',
+            parent: 'admin',
             url: '/branch/{id}',
             data: {
                 authorities: ['ROLE_USER'],
@@ -60,7 +60,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/branch/branch-detail.html',
+                    templateUrl: 'app/admin/branch/branch-detail.html',
                     controller: 'BranchDetailController',
                     controllerAs: 'vm'
                 }
@@ -91,7 +91,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/branch/branch-dialog.html',
+                    templateUrl: 'app/admin/branch/branch-dialog.html',
                     controller: 'BranchDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -116,7 +116,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/branch/branch-dialog.html',
+                    templateUrl: 'app/admin/branch/branch-dialog.html',
                     controller: 'BranchDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -146,7 +146,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/branch/branch-dialog.html',
+                    templateUrl: 'app/admin/branch/branch-dialog.html',
                     controller: 'BranchDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -171,7 +171,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/branch/branch-delete-dialog.html',
+                    templateUrl: 'app/admin/branch/branch-delete-dialog.html',
                     controller: 'BranchDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
