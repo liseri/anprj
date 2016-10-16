@@ -1,0 +1,25 @@
+
+enum NoteType {
+    LENDDES1,
+    LENDDES2,
+    LENDDES3,
+    LENDDES4,
+    LENDDES5,
+    LOADDES1,
+    LOADDES2,
+    LOADDES3,
+    LOADDES4,
+    LOADDES5
+}
+
+entity Note(AN_NOTE) {
+	prjId Long required,      //项目
+	noteType NoteType required, //描述类型
+	noteContent String required maxlength(1000) //描述
+}
+
+service all with serviceClass
+
+// Set pagination options
+paginate Note with infinite-scroll
+angularSuffix * with anprjSuffix
