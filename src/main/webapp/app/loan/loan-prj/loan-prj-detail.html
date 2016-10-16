@@ -20,13 +20,10 @@
         <dd>
             <span>{{vm.loanPrj.rate}}</span>
         </dd>
-        <dt><span data-translate="anprjApp.loanPrj.durationUnit">Duration Unit</span></dt>
-        <dd>
-            <span>{{vm.loanPrj.durationUnit}}</span>
-        </dd>
-        <dt><span data-translate="anprjApp.loanPrj.durationNum">Duration Num</span></dt>
+        <dt><span data-translate="anprjApp.loanPrj.duration">Duration</span></dt>
         <dd>
             <span>{{vm.loanPrj.durationNum}}</span>
+            <span data-translate="{{'anprjApp.durationUnit.' + vm.loanPrj.durationUnit}}">{{vm.loanPrj.durationUnit}}</span>
         </dd>
         <dt><span data-translate="anprjApp.loanPrj.replayType">Replay Type</span></dt>
         <dd>
@@ -34,7 +31,8 @@
         </dd>
         <dt><span data-translate="anprjApp.loanPrj.activated">Activated</span></dt>
         <dd>
-            <span>{{vm.loanPrj.activated}}</span>
+            <span ng-show="vm.loanPrj.activated==true">已发布</span>
+            <span ng-show="vm.loanPrj.activated==false">未发布</span>
         </dd>
         <dt><span data-translate="anprjApp.loanPrj.activateDate">Activate Date</span></dt>
         <dd>

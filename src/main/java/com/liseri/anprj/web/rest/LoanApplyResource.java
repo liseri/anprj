@@ -5,6 +5,7 @@ import com.liseri.anprj.domain.LoanApply;
 import com.liseri.anprj.service.LoanApplyService;
 import com.liseri.anprj.web.rest.util.HeaderUtil;
 import com.liseri.anprj.web.rest.util.PaginationUtil;
+import com.liseri.anprj.web.rest.vm.LoanApplyVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -37,7 +38,7 @@ public class LoanApplyResource {
     /**
      * POST  /loan-applies : Create a new loanApply.
      *
-     * @param loanApply the loanApply to create
+     * @param loanApplyVM the loanApply to create
      * @return the ResponseEntity with status 201 (Created) and with body the new loanApply, or with status 400 (Bad Request) if the loanApply has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
@@ -45,12 +46,12 @@ public class LoanApplyResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<LoanApply> createLoanApply(@Valid @RequestBody LoanApply loanApply) throws URISyntaxException {
-        log.debug("REST request to save LoanApply : {}", loanApply);
-        if (loanApply.getId() != null) {
+    public ResponseEntity<LoanApply> createLoanApply(@Valid @RequestBody LoanApplyVM loanApplyVM) throws URISyntaxException {
+        log.debug("REST request to save LoanApply : {}", loanApplyVM);
+        if (loanApplyVM.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("loanApply", "idexists", "A new loanApply cannot already have an ID")).body(null);
         }
-        LoanApply result = loanApplyService.create(loanApply);
+        LoanApply result = loanApplyService.create(loanApplyVM);
         return ResponseEntity.created(new URI("/api/loan-applies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("loanApply", result.getId().toString()))
             .body(result);

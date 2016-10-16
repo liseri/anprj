@@ -2,28 +2,28 @@
     "anprjApp": {
         "loanApply" : {
             "home": {
-                "title": "Loan Applies",
-                "createLabel": "Create a new Loan Apply",
-                "createOrEditLabel": "Create or edit a Loan Apply",
-                "search": "Search for Loan Apply"
+                "title": "用户借款管理",
+                "createLabel": "借款申请",
+                "createOrEditLabel": "新建或编辑借款申请",
+                "search": "查询"
             },
-            "created": "A new Loan Apply is created with identifier {{ param }}",
-            "updated": "A Loan Apply is updated with identifier {{ param }}",
-            "deleted": "A Loan Apply is deleted with identifier {{ param }}",
+            "created": "借款申请创建成功",
+            "updated": "借款申请修改成功",
+            "deleted": "借款申请删除成功",
             "delete": {
-                "question": "Are you sure you want to delete Loan Apply {{ id }}?"
+                "question": "确定要删除该借款申请?"
             },
             "detail": {
-                "title": "Loan Apply"
+                "title": "借款申请详情"
             },
-            "login": "Login",
-            "loanPrjId": "Loan Prj Id",
-            "amount": "Amount",
-            "applyStatu": "Apply Statu",
-            "applyDate": "Apply Date",
-            "auditDate": "Audit Date",
-            "loanDate": "Loan Date",
-            "completeDate": "Complete Date"
+            "login": "用户",
+            "loanPrjId": "借款项目",
+            "amount": "借款金额",
+            "applyStatu": "状态",
+            "applyDate": "借款日期",
+            "auditDate": "审核通过日期",
+            "loanDate": "放款日期",
+            "completeDate": "还款日期"
         }
     }
 }

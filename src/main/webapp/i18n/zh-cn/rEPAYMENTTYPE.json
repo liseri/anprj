@@ -2,11 +2,11 @@
     "anprjApp": {
         "REPAYMENTTYPE" : {
             "null": "",
-            "MONTH": "MONTH",
-            "MONTHANDDUE": "MONTHANDDUE",
-            "QUARTER": "QUARTER",
-            "QUARTERANDDUE": "QUARTERANDDUE",
-            "DUE": "DUE"
+            "MONTH": "每月等额本息",
+            "MONTHANDDUE": "每月付息到期一次性还本",
+            "QUARTER": "每季度等额本息",
+            "QUARTERANDDUE": "每季度付息到期一次性还本",
+            "DUE": "到期一次性还本付息"
         }
     }
 }

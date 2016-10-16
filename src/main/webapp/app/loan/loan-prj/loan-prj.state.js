@@ -9,75 +9,57 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('lend-apply', {
-            parent: 'entity',
-            url: '/lend-apply?page&sort&search',
+        .state('loan-prj', {
+            parent: 'loan',
+            url: '/loan-prj',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.lendApply.home.title'
+                pageTitle: 'anprjApp.loanPrj.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/lend-apply/lend-applies.html',
-                    controller: 'LendApplyController',
+                    templateUrl: 'app/loan/loan-prj/loan-prjs.html',
+                    controller: 'LoanPrjController',
                     controllerAs: 'vm'
                 }
             },
-            params: {
-                page: {
-                    value: '1',
-                    squash: true
-                },
-                sort: {
-                    value: 'id,asc',
-                    squash: true
-                },
-                search: null
-            },
             resolve: {
-                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
-                    return {
-                        page: PaginationUtil.parsePage($stateParams.page),
-                        sort: $stateParams.sort,
-                        predicate: PaginationUtil.parsePredicate($stateParams.sort),
-                        ascending: PaginationUtil.parseAscending($stateParams.sort),
-                        search: $stateParams.search
-                    };
-                }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('lendApply');
-                    $translatePartialLoader.addPart('lendApplyStatu');
+                    $translatePartialLoader.addPart('loanPrj');
+                    $translatePartialLoader.addPart('lOANPRJTYPE');
+                    $translatePartialLoader.addPart('rEPAYMENTTYPE');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('lend-apply-detail', {
+        .state('loan-prj-detail', {
             parent: 'entity',
-            url: '/lend-apply/{id}',
+            url: '/loan-prj/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.lendApply.detail.title'
+                pageTitle: 'anprjApp.loanPrj.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/lend-apply/lend-apply-detail.html',
-                    controller: 'LendApplyDetailController',
+                    templateUrl: 'app/loan/loan-prj/loan-prj-detail.html',
+                    controller: 'LoanPrjDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('lendApply');
-                    $translatePartialLoader.addPart('lendApplyStatu');
+                    $translatePartialLoader.addPart('loanPrj');
+                    $translatePartialLoader.addPart('lOANPRJTYPE');
+                    $translatePartialLoader.addPart('rEPAYMENTTYPE');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'LendApply', function($stateParams, LendApply) {
-                    return LendApply.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'LoanPrj', function($stateParams, LoanPrj) {
+                    return LoanPrj.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'lend-apply',
+                        name: $state.current.name || 'loan-prj',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -85,22 +67,22 @@
                 }]
             }
         })
-        .state('lend-apply-detail.edit', {
-            parent: 'lend-apply-detail',
+        .state('loan-prj-detail.edit', {
+            parent: 'loan-prj-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/lend-apply/lend-apply-dialog.html',
-                    controller: 'LendApplyDialogController',
+                    templateUrl: 'app/loan/loan-prj/loan-prj-dialog.html',
+                    controller: 'LoanPrjDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['LendApply', function(LendApply) {
-                            return LendApply.get({id : $stateParams.id}).$promise;
+                        entity: ['LoanPrj', function(LoanPrj) {
+                            return LoanPrj.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -110,84 +92,86 @@
                 });
             }]
         })
-        .state('lend-apply.new', {
-            parent: 'lend-apply',
+        .state('loan-prj.new', {
+            parent: 'loan-prj',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/lend-apply/lend-apply-dialog.html',
-                    controller: 'LendApplyDialogController',
+                    templateUrl: 'app/loan/loan-prj/loan-prj-dialog.html',
+                    controller: 'LoanPrjDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                login: null,
-                                lendPrjId: null,
-                                amount: null,
-                                lendStatu: null,
-                                applyDate: null,
-                                startDate: null,
-                                completeDate: null,
+                                name: null,
+                                loanType: null,
+                                maxAmount: null,
+                                rate: null,
+                                durationUnit: null,
+                                durationNum: null,
+                                replayType: null,
+                                activated: false,
+                                activateDate: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('lend-apply', null, { reload: 'lend-apply' });
+                    $state.go('loan-prj', null, { reload: 'loan-prj' });
                 }, function() {
-                    $state.go('lend-apply');
+                    $state.go('loan-prj');
                 });
             }]
         })
-        .state('lend-apply.edit', {
-            parent: 'lend-apply',
+        .state('loan-prj.edit', {
+            parent: 'loan-prj',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/lend-apply/lend-apply-dialog.html',
-                    controller: 'LendApplyDialogController',
+                    templateUrl: 'app/loan/loan-prj/loan-prj-dialog.html',
+                    controller: 'LoanPrjDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['LendApply', function(LendApply) {
-                            return LendApply.get({id : $stateParams.id}).$promise;
+                        entity: ['LoanPrj', function(LoanPrj) {
+                            return LoanPrj.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('lend-apply', null, { reload: 'lend-apply' });
+                    $state.go('loan-prj', null, { reload: 'loan-prj' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('lend-apply.delete', {
-            parent: 'lend-apply',
+        .state('loan-prj.delete', {
+            parent: 'loan-prj',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/lend-apply/lend-apply-delete-dialog.html',
-                    controller: 'LendApplyDeleteController',
+                    templateUrl: 'app/loan/loan-prj/loan-prj-delete-dialog.html',
+                    controller: 'LoanPrjDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['LendApply', function(LendApply) {
-                            return LendApply.get({id : $stateParams.id}).$promise;
+                        entity: ['LoanPrj', function(LoanPrj) {
+                            return LoanPrj.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('lend-apply', null, { reload: 'lend-apply' });
+                    $state.go('loan-prj', null, { reload: 'loan-prj' });
                 }, function() {
                     $state.go('^');
                 });

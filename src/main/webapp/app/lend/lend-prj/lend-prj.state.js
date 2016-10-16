@@ -9,55 +9,55 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('loan-limit', {
-            parent: 'entity',
-            url: '/loan-limit',
+        .state('lend-prj', {
+            parent: 'lend',
+            url: '/lend-prj',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.loanLimit.home.title'
+                pageTitle: 'anprjApp.lendPrj.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/loan-limit/loan-limits.html',
-                    controller: 'LoanLimitController',
+                    templateUrl: 'app/lend/lend-prj/lend-prjs.html',
+                    controller: 'LendPrjController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('loanLimit');
-                    $translatePartialLoader.addPart('lOANPRJTYPE');
+                    $translatePartialLoader.addPart('lendPrj');
+                    $translatePartialLoader.addPart('rEPAYMENTTYPE');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('loan-limit-detail', {
+        .state('lend-prj-detail', {
             parent: 'entity',
-            url: '/loan-limit/{id}',
+            url: '/lend-prj/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.loanLimit.detail.title'
+                pageTitle: 'anprjApp.lendPrj.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/loan-limit/loan-limit-detail.html',
-                    controller: 'LoanLimitDetailController',
+                    templateUrl: 'app/lend/lend-prj/lend-prj-detail.html',
+                    controller: 'LendPrjDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('loanLimit');
-                    $translatePartialLoader.addPart('lOANPRJTYPE');
+                    $translatePartialLoader.addPart('lendPrj');
+                    $translatePartialLoader.addPart('rEPAYMENTTYPE');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'LoanLimit', function($stateParams, LoanLimit) {
-                    return LoanLimit.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'LendPrj', function($stateParams, LendPrj) {
+                    return LendPrj.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'loan-limit',
+                        name: $state.current.name || 'lend-prj',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -65,22 +65,22 @@
                 }]
             }
         })
-        .state('loan-limit-detail.edit', {
-            parent: 'loan-limit-detail',
+        .state('lend-prj-detail.edit', {
+            parent: 'lend-prj-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/loan-limit/loan-limit-dialog.html',
-                    controller: 'LoanLimitDialogController',
+                    templateUrl: 'app/lend/lend-prj/lend-prj-dialog.html',
+                    controller: 'LendPrjDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['LoanLimit', function(LoanLimit) {
-                            return LoanLimit.get({id : $stateParams.id}).$promise;
+                        entity: ['LendPrj', function(LendPrj) {
+                            return LendPrj.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -90,80 +90,85 @@
                 });
             }]
         })
-        .state('loan-limit.new', {
-            parent: 'loan-limit',
+        .state('lend-prj.new', {
+            parent: 'lend-prj',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/loan-limit/loan-limit-dialog.html',
-                    controller: 'LoanLimitDialogController',
+                    templateUrl: 'app/lend/lend-prj/lend-prj-dialog.html',
+                    controller: 'LendPrjDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                loanType: null,
-                                minLimit: null,
-                                maxLimit: null,
+                                name: null,
+                                startAmount: null,
+                                rate: null,
+                                durationUnit: null,
+                                durationNum: null,
+                                returnType: null,
+                                activated: false,
+                                activateDate: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('loan-limit', null, { reload: 'loan-limit' });
+                    $state.go('lend-prj', null, { reload: 'lend-prj' });
                 }, function() {
-                    $state.go('loan-limit');
+                    $state.go('lend-prj');
                 });
             }]
         })
-        .state('loan-limit.edit', {
-            parent: 'loan-limit',
+        .state('lend-prj.edit', {
+            parent: 'lend-prj',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/loan-limit/loan-limit-dialog.html',
-                    controller: 'LoanLimitDialogController',
+                    templateUrl: 'app/lend/lend-prj/lend-prj-dialog.html',
+                    controller: 'LendPrjDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['LoanLimit', function(LoanLimit) {
-                            return LoanLimit.get({id : $stateParams.id}).$promise;
+                        entity: ['LendPrj', function(LendPrj) {
+                            return LendPrj.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('loan-limit', null, { reload: 'loan-limit' });
+                    $state.go('lend-prj', null, { reload: 'lend-prj' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('loan-limit.delete', {
-            parent: 'loan-limit',
+        .state('lend-prj.delete', {
+            parent: 'lend-prj',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/loan-limit/loan-limit-delete-dialog.html',
-                    controller: 'LoanLimitDeleteController',
+                    templateUrl: 'app/lend/lend-prj/lend-prj-delete-dialog.html',
+                    controller: 'LendPrjDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['LoanLimit', function(LoanLimit) {
-                            return LoanLimit.get({id : $stateParams.id}).$promise;
+                        entity: ['LendPrj', function(LendPrj) {
+                            return LendPrj.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('loan-limit', null, { reload: 'loan-limit' });
+                    $state.go('lend-prj', null, { reload: 'lend-prj' });
                 }, function() {
                     $state.go('^');
                 });

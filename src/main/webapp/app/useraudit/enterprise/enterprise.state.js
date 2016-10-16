@@ -9,17 +9,17 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('draw-apply', {
-            parent: 'entity',
-            url: '/draw-apply?page&sort&search',
+        .state('enterprise', {
+            parent: 'useraudit',
+            url: '/enterprise?page&sort&search',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.drawApply.home.title'
+                pageTitle: 'anprjApp.enterprise.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/draw-apply/draw-applies.html',
-                    controller: 'DrawApplyController',
+                    templateUrl: 'app/useraudit/enterprise/enterprises.html',
+                    controller: 'EnterpriseController',
                     controllerAs: 'vm'
                 }
             },
@@ -45,37 +45,37 @@
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('drawApply');
+                    $translatePartialLoader.addPart('enterprise');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('draw-apply-detail', {
+        .state('enterprise-detail', {
             parent: 'entity',
-            url: '/draw-apply/{id}',
+            url: '/enterprise/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.drawApply.detail.title'
+                pageTitle: 'anprjApp.enterprise.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/draw-apply/draw-apply-detail.html',
-                    controller: 'DrawApplyDetailController',
+                    templateUrl: 'app/useraudit/enterprise/enterprise-detail.html',
+                    controller: 'EnterpriseDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('drawApply');
+                    $translatePartialLoader.addPart('enterprise');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'DrawApply', function($stateParams, DrawApply) {
-                    return DrawApply.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Enterprise', function($stateParams, Enterprise) {
+                    return Enterprise.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'draw-apply',
+                        name: $state.current.name || 'enterprise',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -83,22 +83,22 @@
                 }]
             }
         })
-        .state('draw-apply-detail.edit', {
-            parent: 'draw-apply-detail',
+        .state('enterprise-detail.edit', {
+            parent: 'enterprise-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/draw-apply/draw-apply-dialog.html',
-                    controller: 'DrawApplyDialogController',
+                    templateUrl: 'app/useraudit/enterprise/enterprise-dialog.html',
+                    controller: 'EnterpriseDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['DrawApply', function(DrawApply) {
-                            return DrawApply.get({id : $stateParams.id}).$promise;
+                        entity: ['Enterprise', function(Enterprise) {
+                            return Enterprise.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -108,16 +108,16 @@
                 });
             }]
         })
-        .state('draw-apply.new', {
-            parent: 'draw-apply',
+        .state('enterprise.new', {
+            parent: 'enterprise',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/draw-apply/draw-apply-dialog.html',
-                    controller: 'DrawApplyDialogController',
+                    templateUrl: 'app/useraudit/enterprise/enterprise-dialog.html',
+                    controller: 'EnterpriseDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
@@ -125,69 +125,65 @@
                         entity: function () {
                             return {
                                 login: null,
-                                orderAmount: null,
-                                actualAmount: null,
-                                orderDrawDate: null,
-                                canceled: false,
-                                completed: false,
-                                applyDate: null,
-                                canceledDate: null,
-                                completedDate: null,
+                                name: null,
+                                address: null,
+                                postcode: null,
+                                phone: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('draw-apply', null, { reload: 'draw-apply' });
+                    $state.go('enterprise', null, { reload: 'enterprise' });
                 }, function() {
-                    $state.go('draw-apply');
+                    $state.go('enterprise');
                 });
             }]
         })
-        .state('draw-apply.edit', {
-            parent: 'draw-apply',
+        .state('enterprise.edit', {
+            parent: 'enterprise',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/draw-apply/draw-apply-dialog.html',
-                    controller: 'DrawApplyDialogController',
+                    templateUrl: 'app/useraudit/enterprise/enterprise-dialog.html',
+                    controller: 'EnterpriseDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['DrawApply', function(DrawApply) {
-                            return DrawApply.get({id : $stateParams.id}).$promise;
+                        entity: ['Enterprise', function(Enterprise) {
+                            return Enterprise.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('draw-apply', null, { reload: 'draw-apply' });
+                    $state.go('enterprise', null, { reload: 'enterprise' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('draw-apply.delete', {
-            parent: 'draw-apply',
+        .state('enterprise.delete', {
+            parent: 'enterprise',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/draw-apply/draw-apply-delete-dialog.html',
-                    controller: 'DrawApplyDeleteController',
+                    templateUrl: 'app/useraudit/enterprise/enterprise-delete-dialog.html',
+                    controller: 'EnterpriseDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['DrawApply', function(DrawApply) {
-                            return DrawApply.get({id : $stateParams.id}).$promise;
+                        entity: ['Enterprise', function(Enterprise) {
+                            return Enterprise.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('draw-apply', null, { reload: 'draw-apply' });
+                    $state.go('enterprise', null, { reload: 'enterprise' });
                 }, function() {
                     $state.go('^');
                 });

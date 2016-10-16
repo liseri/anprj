@@ -1,11 +1,11 @@
 {
     "anprjApp": {
         "LOANPRJTYPE" : {
-            "null": "",
-            "SMALL": "SMALL",
-            "GENERAL": "GENERAL",
-            "LARGE": "LARGE",
-            "HUGE": "HUGE"
+            "null": "全部",
+            "SMALL": "小额",
+            "GENERAL": "一般",
+            "LARGE": "大额",
+            "HUGE": "超大额"
         }
     }
 }

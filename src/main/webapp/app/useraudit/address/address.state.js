@@ -9,73 +9,53 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('enterprise', {
-            parent: 'entity',
-            url: '/enterprise?page&sort&search',
+        .state('address', {
+            parent: 'useraudit',
+            url: '/address',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.enterprise.home.title'
+                pageTitle: 'anprjApp.address.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/enterprise/enterprises.html',
-                    controller: 'EnterpriseController',
+                    templateUrl: 'app/useraudit/address/addresses.html',
+                    controller: 'AddressController',
                     controllerAs: 'vm'
                 }
             },
-            params: {
-                page: {
-                    value: '1',
-                    squash: true
-                },
-                sort: {
-                    value: 'id,asc',
-                    squash: true
-                },
-                search: null
-            },
             resolve: {
-                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
-                    return {
-                        page: PaginationUtil.parsePage($stateParams.page),
-                        sort: $stateParams.sort,
-                        predicate: PaginationUtil.parsePredicate($stateParams.sort),
-                        ascending: PaginationUtil.parseAscending($stateParams.sort),
-                        search: $stateParams.search
-                    };
-                }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('enterprise');
+                    $translatePartialLoader.addPart('address');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('enterprise-detail', {
+        .state('address-detail', {
             parent: 'entity',
-            url: '/enterprise/{id}',
+            url: '/address/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.enterprise.detail.title'
+                pageTitle: 'anprjApp.address.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/enterprise/enterprise-detail.html',
-                    controller: 'EnterpriseDetailController',
+                    templateUrl: 'app/useraudit/address/address-detail.html',
+                    controller: 'AddressDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('enterprise');
+                    $translatePartialLoader.addPart('address');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Enterprise', function($stateParams, Enterprise) {
-                    return Enterprise.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Address', function($stateParams, Address) {
+                    return Address.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'enterprise',
+                        name: $state.current.name || 'address',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -83,22 +63,22 @@
                 }]
             }
         })
-        .state('enterprise-detail.edit', {
-            parent: 'enterprise-detail',
+        .state('address-detail.edit', {
+            parent: 'address-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/enterprise/enterprise-dialog.html',
-                    controller: 'EnterpriseDialogController',
+                    templateUrl: 'app/useraudit/address/address-dialog.html',
+                    controller: 'AddressDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Enterprise', function(Enterprise) {
-                            return Enterprise.get({id : $stateParams.id}).$promise;
+                        entity: ['Address', function(Address) {
+                            return Address.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -108,16 +88,16 @@
                 });
             }]
         })
-        .state('enterprise.new', {
-            parent: 'enterprise',
+        .state('address.new', {
+            parent: 'address',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/enterprise/enterprise-dialog.html',
-                    controller: 'EnterpriseDialogController',
+                    templateUrl: 'app/useraudit/address/address-dialog.html',
+                    controller: 'AddressDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
@@ -125,65 +105,65 @@
                         entity: function () {
                             return {
                                 login: null,
-                                name: null,
                                 address: null,
-                                postcode: null,
+                                name: null,
                                 phone: null,
+                                postcode: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('enterprise', null, { reload: 'enterprise' });
+                    $state.go('address', null, { reload: 'address' });
                 }, function() {
-                    $state.go('enterprise');
+                    $state.go('address');
                 });
             }]
         })
-        .state('enterprise.edit', {
-            parent: 'enterprise',
+        .state('address.edit', {
+            parent: 'address',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/enterprise/enterprise-dialog.html',
-                    controller: 'EnterpriseDialogController',
+                    templateUrl: 'app/useraudit/address/address-dialog.html',
+                    controller: 'AddressDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Enterprise', function(Enterprise) {
-                            return Enterprise.get({id : $stateParams.id}).$promise;
+                        entity: ['Address', function(Address) {
+                            return Address.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('enterprise', null, { reload: 'enterprise' });
+                    $state.go('address', null, { reload: 'address' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('enterprise.delete', {
-            parent: 'enterprise',
+        .state('address.delete', {
+            parent: 'address',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/enterprise/enterprise-delete-dialog.html',
-                    controller: 'EnterpriseDeleteController',
+                    templateUrl: 'app/useraudit/address/address-delete-dialog.html',
+                    controller: 'AddressDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Enterprise', function(Enterprise) {
-                            return Enterprise.get({id : $stateParams.id}).$promise;
+                        entity: ['Address', function(Address) {
+                            return Address.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('enterprise', null, { reload: 'enterprise' });
+                    $state.go('address', null, { reload: 'address' });
                 }, function() {
                     $state.go('^');
                 });

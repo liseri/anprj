@@ -140,24 +140,22 @@ public class LoanPrjResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("loanPrj", id.toString())).build();
     }
 
-    @RequestMapping(value = "/loan-prjs/activate/{id}",
-        method = RequestMethod.DELETE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/loan-prjs/activate/{id}")
     @Timed
-    public ResponseEntity<Void> activateLoanPrj(@PathVariable Long id) {
+    public ResponseEntity<LoanPrj> activateLoanPrj(@PathVariable Long id) {
         log.debug("REST request to delete LoanPrj : {}", id);
-        loanPrjService.activate(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanPrj", "activated", id.toString())).build();
+        LoanPrj result = loanPrjService.activate(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanPrj", "activated", id.toString()))
+            .body(result);
     }
 
-    @RequestMapping(value = "/loan-prjs/unactivate/{id}",
-        method = RequestMethod.DELETE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/loan-prjs/unactivate/{id}")
     @Timed
-    public ResponseEntity<Void> unactivateLoanPrj(@PathVariable Long id) {
+    public ResponseEntity<LoanPrj> unactivateLoanPrj(@PathVariable Long id) {
         log.debug("REST request to delete LoanPrj : {}", id);
-        loanPrjService.unactivate(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanPrj", "unactivated", id.toString())).build();
+        LoanPrj result = loanPrjService.unactivate(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanPrj", "unactivated", id.toString()))
+            .body(result);
     }
 
 }

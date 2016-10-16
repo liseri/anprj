@@ -9,7 +9,7 @@
 
     function LoanPrjController ($scope, $state, LoanPrj, ParseLinks, AlertService) {
         var vm = this;
-        
+
         vm.loanPrjs = [];
         vm.loadPage = loadPage;
         vm.page = 0;
@@ -19,7 +19,8 @@
         vm.predicate = 'id';
         vm.reset = reset;
         vm.reverse = true;
-
+        vm.activate = activate;
+        vm.unactivate = unactivate;
         loadAll();
 
         function loadAll () {
@@ -58,6 +59,19 @@
         function loadPage(page) {
             vm.page = page;
             loadAll();
+        }
+
+        function activate(project) {
+            project.activated = false;
+            LoanPrj.activate(project, function(result){
+                reset();
+            });
+        }
+
+        function unactivate(project) {
+            LoanPrj.unactivate(project, function(result){
+                reset();
+            });
         }
     }
 })();

@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <!-- 借款管理 -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true"  has-authority="ROLE_ADMIN"
+                <li ng-class="{active: vm.$state.includes('loan')}" ng-switch-when="true"  has-authority="ROLE_ADMIN"
                     uib-dropdown  class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="loan-menu">
                         <span>
@@ -54,7 +54,7 @@
                     </ul>
                 </li>
                 <!--理财管理-->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true"  has-authority="ROLE_ADMIN"
+                <li ng-class="{active: vm.$state.includes('lend')}" ng-switch-when="true"  has-authority="ROLE_ADMIN"
                     uib-dropdown  class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="lend-menu">
                         <span>
@@ -81,7 +81,7 @@
                     </ul>
                 </li>
                 <!--预约提款-->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true"  has-authority="ROLE_ADMIN"
+                <li ng-class="{active: vm.$state.includes('draw')}" ng-switch-when="true"  has-authority="ROLE_ADMIN"
                     uib-dropdown  class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="draw-menu">
                         <span>
@@ -102,7 +102,7 @@
                     </ul>
                 </li>
                 <!--用户审核-->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true"  has-authority="ROLE_ADMIN"
+                <li ng-class="{active: vm.$state.includes('useraudit')}" ng-switch-when="true"  has-authority="ROLE_ADMIN"
                     uib-dropdown  class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="audit-menu">
                         <span>

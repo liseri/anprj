@@ -3,6 +3,7 @@ package com.liseri.anprj.service;
 import com.liseri.anprj.domain.LoanApply;
 import com.liseri.anprj.domain.enumeration.LoanApplyStatu;
 import com.liseri.anprj.repository.LoanApplyRepository;
+import com.liseri.anprj.web.rest.vm.LoanApplyVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,16 +26,17 @@ public class LoanApplyService {
 
     @Inject
     private LoanApplyRepository loanApplyRepository;
-
+    @Inject
+    private UserService userService;
     /**
      * 申请创建
      *
-     * @param loanApply the entity to save
+     * @param loanApplyVM the entity to save
      * @return the persisted entity
      */
-    public LoanApply create(LoanApply loanApply) {
-        log.debug("Request to save LoanApply : {}", loanApply);
-        loanApply.applyStatu(LoanApplyStatu.APPLYED).applyDate(LocalDate.now());
+    public LoanApply create(LoanApplyVM loanApplyVM) {
+        log.debug("Request to save LoanApply : {}", loanApplyVM);
+        LoanApply loanApply = loanApplyVM.newLoanApply(userService.getUserWithAuthorities().getLogin());
         LoanApply result = loanApplyRepository.save(loanApply);
         return result;
     }

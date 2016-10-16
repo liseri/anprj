@@ -40,7 +40,7 @@
             "fieldValidateRulesMax": 1
         },
         {
-            "fieldName": "durationUnit",
+            "fieldName": "借款周期",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required",

@@ -36,6 +36,14 @@
                     copy.activateDate = DateUtils.convertLocalDateToServer(copy.activateDate);
                     return angular.toJson(copy);
                 }
+            },
+            'activate': {
+                url: 'api/loan-prjs/activate/:id',
+                method: 'GET'
+            },
+            'unactivate': {
+                url: 'api/loan-prjs/unactivate/:id',
+                method: 'GET'
             }
         });
     }

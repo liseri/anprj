@@ -10,7 +10,7 @@
     function stateConfig($stateProvider) {
         $stateProvider
         .state('loan-apply', {
-            parent: 'entity',
+            parent: 'loan',
             url: '/loan-apply?page&sort&search',
             data: {
                 authorities: ['ROLE_USER'],
@@ -18,7 +18,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/loan-apply/loan-applies.html',
+                    templateUrl: 'app/loan/loan-apply/loan-applies.html',
                     controller: 'LoanApplyController',
                     controllerAs: 'vm'
                 }
@@ -61,7 +61,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/loan-apply/loan-apply-detail.html',
+                    templateUrl: 'app/loan/loan-apply/loan-apply-detail.html',
                     controller: 'LoanApplyDetailController',
                     controllerAs: 'vm'
                 }
@@ -93,7 +93,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/loan-apply/loan-apply-dialog.html',
+                    templateUrl: 'app/loan/loan-apply/loan-apply-dialog.html',
                     controller: 'LoanApplyDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -118,7 +118,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/loan-apply/loan-apply-dialog.html',
+                    templateUrl: 'app/loan/loan-apply/loan-apply-dialog.html',
                     controller: 'LoanApplyDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -153,7 +153,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/loan-apply/loan-apply-dialog.html',
+                    templateUrl: 'app/loan/loan-apply/loan-apply-dialog.html',
                     controller: 'LoanApplyDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -178,7 +178,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/loan-apply/loan-apply-delete-dialog.html',
+                    templateUrl: 'app/loan/loan-apply/loan-apply-delete-dialog.html',
                     controller: 'LoanApplyDeleteController',
                     controllerAs: 'vm',
                     size: 'md',

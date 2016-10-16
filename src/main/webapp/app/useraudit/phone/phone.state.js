@@ -9,53 +9,53 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('address', {
-            parent: 'entity',
-            url: '/address',
+        .state('phone', {
+            parent: 'useraudit',
+            url: '/phone',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.address.home.title'
+                pageTitle: 'anprjApp.phone.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/address/addresses.html',
-                    controller: 'AddressController',
+                    templateUrl: 'app/useraudit/phone/phones.html',
+                    controller: 'PhoneController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('address');
+                    $translatePartialLoader.addPart('phone');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('address-detail', {
+        .state('phone-detail', {
             parent: 'entity',
-            url: '/address/{id}',
+            url: '/phone/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.address.detail.title'
+                pageTitle: 'anprjApp.phone.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/address/address-detail.html',
-                    controller: 'AddressDetailController',
+                    templateUrl: 'app/useraudit/phone/phone-detail.html',
+                    controller: 'PhoneDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('address');
+                    $translatePartialLoader.addPart('phone');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Address', function($stateParams, Address) {
-                    return Address.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Phone', function($stateParams, Phone) {
+                    return Phone.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'address',
+                        name: $state.current.name || 'phone',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -63,22 +63,22 @@
                 }]
             }
         })
-        .state('address-detail.edit', {
-            parent: 'address-detail',
+        .state('phone-detail.edit', {
+            parent: 'phone-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/address/address-dialog.html',
-                    controller: 'AddressDialogController',
+                    templateUrl: 'app/useraudit/phone/phone-dialog.html',
+                    controller: 'PhoneDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Address', function(Address) {
-                            return Address.get({id : $stateParams.id}).$promise;
+                        entity: ['Phone', function(Phone) {
+                            return Phone.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -88,16 +88,16 @@
                 });
             }]
         })
-        .state('address.new', {
-            parent: 'address',
+        .state('phone.new', {
+            parent: 'phone',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/address/address-dialog.html',
-                    controller: 'AddressDialogController',
+                    templateUrl: 'app/useraudit/phone/phone-dialog.html',
+                    controller: 'PhoneDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
@@ -105,65 +105,64 @@
                         entity: function () {
                             return {
                                 login: null,
-                                address: null,
-                                name: null,
                                 phone: null,
-                                postcode: null,
+                                activated: false,
+                                activateDate: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('address', null, { reload: 'address' });
+                    $state.go('phone', null, { reload: 'phone' });
                 }, function() {
-                    $state.go('address');
+                    $state.go('phone');
                 });
             }]
         })
-        .state('address.edit', {
-            parent: 'address',
+        .state('phone.edit', {
+            parent: 'phone',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/address/address-dialog.html',
-                    controller: 'AddressDialogController',
+                    templateUrl: 'app/useraudit/phone/phone-dialog.html',
+                    controller: 'PhoneDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Address', function(Address) {
-                            return Address.get({id : $stateParams.id}).$promise;
+                        entity: ['Phone', function(Phone) {
+                            return Phone.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('address', null, { reload: 'address' });
+                    $state.go('phone', null, { reload: 'phone' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('address.delete', {
-            parent: 'address',
+        .state('phone.delete', {
+            parent: 'phone',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/address/address-delete-dialog.html',
-                    controller: 'AddressDeleteController',
+                    templateUrl: 'app/useraudit/phone/phone-delete-dialog.html',
+                    controller: 'PhoneDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Address', function(Address) {
-                            return Address.get({id : $stateParams.id}).$promise;
+                        entity: ['Phone', function(Phone) {
+                            return Phone.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('address', null, { reload: 'address' });
+                    $state.go('phone', null, { reload: 'phone' });
                 }, function() {
                     $state.go('^');
                 });

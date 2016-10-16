@@ -1,0 +1,10 @@
+{
+    "anprjApp": {
+        "durationUnit" : {
+            "null": "",
+            "DAYS": "天",
+            "MONTHS": "月",
+            "YEARS": "年"
+        }
+    }
+}

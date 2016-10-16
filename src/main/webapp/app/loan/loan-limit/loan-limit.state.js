@@ -9,73 +9,55 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('real-identity', {
-            parent: 'entity',
-            url: '/real-identity?page&sort&search',
+        .state('loan-limit', {
+            parent: 'loan',
+            url: '/loan-limit',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.realIdentity.home.title'
+                pageTitle: 'anprjApp.loanLimit.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/real-identity/real-identities.html',
-                    controller: 'RealIdentityController',
+                    templateUrl: 'app/loan/loan-limit/loan-limits.html',
+                    controller: 'LoanLimitController',
                     controllerAs: 'vm'
                 }
             },
-            params: {
-                page: {
-                    value: '1',
-                    squash: true
-                },
-                sort: {
-                    value: 'id,asc',
-                    squash: true
-                },
-                search: null
-            },
             resolve: {
-                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
-                    return {
-                        page: PaginationUtil.parsePage($stateParams.page),
-                        sort: $stateParams.sort,
-                        predicate: PaginationUtil.parsePredicate($stateParams.sort),
-                        ascending: PaginationUtil.parseAscending($stateParams.sort),
-                        search: $stateParams.search
-                    };
-                }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('realIdentity');
+                    $translatePartialLoader.addPart('loanLimit');
+                    $translatePartialLoader.addPart('lOANPRJTYPE');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('real-identity-detail', {
+        .state('loan-limit-detail', {
             parent: 'entity',
-            url: '/real-identity/{id}',
+            url: '/loan-limit/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'anprjApp.realIdentity.detail.title'
+                pageTitle: 'anprjApp.loanLimit.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/real-identity/real-identity-detail.html',
-                    controller: 'RealIdentityDetailController',
+                    templateUrl: 'app/loan/loan-limit/loan-limit-detail.html',
+                    controller: 'LoanLimitDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('realIdentity');
+                    $translatePartialLoader.addPart('loanLimit');
+                    $translatePartialLoader.addPart('lOANPRJTYPE');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'RealIdentity', function($stateParams, RealIdentity) {
-                    return RealIdentity.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'LoanLimit', function($stateParams, LoanLimit) {
+                    return LoanLimit.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'real-identity',
+                        name: $state.current.name || 'loan-limit',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -83,22 +65,22 @@
                 }]
             }
         })
-        .state('real-identity-detail.edit', {
-            parent: 'real-identity-detail',
+        .state('loan-limit-detail.edit', {
+            parent: 'loan-limit-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/real-identity/real-identity-dialog.html',
-                    controller: 'RealIdentityDialogController',
+                    templateUrl: 'app/loan/loan-limit/loan-limit-dialog.html',
+                    controller: 'LoanLimitDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['RealIdentity', function(RealIdentity) {
-                            return RealIdentity.get({id : $stateParams.id}).$promise;
+                        entity: ['LoanLimit', function(LoanLimit) {
+                            return LoanLimit.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -108,83 +90,80 @@
                 });
             }]
         })
-        .state('real-identity.new', {
-            parent: 'real-identity',
+        .state('loan-limit.new', {
+            parent: 'loan-limit',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/real-identity/real-identity-dialog.html',
-                    controller: 'RealIdentityDialogController',
+                    templateUrl: 'app/loan/loan-limit/loan-limit-dialog.html',
+                    controller: 'LoanLimitDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                login: null,
-                                name: null,
-                                identityNumber: null,
-                                identityPicPath: null,
-                                activated: false,
-                                activateDate: null,
+                                loanType: null,
+                                minLimit: null,
+                                maxLimit: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('real-identity', null, { reload: 'real-identity' });
+                    $state.go('loan-limit', null, { reload: 'loan-limit' });
                 }, function() {
-                    $state.go('real-identity');
+                    $state.go('loan-limit');
                 });
             }]
         })
-        .state('real-identity.edit', {
-            parent: 'real-identity',
+        .state('loan-limit.edit', {
+            parent: 'loan-limit',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/real-identity/real-identity-dialog.html',
-                    controller: 'RealIdentityDialogController',
+                    templateUrl: 'app/loan/loan-limit/loan-limit-dialog.html',
+                    controller: 'LoanLimitDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['RealIdentity', function(RealIdentity) {
-                            return RealIdentity.get({id : $stateParams.id}).$promise;
+                        entity: ['LoanLimit', function(LoanLimit) {
+                            return LoanLimit.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('real-identity', null, { reload: 'real-identity' });
+                    $state.go('loan-limit', null, { reload: 'loan-limit' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('real-identity.delete', {
-            parent: 'real-identity',
+        .state('loan-limit.delete', {
+            parent: 'loan-limit',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/real-identity/real-identity-delete-dialog.html',
-                    controller: 'RealIdentityDeleteController',
+                    templateUrl: 'app/loan/loan-limit/loan-limit-delete-dialog.html',
+                    controller: 'LoanLimitDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['RealIdentity', function(RealIdentity) {
-                            return RealIdentity.get({id : $stateParams.id}).$promise;
+                        entity: ['LoanLimit', function(LoanLimit) {
+                            return LoanLimit.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('real-identity', null, { reload: 'real-identity' });
+                    $state.go('loan-limit', null, { reload: 'loan-limit' });
                 }, function() {
                     $state.go('^');
                 });

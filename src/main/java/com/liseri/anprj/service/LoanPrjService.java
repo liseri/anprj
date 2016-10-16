@@ -77,25 +77,27 @@ public class LoanPrjService {
      * 启动
      * @param id
      */
-    public void activate(Long id) {
+    public LoanPrj activate(Long id) {
         log.debug("Request to activate LoanPrj : {}", id);
         LoanPrj loanPrj = loanPrjRepository.findOne(id);
         if (loanPrj.isActivated() == false) {
             loanPrj.activated(true).activateDate(LocalDate.now());
         }
         loanPrjRepository.save(loanPrj);
+        return loanPrj;
     }
 
     /**
      * 停止
      * @param id
      */
-    public void unactivate(Long id) {
+    public LoanPrj unactivate(Long id) {
         log.debug("Request to activate LoanPrj : {}", id);
         LoanPrj loanPrj = loanPrjRepository.findOne(id);
         if (loanPrj.isActivated() == true) {
             loanPrj.activated(false).activateDate(LocalDate.now());
         }
         loanPrjRepository.save(loanPrj);
+        return loanPrj;
     }
 }
