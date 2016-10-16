@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span data-translate="anprjApp.lendApply.detail.title">Lend Apply</span> {{vm.lendApply.id}}</h2>
+    <h2><span data-translate="anprjApp.lendApply.detail.title">Lend Apply</span></h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
@@ -24,6 +24,10 @@
         <dd>
             <span>{{vm.lendApply.applyDate | date:'mediumDate'}}</span>
         </dd>
+        <dt><span data-translate="anprjApp.lendApply.auditDate">Audit Date</span></dt>
+        <dd>
+            <span>{{vm.lendApply.auditDate | date:'mediumDate'}}</span>
+        </dd>
         <dt><span data-translate="anprjApp.lendApply.startDate">Start Date</span></dt>
         <dd>
             <span>{{vm.lendApply.startDate | date:'mediumDate'}}</span>
@@ -38,10 +42,5 @@
             ui-sref="{{ vm.previousState }}"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button" ui-sref="lend-apply-detail.edit({id:vm.lendApply.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
     </button>
 </div>

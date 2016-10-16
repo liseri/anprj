@@ -42,6 +42,22 @@
                     copy.completeDate = DateUtils.convertLocalDateToServer(copy.completeDate);
                     return angular.toJson(copy);
                 }
+            },
+            'auditPass': {
+                url: 'api/lend-applies/:id/auditPass',
+                method: 'GET'
+            },
+            'auditReject': {
+                url: 'api/lend-applies/:id/auditReject',
+                method: 'GET'
+            },
+            'lend': {
+                url: 'api/lend-applies/:id/lend',
+                method: 'GET'
+            },
+            'complete': {
+                url: 'api/lend-applies/:id/complete',
+                method: 'GET'
             }
         });
     }

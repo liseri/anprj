@@ -54,6 +54,9 @@ public class LendApply implements Serializable {
     @Column(name = "apply_date", nullable = false)
     private LocalDate applyDate;
 
+    @Column(name = "audit_date")
+    private LocalDate auditDate;
+
     @Column(name = "start_date")
     private LocalDate startDate;
 
@@ -131,6 +134,19 @@ public class LendApply implements Serializable {
 
     public void setApplyDate(LocalDate applyDate) {
         this.applyDate = applyDate;
+    }
+
+    public LocalDate getAuditDate() {
+        return auditDate;
+    }
+
+    public LendApply auditDate(LocalDate auditDate) {
+        this.auditDate = auditDate;
+        return this;
+    }
+
+    public void setAuditDate(LocalDate auditDate) {
+        this.auditDate = auditDate;
     }
 
     public LocalDate getStartDate() {

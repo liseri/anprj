@@ -4,24 +4,28 @@
             "home": {
                 "title": "用户借款管理",
                 "createLabel": "借款申请",
-                "createOrEditLabel": "新建或编辑借款申请",
+                "createOrEditLabel": "新建借款申请",
                 "search": "查询"
             },
             "created": "借款申请创建成功",
             "updated": "借款申请修改成功",
             "deleted": "借款申请删除成功",
+            "auditPassed": "借款申请审核通过",
+            "auditRejected": "借款申请审核未通过",
+            "loaned": "放款成功",
+            "completed": "还款成功",
             "delete": {
                 "question": "确定要删除该借款申请?"
             },
             "detail": {
                 "title": "借款申请详情"
             },
-            "login": "用户",
+            "login": "借款用户",
             "loanPrjId": "借款项目",
             "amount": "借款金额",
-            "applyStatu": "状态",
-            "applyDate": "借款日期",
-            "auditDate": "审核通过日期",
+            "applyStatu": "借款状态",
+            "applyDate": "申请日期",
+            "auditDate": "审核日期",
             "loanDate": "放款日期",
             "completeDate": "还款日期"
         }

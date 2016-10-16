@@ -4,9 +4,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="lend-prj.new" >
+                <button class="btn btn-primary" ui-sref="lend-prj.new">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="anprjApp.lendPrj.home.createLabel">
+                    <span data-translate="anprjApp.lendPrj.home.createLabel">
                         Create new Lend Prj
                     </span>
                 </button>
@@ -17,53 +17,67 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span data-translate="anprjApp.lendPrj.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="startAmount"><span data-translate="anprjApp.lendPrj.startAmount">Start Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="rate"><span data-translate="anprjApp.lendPrj.rate">Rate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationUnit"><span data-translate="anprjApp.lendPrj.durationUnit">Duration Unit</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationNum"><span data-translate="anprjApp.lendPrj.durationNum">Duration Num</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="returnType"><span data-translate="anprjApp.lendPrj.returnType">Return Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="activated"><span data-translate="anprjApp.lendPrj.activated">Activated</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="activateDate"><span data-translate="anprjApp.lendPrj.activateDate">Activate Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name"><span data-translate="anprjApp.lendPrj.name">Name</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="startAmount"><span data-translate="anprjApp.lendPrj.startAmount">Start Amount</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="rate"><span data-translate="anprjApp.lendPrj.rate">Rate</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th><span data-translate="anprjApp.lendPrj.duration">Duration Num</span></span></th>
+                <th><span data-translate="anprjApp.lendPrj.returnType">Return Type</span></span></th>
+                <th jh-sort-by="activated"><span data-translate="anprjApp.lendPrj.activateStatu">Activated</span>及操作
+                    <span class="glyphicon glyphicon-sort"></span></th>
+                <th></th>
+            </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="lendPrj in vm.lendPrjs track by lendPrj.id">
-                    <td><a ui-sref="lend-prj-detail({id:lendPrj.id})">{{lendPrj.id}}</a></td>
-                    <td>{{lendPrj.name}}</td>
-                    <td>{{lendPrj.startAmount}}</td>
-                    <td>{{lendPrj.rate}}</td>
-                    <td>{{lendPrj.durationUnit}}</td>
-                    <td>{{lendPrj.durationNum}}</td>
-                    <td data-translate="{{'anprjApp.REPAYMENTTYPE.' + lendPrj.returnType}}">{{lendPrj.returnType}}</td>
-                    <td>{{lendPrj.activated}}</td>
-                        <td>{{lendPrj.activateDate | date:'mediumDate'}}</td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="lend-prj-detail({id:lendPrj.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="lend-prj.edit({id:lendPrj.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="lend-prj.delete({id:lendPrj.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+            <tr ng-repeat="lendPrj in vm.lendPrjs track by lendPrj.id">
+                <td><a ui-sref="lend-prj-detail({id:lendPrj.id})">{{lendPrj.id}}</a></td>
+                <td>{{lendPrj.name}}</td>
+                <td>{{lendPrj.startAmount}}</td>
+                <td>{{lendPrj.rate}}</td>
+                <td>
+                    {{lendPrj.durationNum}}
+                    <span
+                        data-translate="{{'anprjApp.durationUnit.' + lendPrj.durationUnit}}">{{lendPrj.durationUnit}}</span>
+                </td>
+                <td data-translate="{{'anprjApp.REPAYMENTTYPE.' + lendPrj.returnType}}">{{lendPrj.returnType}}</td>
+                <td>
+                    <span ng-show="lendPrj.activated == false">未发布</span>
+                    <span ng-show="lendPrj.activated == true">已发布</span>
+                    <span class="label label-warning" ng-click="vm.activate(lendPrj)"
+                          ng-show="lendPrj.activated == false"
+                          style="cursor: pointer;">发布</span>
+                    <span class="label label-warning" ng-click="vm.unactivate(lendPrj)"
+                          ng-show="lendPrj.activated == true"
+                          style="cursor: pointer;">取消发布</span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="lend-prj-detail({id:lendPrj.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="lend-prj.edit({id:lendPrj.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="lend-prj.delete({id:lendPrj.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -1,6 +1,7 @@
 package com.liseri.anprj.service;
 
 import com.liseri.anprj.domain.LendPrj;
+import com.liseri.anprj.domain.LoanPrj;
 import com.liseri.anprj.repository.LendPrjRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ import java.util.List;
 public class LendPrjService {
 
     private final Logger log = LoggerFactory.getLogger(LendPrjService.class);
-    
+
     @Inject
     private LendPrjRepository lendPrjRepository;
 
@@ -38,11 +40,11 @@ public class LendPrjService {
 
     /**
      *  Get all the lendPrjs.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<LendPrj> findAll(Pageable pageable) {
         log.debug("Request to get all LendPrjs");
         Page<LendPrj> result = lendPrjRepository.findAll(pageable);
@@ -55,7 +57,7 @@ public class LendPrjService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public LendPrj findOne(Long id) {
         log.debug("Request to get LendPrj : {}", id);
         LendPrj lendPrj = lendPrjRepository.findOne(id);
@@ -70,5 +72,33 @@ public class LendPrjService {
     public void delete(Long id) {
         log.debug("Request to delete LendPrj : {}", id);
         lendPrjRepository.delete(id);
+    }
+
+    /**
+     * 启动
+     * @param id
+     */
+    public LendPrj activate(Long id) {
+        log.debug("Request to activate lendPrj : {}", id);
+        LendPrj lendPrj = lendPrjRepository.findOne(id);
+        if (lendPrj.isActivated() == false) {
+            lendPrj.activated(true).activateDate(LocalDate.now());
+        }
+        lendPrjRepository.save(lendPrj);
+        return lendPrj;
+    }
+
+    /**
+     * 停止
+     * @param id
+     */
+    public LendPrj unactivate(Long id) {
+        log.debug("Request to activate lendPrj : {}", id);
+        LendPrj lendPrj = lendPrjRepository.findOne(id);
+        if (lendPrj.isActivated() == true) {
+            lendPrj.activated(false).activateDate(LocalDate.now());
+        }
+        lendPrjRepository.save(lendPrj);
+        return lendPrj;
     }
 }

@@ -2,28 +2,31 @@
     "anprjApp": {
         "lendPrj" : {
             "home": {
-                "title": "Lend Prjs",
-                "createLabel": "Create a new Lend Prj",
-                "createOrEditLabel": "Create or edit a Lend Prj",
-                "search": "Search for Lend Prj"
+                "title": "理财项目管理",
+                "createLabel": "新建项目",
+                "createOrEditLabel": "新建或编辑理财项目",
+                "search": "查询"
             },
-            "created": "A new Lend Prj is created with identifier {{ param }}",
-            "updated": "A Lend Prj is updated with identifier {{ param }}",
-            "deleted": "A Lend Prj is deleted with identifier {{ param }}",
+            "created": "理财项目创建成功",
+            "updated": "理财项目修改成功",
+            "deleted": "理财项目删除成功",
+            "activated": "理财项目已经发布",
+            "unactivated": "理财项目已经取消发布",
             "delete": {
-                "question": "Are you sure you want to delete Lend Prj {{ id }}?"
+                "question": "确定要删除该理财项目?"
             },
             "detail": {
-                "title": "Lend Prj"
+                "title": "理财项目详情"
             },
-            "name": "Name",
-            "startAmount": "Start Amount",
-            "rate": "Rate",
-            "durationUnit": "Duration Unit",
-            "durationNum": "Duration Num",
-            "returnType": "Return Type",
-            "activated": "Activated",
-            "activateDate": "Activate Date"
+            "name": "理财项目名称",
+            "startAmount": "起投金额(元)",
+            "rate": "预期利率(%)",
+            "duration": "理财周期",
+            "durationUnit": "理财周期单位",
+            "durationNum": "理财周期单位数",
+            "returnType": "返利方式",
+            "activateStatu": "发布状态",
+            "activateDate": "发布时间"
         }
     }
 }

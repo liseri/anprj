@@ -5,6 +5,7 @@ import com.liseri.anprj.domain.LendApply;
 import com.liseri.anprj.service.LendApplyService;
 import com.liseri.anprj.web.rest.util.HeaderUtil;
 import com.liseri.anprj.web.rest.util.PaginationUtil;
+import com.liseri.anprj.web.rest.vm.LendApplyVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -30,14 +31,14 @@ import java.util.Optional;
 public class LendApplyResource {
 
     private final Logger log = LoggerFactory.getLogger(LendApplyResource.class);
-        
+
     @Inject
     private LendApplyService lendApplyService;
 
     /**
      * POST  /lend-applies : Create a new lendApply.
      *
-     * @param lendApply the lendApply to create
+     * @param lendApplyVM the lendApply to create
      * @return the ResponseEntity with status 201 (Created) and with body the new lendApply, or with status 400 (Bad Request) if the lendApply has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
@@ -45,38 +46,14 @@ public class LendApplyResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<LendApply> createLendApply(@Valid @RequestBody LendApply lendApply) throws URISyntaxException {
-        log.debug("REST request to save LendApply : {}", lendApply);
-        if (lendApply.getId() != null) {
+    public ResponseEntity<LendApply> createLendApply(@Valid @RequestBody LendApplyVM lendApplyVM) throws URISyntaxException {
+        log.debug("REST request to save LendApply : {}", lendApplyVM);
+        if (lendApplyVM.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("lendApply", "idexists", "A new lendApply cannot already have an ID")).body(null);
         }
-        LendApply result = lendApplyService.save(lendApply);
+        LendApply result = lendApplyService.create(lendApplyVM);
         return ResponseEntity.created(new URI("/api/lend-applies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("lendApply", result.getId().toString()))
-            .body(result);
-    }
-
-    /**
-     * PUT  /lend-applies : Updates an existing lendApply.
-     *
-     * @param lendApply the lendApply to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated lendApply,
-     * or with status 400 (Bad Request) if the lendApply is not valid,
-     * or with status 500 (Internal Server Error) if the lendApply couldnt be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @RequestMapping(value = "/lend-applies",
-        method = RequestMethod.PUT,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<LendApply> updateLendApply(@Valid @RequestBody LendApply lendApply) throws URISyntaxException {
-        log.debug("REST request to update LendApply : {}", lendApply);
-        if (lendApply.getId() == null) {
-            return createLendApply(lendApply);
-        }
-        LendApply result = lendApplyService.save(lendApply);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("lendApply", lendApply.getId().toString()))
             .body(result);
     }
 
@@ -133,6 +110,57 @@ public class LendApplyResource {
         log.debug("REST request to delete LendApply : {}", id);
         lendApplyService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("lendApply", id.toString())).build();
+    }
+
+    /**
+     * 审核通过
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/lend-applies/{id}/auditPass")
+    @Timed
+    public ResponseEntity<Void> auditPass(@PathVariable Long id) {
+        log.debug("REST request to auditPass LendApply : {}", id);
+        lendApplyService.auditPass(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("lendApply", "auditPassed", id.toString())).build();
+    }
+    /**
+     * 审核不通过
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/lend-applies/{id}/auditReject")
+    @Timed
+    public ResponseEntity<Void> auditReject(@PathVariable Long id) {
+        log.debug("REST request to auditReject LendApply : {}", id);
+        lendApplyService.auditReject(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("lendApply", "auditRejected", id.toString())).build();
+    }
+
+    /**
+     * 放款
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/lend-applies/{id}/lend")
+    @Timed
+    public ResponseEntity<Void> lend(@PathVariable Long id) {
+        log.debug("REST request to lend LendApply : {}", id);
+        lendApplyService.lend(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("lendApply", "loaned", id.toString())).build();
+    }
+
+    /**
+     * 还款
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/lend-applies/{id}/complete")
+    @Timed
+    public ResponseEntity<Void> complete(@PathVariable Long id) {
+        log.debug("REST request to complete LendApply : {}", id);
+        lendApplyService.complete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("lendApply", "completed", id.toString())).build();
     }
 
 }

@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span data-translate="anprjApp.lendPrj.detail.title">Lend Prj</span> {{vm.lendPrj.id}}</h2>
+    <h2><span data-translate="anprjApp.lendPrj.detail.title">Lend Prj</span></h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
@@ -16,21 +16,19 @@
         <dd>
             <span>{{vm.lendPrj.rate}}</span>
         </dd>
-        <dt><span data-translate="anprjApp.lendPrj.durationUnit">Duration Unit</span></dt>
-        <dd>
-            <span>{{vm.lendPrj.durationUnit}}</span>
-        </dd>
-        <dt><span data-translate="anprjApp.lendPrj.durationNum">Duration Num</span></dt>
+        <dt><span data-translate="anprjApp.lendPrj.duration">Duration Unit</span></dt>
         <dd>
             <span>{{vm.lendPrj.durationNum}}</span>
+            <span data-translate="{{'anprjApp.durationUnit.' + vm.lendPrj.durationUnit}}">{{vm.lendPrj.durationUnit}}</span>
         </dd>
         <dt><span data-translate="anprjApp.lendPrj.returnType">Return Type</span></dt>
         <dd>
             <span data-translate="{{'anprjApp.REPAYMENTTYPE.' + vm.lendPrj.returnType}}">{{vm.lendPrj.returnType}}</span>
         </dd>
-        <dt><span data-translate="anprjApp.lendPrj.activated">Activated</span></dt>
+        <dt><span data-translate="anprjApp.lendPrj.activateStatu">Activated</span></dt>
         <dd>
-            <span>{{vm.lendPrj.activated}}</span>
+            <span ng-show="vm.lendPrj.activated==true">已发布</span>
+            <span ng-show="vm.lendPrj.activated==false">未发布</span>
         </dd>
         <dt><span data-translate="anprjApp.lendPrj.activateDate">Activate Date</span></dt>
         <dd>

@@ -2,6 +2,7 @@ package com.liseri.anprj.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.liseri.anprj.domain.LendPrj;
+import com.liseri.anprj.domain.LoanPrj;
 import com.liseri.anprj.service.LendPrjService;
 import com.liseri.anprj.web.rest.util.HeaderUtil;
 import com.liseri.anprj.web.rest.util.PaginationUtil;
@@ -30,7 +31,7 @@ import java.util.Optional;
 public class LendPrjResource {
 
     private final Logger log = LoggerFactory.getLogger(LendPrjResource.class);
-        
+
     @Inject
     private LendPrjService lendPrjService;
 
@@ -133,6 +134,24 @@ public class LendPrjResource {
         log.debug("REST request to delete LendPrj : {}", id);
         lendPrjService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("lendPrj", id.toString())).build();
+    }
+
+    @GetMapping(value = "/lend-prjs/activate/{id}")
+    @Timed
+    public ResponseEntity<LendPrj> activateLoanPrj(@PathVariable Long id) {
+        log.debug("REST request to delete LoanPrj : {}", id);
+        LendPrj result = lendPrjService.activate(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("lendPrj", "activated", id.toString()))
+            .body(result);
+    }
+
+    @GetMapping(value = "/lend-prjs/unactivate/{id}")
+    @Timed
+    public ResponseEntity<LendPrj> unactivateLoanPrj(@PathVariable Long id) {
+        log.debug("REST request to delete LoanPrj : {}", id);
+        LendPrj result = lendPrjService.unactivate(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("lendPrj", "unactivated", id.toString()))
+            .body(result);
     }
 
 }

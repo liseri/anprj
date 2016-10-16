@@ -2,27 +2,32 @@
     "anprjApp": {
         "lendApply" : {
             "home": {
-                "title": "Lend Applies",
-                "createLabel": "Create a new Lend Apply",
-                "createOrEditLabel": "Create or edit a Lend Apply",
-                "search": "Search for Lend Apply"
+                "title": "用户理财申请",
+                "createLabel": "理财申请",
+                "createOrEditLabel": "新建理财申请",
+                "search": "查询"
             },
-            "created": "A new Lend Apply is created with identifier {{ param }}",
-            "updated": "A Lend Apply is updated with identifier {{ param }}",
-            "deleted": "A Lend Apply is deleted with identifier {{ param }}",
+            "created": "理财申请创建成功",
+            "updated": "理财申请修改成功",
+            "deleted": "理财申请删除成功",
+            "auditPassed": "理财申请审核通过",
+            "auditRejected": "理财申请审核未通过",
+            "loaned": "起息成功",
+            "completed": "项目完成成功",
             "delete": {
-                "question": "Are you sure you want to delete Lend Apply {{ id }}?"
+                "question": "确定要删除该理财申请?"
             },
             "detail": {
-                "title": "Lend Apply"
+                "title": "借款申请详情"
             },
-            "login": "Login",
-            "lendPrjId": "Lend Prj Id",
-            "amount": "Amount",
-            "lendStatu": "Lend Statu",
-            "applyDate": "Apply Date",
-            "startDate": "Start Date",
-            "completeDate": "Complete Date"
+            "login": "理财用户",
+            "lendPrjId": "理财项目",
+            "amount": "投资金额",
+            "lendStatu": "理财状态",
+            "applyDate": "申请日期",
+            "auditDate": "审核日期",
+            "startDate": "起息日期",
+            "completeDate": "完成日期"
         }
     }
 }

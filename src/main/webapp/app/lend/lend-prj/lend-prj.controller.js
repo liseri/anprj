@@ -9,7 +9,7 @@
 
     function LendPrjController ($scope, $state, LendPrj, ParseLinks, AlertService) {
         var vm = this;
-        
+
         vm.lendPrjs = [];
         vm.loadPage = loadPage;
         vm.page = 0;
@@ -19,6 +19,8 @@
         vm.predicate = 'id';
         vm.reset = reset;
         vm.reverse = true;
+        vm.activate = activate;
+        vm.unactivate = unactivate;
 
         loadAll();
 
@@ -58,6 +60,19 @@
         function loadPage(page) {
             vm.page = page;
             loadAll();
+        }
+
+        function activate(project) {
+            project.activated = false;
+            LendPrj.activate(project, function(result){
+                reset();
+            });
+        }
+
+        function unactivate(project) {
+            LendPrj.unactivate(project, function(result){
+                reset();
+            });
         }
     }
 })();

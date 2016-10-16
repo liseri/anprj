@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span data-translate="anprjApp.loanApply.detail.title">Loan Apply</span> {{vm.loanApply.id}}</h2>
+    <h2><span data-translate="anprjApp.loanApply.detail.title">Loan Apply</span></h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
@@ -42,10 +42,5 @@
             ui-sref="{{ vm.previousState }}"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button" ui-sref="loan-apply-detail.edit({id:vm.loanApply.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
     </button>
 </div>

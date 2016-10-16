@@ -113,4 +113,54 @@ public class LoanApplyResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("loanApply", id.toString())).build();
     }
 
+    /**
+     * 审核通过
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/loan-applies/{id}/auditPass")
+    @Timed
+    public ResponseEntity<Void> auditPass(@PathVariable Long id) {
+        log.debug("REST request to auditPass LoanApply : {}", id);
+        loanApplyService.auditPass(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanApply", "auditPassed", id.toString())).build();
+    }
+    /**
+     * 审核不通过
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/loan-applies/{id}/auditReject")
+    @Timed
+    public ResponseEntity<Void> auditReject(@PathVariable Long id) {
+        log.debug("REST request to auditReject LoanApply : {}", id);
+        loanApplyService.auditReject(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanApply", "auditRejected", id.toString())).build();
+    }
+
+    /**
+     * 放款
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/loan-applies/{id}/loan")
+    @Timed
+    public ResponseEntity<Void> loan(@PathVariable Long id) {
+        log.debug("REST request to loan LoanApply : {}", id);
+        loanApplyService.loan(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanApply", "loaned", id.toString())).build();
+    }
+
+    /**
+     * 还款
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/loan-applies/{id}/repay")
+    @Timed
+    public ResponseEntity<Void> repayment(@PathVariable Long id) {
+        log.debug("REST request to repay LoanApply : {}", id);
+        loanApplyService.complete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("loanApply", "completed", id.toString())).build();
+    }
 }

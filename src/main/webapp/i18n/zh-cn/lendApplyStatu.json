@@ -2,9 +2,11 @@
     "anprjApp": {
         "LendApplyStatu" : {
             "null": "",
-            "APPLYED": "APPLYED",
-            "STARTED": "STARTED",
-            "COMPLETED": "COMPLETED"
+            "APPLYED": "申请已提交",
+            "PASSED": "审核通过",
+            "REJECTED": "审核未通过",
+            "LENDED": "起息",
+            "COMPLETED": "完成"
         }
     }
 }

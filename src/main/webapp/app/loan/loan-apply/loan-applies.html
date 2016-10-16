@@ -22,11 +22,7 @@
                     <th jh-sort-by="login"><span data-translate="anprjApp.loanApply.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="loanPrjId"><span data-translate="anprjApp.loanApply.loanPrjId">Loan Prj Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="amount"><span data-translate="anprjApp.loanApply.amount">Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="applyStatu"><span data-translate="anprjApp.loanApply.applyStatu">Apply Statu</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="applyDate"><span data-translate="anprjApp.loanApply.applyDate">Apply Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="auditDate"><span data-translate="anprjApp.loanApply.auditDate">Audit Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="loanDate"><span data-translate="anprjApp.loanApply.loanDate">Loan Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="completeDate"><span data-translate="anprjApp.loanApply.completeDate">Complete Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="applyStatu"><span data-translate="anprjApp.loanApply.applyStatu">Apply Statu</span>及操作 <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -36,11 +32,17 @@
                     <td>{{loanApply.login}}</td>
                     <td>{{loanApply.loanPrjId}}</td>
                     <td>{{loanApply.amount}}</td>
-                    <td data-translate="{{'anprjApp.LoanApplyStatu.' + loanApply.applyStatu}}">{{loanApply.applyStatu}}</td>
-                        <td>{{loanApply.applyDate | date:'mediumDate'}}</td>
-                        <td>{{loanApply.auditDate | date:'mediumDate'}}</td>
-                        <td>{{loanApply.loanDate | date:'mediumDate'}}</td>
-                        <td>{{loanApply.completeDate | date:'mediumDate'}}</td>
+                    <td>
+                        <span data-translate="{{'anprjApp.LoanApplyStatu.' + loanApply.applyStatu}}">{{loanApply.applyStatu}}></span>
+                        <span class="label label-warning" ng-click="vm.auditPass(loanApply)"
+                              ng-show="loanApply.applyStatu == 'APPLYED'" style="cursor: pointer;">审核通过</span>
+                        <span class="label label-warning" ng-click="vm.auditReject(loanApply)"
+                              ng-show="loanApply.applyStatu == 'APPLYED'" style="cursor: pointer;">拒绝</span>
+                        <span class="label label-warning" ng-click="vm.loan(loanApply)"
+                              ng-show="loanApply.applyStatu == 'PASSED'" style="cursor: pointer;">放款</span>
+                        <span class="label label-warning" ng-click="vm.repay(loanApply)"
+                              ng-show="loanApply.applyStatu == 'LOANED'" style="cursor: pointer;">还款</span>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -48,12 +50,6 @@
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="loan-apply.edit({id:loanApply.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="loan-apply.delete({id:loanApply.id})"

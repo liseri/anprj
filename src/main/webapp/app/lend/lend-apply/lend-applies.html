@@ -22,10 +22,7 @@
                     <th jh-sort-by="login"><span data-translate="anprjApp.lendApply.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lendPrjId"><span data-translate="anprjApp.lendApply.lendPrjId">Lend Prj Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="amount"><span data-translate="anprjApp.lendApply.amount">Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lendStatu"><span data-translate="anprjApp.lendApply.lendStatu">Lend Statu</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="applyDate"><span data-translate="anprjApp.lendApply.applyDate">Apply Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="startDate"><span data-translate="anprjApp.lendApply.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="completeDate"><span data-translate="anprjApp.lendApply.completeDate">Complete Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lendStatu"><span data-translate="anprjApp.lendApply.lendStatu">Lend Statu</span>及操作 <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -35,10 +32,17 @@
                     <td>{{lendApply.login}}</td>
                     <td>{{lendApply.lendPrjId}}</td>
                     <td>{{lendApply.amount}}</td>
-                    <td data-translate="{{'anprjApp.LendApplyStatu.' + lendApply.lendStatu}}">{{lendApply.lendStatu}}</td>
-                        <td>{{lendApply.applyDate | date:'mediumDate'}}</td>
-                        <td>{{lendApply.startDate | date:'mediumDate'}}</td>
-                        <td>{{lendApply.completeDate | date:'mediumDate'}}</td>
+                    <td>
+                        <span data-translate="{{'anprjApp.LendApplyStatu.' + lendApply.lendStatu}}">{{lendApply.lendStatu}}></span>
+                        <span class="label label-warning" ng-click="vm.auditPass(lendApply)"
+                              ng-show="lendApply.lendStatu == 'APPLYED'" style="cursor: pointer;">审核通过</span>
+                        <span class="label label-warning" ng-click="vm.auditReject(lendApply)"
+                              ng-show="lendApply.lendStatu == 'APPLYED'" style="cursor: pointer;">拒绝</span>
+                        <span class="label label-warning" ng-click="vm.lend(lendApply)"
+                              ng-show="lendApply.lendStatu == 'PASSED'" style="cursor: pointer;">起息</span>
+                        <span class="label label-warning" ng-click="vm.complete(lendApply)"
+                              ng-show="lendApply.lendStatu == 'LENDED'" style="cursor: pointer;">完成</span>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -46,12 +50,6 @@
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="lend-apply.edit({id:lendApply.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="lend-apply.delete({id:lendApply.id})"

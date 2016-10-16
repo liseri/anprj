@@ -28,6 +28,7 @@
                     $translatePartialLoader.addPart('loanPrj');
                     $translatePartialLoader.addPart('lOANPRJTYPE');
                     $translatePartialLoader.addPart('rEPAYMENTTYPE');
+                    $translatePartialLoader.addPart('durationUnit');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]

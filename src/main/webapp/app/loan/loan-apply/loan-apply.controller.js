@@ -9,12 +9,16 @@
 
     function LoanApplyController ($scope, $state, LoanApply, ParseLinks, AlertService, pagingParams, paginationConstants) {
         var vm = this;
-        
+
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.auditPass = auditPass;
+        vm.auditReject = auditReject;
+        vm.loan = loan;
+        vm.repay = repay;
 
         loadAll();
 
@@ -53,6 +57,27 @@
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
+            });
+        }
+
+        function auditPass(loanApply) {
+            LoanApply.auditPass(loanApply, function(result){
+                loadAll();
+            });
+        }
+        function auditReject(loanApply) {
+            LoanApply.auditReject(loanApply, function(result){
+                loadAll();
+            });
+        }
+        function loan(loanApply) {
+            LoanApply.loan(loanApply, function(result){
+                loadAll();
+            });
+        }
+        function repay(loanApply) {
+            LoanApply.repay(loanApply, function(result){
+                loadAll();
             });
         }
     }

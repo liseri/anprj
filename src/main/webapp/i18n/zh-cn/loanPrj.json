@@ -18,15 +18,15 @@
             "detail": {
                 "title": "借款项目详情"
             },
-            "name": "名称",
+            "name": "借款项目名称",
             "loanType": "类型",
-            "maxAmount": "最大可借额度",
-            "rate": "利率",
+            "maxAmount": "最大可借额度(元)",
+            "rate": "利率(%)",
             "duration": "借款期限",
             "durationUnit": "借款期限单位",
             "durationNum": "借款期限单位数",
             "replayType": "还款方式",
-            "activatStatu": "发布状态",
+            "activateStatu": "发布状态",
             "activateDate": "发布时间"
         }
     }
