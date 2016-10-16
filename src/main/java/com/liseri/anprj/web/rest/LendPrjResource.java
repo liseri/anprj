@@ -99,24 +99,7 @@ public class LendPrjResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/lend-prjs");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-    /**
-     * GET  /lend-prjs : get all the lendPrjs.
-     *
-     * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of lendPrjs in body
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @RequestMapping(value = "/lend-prjs/activated",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<List<LendPrj>> getAllLendUserPrjs(Pageable pageable)
-        throws URISyntaxException {
-        log.debug("REST request to get a page of LendPrjs");
-        Page<LendPrj> page = lendPrjService.findAllActivated(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/lend-prjs");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
+
     /**
      * GET  /lend-prjs/:id : get the "id" lendPrj.
      *
@@ -170,5 +153,35 @@ public class LendPrjResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityOperationAlert("lendPrj", "unactivated", id.toString()))
             .body(result);
     }
+    //region 用户接口
 
+    /**
+     * 查询
+     * @param pageable
+     * @return
+     * @throws URISyntaxException
+     */
+    @GetMapping(value = "/lend-prjs/activated")
+    @Timed
+    public ResponseEntity<List<LendPrj>> getAllLendUserPrjs(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of LendPrjs");
+        Page<LendPrj> page = lendPrjService.findAllActivated(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/lend-prjs");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    @GetMapping(value = "/lend-prjs/activated/{id}")
+    @Timed
+    public ResponseEntity<LendPrj> getLendUserPrj(@PathVariable Long id)
+        throws URISyntaxException {
+        log.debug("REST request to get LendUserPrj : {}", id);
+        LendPrj lendPrj = lendPrjService.findOne(id);
+        return Optional.ofNullable(lendPrj)
+            .filter(item -> item.isActivated() == true)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    //endregion
 }
