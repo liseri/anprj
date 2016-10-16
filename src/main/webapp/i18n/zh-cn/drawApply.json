@@ -2,29 +2,29 @@
     "anprjApp": {
         "drawApply" : {
             "home": {
-                "title": "Draw Applies",
-                "createLabel": "Create a new Draw Apply",
-                "createOrEditLabel": "Create or edit a Draw Apply",
-                "search": "Search for Draw Apply"
+                "title": "提款预约管理",
+                "createLabel": "提款预约",
+                "createOrEditLabel": "提款预约",
+                "search": "查询"
             },
-            "created": "A new Draw Apply is created with identifier {{ param }}",
-            "updated": "A Draw Apply is updated with identifier {{ param }}",
-            "deleted": "A Draw Apply is deleted with identifier {{ param }}",
+            "created": "提款预约创建成功",
+            "updated": "提款预约修改成功",
+            "deleted": "提款预约删除成功",
             "delete": {
-                "question": "Are you sure you want to delete Draw Apply {{ id }}?"
+                "question": "确定要删除该提款预约?"
             },
             "detail": {
-                "title": "Draw Apply"
+                "title": "提款预约详情"
             },
-            "login": "Login",
-            "orderAmount": "Order Amount",
-            "actualAmount": "Actual Amount",
-            "orderDrawDate": "Order Draw Date",
-            "canceled": "Canceled",
-            "completed": "Completed",
-            "applyDate": "Apply Date",
-            "canceledDate": "Canceled Date",
-            "completedDate": "Completed Date"
+            "login": "预约用户",
+            "orderAmount": "预约提款金额",
+            "actualAmount": "实际提款金额",
+            "orderDrawDate": "预约提款日期",
+            "canceled": "是否取消",
+            "completed": "是否完成",
+            "applyDate": "申请日期",
+            "canceledDate": "取消日期",
+            "completedDate": "实际提款日期"
         }
     }
 }

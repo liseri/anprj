@@ -25,9 +25,6 @@
                     <th jh-sort-by="orderDrawDate"><span data-translate="anprjApp.drawApply.orderDrawDate">Order Draw Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="canceled"><span data-translate="anprjApp.drawApply.canceled">Canceled</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="completed"><span data-translate="anprjApp.drawApply.completed">Completed</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="applyDate"><span data-translate="anprjApp.drawApply.applyDate">Apply Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="canceledDate"><span data-translate="anprjApp.drawApply.canceledDate">Canceled Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="completedDate"><span data-translate="anprjApp.drawApply.completedDate">Completed Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -40,9 +37,6 @@
                     <td>{{drawApply.orderDrawDate}}</td>
                     <td>{{drawApply.canceled}}</td>
                     <td>{{drawApply.completed}}</td>
-                        <td>{{drawApply.applyDate | date:'mediumDate'}}</td>
-                        <td>{{drawApply.canceledDate | date:'mediumDate'}}</td>
-                        <td>{{drawApply.completedDate | date:'mediumDate'}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

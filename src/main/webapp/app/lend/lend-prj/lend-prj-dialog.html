@@ -56,7 +56,7 @@
             <label class="control-label" data-translate="anprjApp.lendPrj.rate" for="field_rate">Rate</label>
             <input type="number" class="form-control" name="rate" id="field_rate"
                    ng-model="vm.lendPrj.rate"
-                   required min="0" max="1"/>
+                   required min="0" max="100"/>
             <div ng-show="editForm.rate.$invalid">
                 <p class="help-block"
                    ng-show="editForm.rate.$error.required" data-translate="entity.validation.required">

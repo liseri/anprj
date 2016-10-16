@@ -50,7 +50,12 @@ public class LendPrjService {
         Page<LendPrj> result = lendPrjRepository.findAll(pageable);
         return result;
     }
-
+    @Transactional(readOnly = true)
+    public Page<LendPrj> findAllActivated(Pageable pageable) {
+        log.debug("Request to get all LendPrjs");
+        Page<LendPrj> result = lendPrjRepository.findByActivated(true, pageable);
+        return result;
+    }
     /**
      *  Get one lendPrj by id.
      *

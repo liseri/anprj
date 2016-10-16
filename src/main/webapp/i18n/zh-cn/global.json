@@ -14,7 +14,8 @@
             "lend": {
                 "main": "理财管理",
                 "lendPrj": "理财项目管理",
-                "lendApply": "用户理财管理"
+                "lendApply": "用户理财管理",
+                "lendUser": "我要理财"
             },
             "draw": {
                 "main": "预约提款管理",

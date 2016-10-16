@@ -1,8 +1,8 @@
 {
     "anprjApp": {
-        "lendPrj" : {
+        "lendUserPrj" : {
             "home": {
-                "title": "理财项目管理",
+                "title": "理财产品列表",
                 "createLabel": "新建项目",
                 "createOrEditLabel": "新建或编辑理财项目",
                 "search": "查询"

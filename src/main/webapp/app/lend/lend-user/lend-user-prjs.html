@@ -1,0 +1,48 @@
+<div>
+    <h2 data-translate="anprjApp.lendUserPrj.home.title">Lend Prjs</h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name"><span data-translate="anprjApp.lendUserPrj.name">Name</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="startAmount"><span data-translate="anprjApp.lendUserPrj.startAmount">Start Amount</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="rate"><span data-translate="anprjApp.lendUserPrj.rate">Rate</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th><span data-translate="anprjApp.lendUserPrj.duration">Duration Num</span></span></th>
+                <th><span data-translate="anprjApp.lendUserPrj.returnType">Return Type</span></span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+            <tr ng-repeat="lendUserPrj in vm.lendPrjs track by lendUserPrj.id">
+                <td><a ui-sref="lend-user-prjdetail({id:lendUserPrj.id})">{{lendUserPrj.id}}</a></td>
+                <td>{{lendUserPrj.name}}</td>
+                <td>{{lendUserPrj.startAmount}}</td>
+                <td>{{lendUserPrj.rate}}</td>
+                <td>
+                    {{lendUserPrj.durationNum}}
+                    <span
+                        data-translate="{{'anprjApp.durationUnit.' + lendUserPrj.durationUnit}}">{{lendUserPrj.durationUnit}}</span>
+                </td>
+                <td data-translate="{{'anprjApp.REPAYMENTTYPE.' + lendUserPrj.returnType}}">{{lendUserPrj.returnType}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="lend-prj-detail({id:lendUserPrj.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
