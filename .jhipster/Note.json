@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "prjId",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "noteType",
+            "fieldType": "NoteType",
+            "fieldValues": "LENDDES1,LENDDES2,LENDDES3,LENDDES4,LENDDES5,LOADDES1,LOADDES2,LOADDES3,LOADDES4,LOADDES5",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "noteContent",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1000
+        }
+    ],
+    "changelogDate": "20161016234706",
+    "entityTableName": "an_note",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "angularSuffix": "anprjSuffix"
+}

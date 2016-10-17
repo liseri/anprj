@@ -81,5 +81,9 @@
         timeToLiveSeconds="3600">
     </cache>
 
+    <cache name="com.liseri.anprj.domain.Note"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

@@ -1,0 +1,17 @@
+{
+    "anprjApp": {
+        "NoteType" : {
+            "null": "",
+            "LENDDES1": "LENDDES1",
+            "LENDDES2": "LENDDES2",
+            "LENDDES3": "LENDDES3",
+            "LENDDES4": "LENDDES4",
+            "LENDDES5": "LENDDES5",
+            "LOADDES1": "LOADDES1",
+            "LOADDES2": "LOADDES2",
+            "LOADDES3": "LOADDES3",
+            "LOADDES4": "LOADDES4",
+            "LOADDES5": "LOADDES5"
+        }
+    }
+}

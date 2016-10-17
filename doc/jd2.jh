@@ -18,8 +18,6 @@ entity Note(AN_NOTE) {
 	noteContent String required maxlength(1000) //描述
 }
 
-service all with serviceClass
-
 // Set pagination options
 paginate Note with infinite-scroll
 angularSuffix * with anprjSuffix

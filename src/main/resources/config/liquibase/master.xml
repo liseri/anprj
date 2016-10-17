@@ -16,6 +16,7 @@
     <include file="classpath:config/liquibase/changelog/20161004134623_added_entity_LendPrj.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161004134624_added_entity_LendApply.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161004134625_added_entity_DrawApply.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161016234706_added_entity_Note.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
