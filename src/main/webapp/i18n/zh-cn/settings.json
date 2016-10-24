@@ -17,11 +17,13 @@
                 "emailexists": "<strong>该邮件地址已被使用!</strong> 请使用另外的邮件地址."
             }
         },
+        "phoneUpdated": "用户手机号绑定成功",
         "phone": {
             "title": "手机号绑定",
             "placeholder": "您的手机号",
             "success": "<strong>手机号绑定成功!</strong>"
         },
+        "identityUpdated": "用户实名认证设置成功",
         "identity": {
             "title": "身份证绑定",
             "nameplaceholder": "您身份证上的名字",
@@ -29,6 +31,7 @@
             "cardplaceholder": "您的身份证号",
             "success": "<strong>身份证信息上传成功，等待审核!</strong>"
         },
+        "address": "用户居住地址设置成功",
         "address": {
             "title": "地址设置",
             "addressplaceholder": "您的居住地址",

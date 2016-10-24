@@ -25,6 +25,7 @@ public final class HeaderUtil {
         headers.add("X-anprjApp-params", param);
         return headers;
     }
+
     public static HttpHeaders createEntityOperationAlert(String entityName, String operateName, String param) {
         return createAlert("anprjApp." + entityName + "." + operateName, param);
     }

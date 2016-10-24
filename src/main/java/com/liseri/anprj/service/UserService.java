@@ -94,7 +94,13 @@ public class UserService {
         log.debug("Created Information for User: {}", user);
         return user;
     }
-
+    public void updateUserEmail(String email) {
+        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
+            u.setEmail(email);
+            userRepository.save(u);
+            log.debug("Changed Email for User: {}", u);
+        });
+    }
     public void updateUser(String firstName, String lastName, String email, String langKey) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
             u.setFirstName(firstName);

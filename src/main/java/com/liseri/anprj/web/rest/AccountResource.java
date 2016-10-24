@@ -15,10 +15,7 @@ import com.liseri.anprj.web.rest.util.HeaderUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -150,6 +147,31 @@ public class AccountResource {
                 userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
                     userDTO.getLangKey());
                 return new ResponseEntity<String>(HttpStatus.OK);
+            })
+            .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    /**
+     * 更新邮箱
+     * @param email
+     * @return
+     */
+    @RequestMapping(value = "/account/email",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Void> updateUserEmail(@Valid @RequestBody String email) {
+        String login = SecurityUtils.getCurrentUserLogin();
+        Optional<User> existingUser = userRepository.findOneByEmail(email);
+        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(login))) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("user-management", "emailexists", "Email already in use")).body(null);
+        }
+        return userRepository
+            .findOneByLogin(login)
+            .map(u -> {
+                userService.updateUserEmail(email);
+                return ResponseEntity.ok()
+                    .headers(HeaderUtil.createAlert("settings.email.success", login)).build();
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }

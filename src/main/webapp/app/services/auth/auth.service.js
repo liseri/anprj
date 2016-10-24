@@ -21,7 +21,8 @@
             resetPasswordInit: resetPasswordInit,
             resetPreviousState: resetPreviousState,
             storePreviousState: storePreviousState,
-            updateAccount: updateAccount
+            updateAccount: updateAccount,
+            updateAccountEmail:updateAccountEmail
         };
 
         return service;
@@ -164,6 +165,18 @@
             return Account.save(account,
                 function () {
                     return cb(account);
+                },
+                function (err) {
+                    return cb(err);
+                }.bind(this)).$promise;
+        }
+
+        function updateAccountEmail (email, callback) {
+            var cb = callback || angular.noop;
+
+            return Account.updateUserEmail(email,
+                function () {
+                    return cb(email);
                 },
                 function (err) {
                     return cb(err);

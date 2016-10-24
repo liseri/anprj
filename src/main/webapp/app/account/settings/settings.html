@@ -1,30 +1,58 @@
 <div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h2 data-translate="settings.title" translate-values="{username: '{{vm.settingsAccount.login}}'}">User
-                settings for [<b>{{vm.settingsAccount.login}}</b>]</h2>
-
-            <div class="alert alert-success" name="alertDiv" ng-show="vm.success"
-                 data-translate="settings.email.success">
-                <strong>Settings saved!</strong>
-            </div>
+            <h2>账号设置</h2>
             <jhi-alert></jhi-alert>
             <jhi-alert-error></jhi-alert-error>
             <!--电子邮件设置-->
             <form name="emailForm" role="form" novalidate ng-submit="vm.emailSave()" show-validation>
-                <label class="control-label" for="email" data-translate="settings.email.title">E-mail</label>
-
+                <h4 class="control-label">账户基本信息设置</h4>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-2"><label class="form-control-static">账号：</label></div>
+                        <div class="col-md-8"><label class="form-control">{{vm.settingsAccount.login}}</label></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2"><label class="form-control-static">电子邮箱：</label></div>
+                        <div class="col-md-8">
+                            <label class="form-control"
+                                   ng-show="vm.isEmailEditing==false">{{vm.settingsAccount.email}}</label>
                             <input type="email" class="form-control" id="email" name="email"
                                    placeholder="{{'global.form.email.placeholder' | translate}}"
-                                   ng-model="vm.settingsAccount.email" ng-minlength=8 ng-maxlength=100 required
-                                   maxlength="100">
+                                   ng-show="vm.isEmailEditing==true"
+                                   auto-focus-when="vm.isEmailEditing==true"
+                                   ng-model="vm.settingsAccount.email" ng-minlength=8 ng-maxlength=100 required maxlength="100">
+                            <div ng-show="vm.isEmailEditing==true && form.email.$dirty && form.email.$invalid">
+                                <p class="help-block"
+                                   ng-show="form.email.$error.required"
+                                   data-translate="global.messages.validate.email.required">
+                                    Your e-mail is required.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.email.$error.email"
+                                   data-translate="global.messages.validate.email.invalid">
+                                    Your e-mail is invalid.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.email.$error.minlength"
+                                   data-translate="global.messages.validate.email.minlength">
+                                    Your e-mail is required to be at least 5 characters.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.email.$error.maxlength"
+                                   data-translate="global.messages.validate.email.maxlength">
+                                    Your e-mail cannot be longer than 100 characters.
+                                </p>
+                            </div>
                         </div>
                         <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" ng-show="vm.isEmailEditing==false"
+                                    ng-click="vm.isEmailEditing=true">修改
+                            </button>
                             <button type="submit" ng-disabled="emailForm.$invalid" class="btn btn-primary"
-                                    data-translate="settings.form.button">Save
+                                    ng-show="vm.isEmailEditing==true" data-translate="settings.form.button">保存
                             </button>
                         </div>
                     </div>
@@ -32,7 +60,7 @@
             </form>
             <!--手机号设置-->
             <form name="phoneForm" role="form" novalidate ng-submit="vm.phoneBind()" show-validation>
-                <label class="control-label" for="phone" data-translate="settings.phone.title">Phone</label>
+                <h4 class="control-label" for="phone" data-translate="settings.phone.title">Phone</h4>
 
                 <div class="form-group">
                     <div class="row">
