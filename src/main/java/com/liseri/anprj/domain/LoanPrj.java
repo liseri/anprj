@@ -51,7 +51,7 @@ public class LoanPrj implements Serializable {
 
     @NotNull
     @DecimalMin(value = "0")
-    @DecimalMax(value = "1")
+    @DecimalMax(value = "100")
     @Column(name = "rate", precision=10, scale=2, nullable = false)
     private BigDecimal rate;
 

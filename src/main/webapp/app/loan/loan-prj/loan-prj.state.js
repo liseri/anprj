@@ -45,7 +45,8 @@
                 'content@': {
                     templateUrl: 'app/loan/loan-prj/loan-prj-detail.html',
                     controller: 'LoanPrjDetailController',
-                    controllerAs: 'vm'
+                    controllerAs: 'vm',
+                    size: 'md'
                 }
             },
             resolve: {
@@ -80,7 +81,7 @@
                     controller: 'LoanPrjDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: ['LoanPrj', function(LoanPrj) {
                             return LoanPrj.get({id : $stateParams.id}).$promise;
@@ -105,7 +106,7 @@
                     controller: 'LoanPrjDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: function () {
                             return {
@@ -141,7 +142,7 @@
                     controller: 'LoanPrjDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: ['LoanPrj', function(LoanPrj) {
                             return LoanPrj.get({id : $stateParams.id}).$promise;

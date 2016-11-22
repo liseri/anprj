@@ -10,7 +10,7 @@
     function stateConfig($stateProvider) {
         $stateProvider
         .state('lend-user', {
-            parent: 'lend',
+            parent: 'app',
             url: '/lend-user',
             data: {
                 authorities: ['ROLE_USER'],
@@ -34,7 +34,7 @@
             }
         })
         .state('lend-user-prjdetail', {
-            parent: 'entity',
+            parent: 'app',
             url: '/lend-user/{id}',
             data: {
                 authorities: ['ROLE_USER'],

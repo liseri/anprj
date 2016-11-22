@@ -46,14 +46,14 @@
                 </td>
                 <td data-translate="{{'anprjApp.REPAYMENTTYPE.' + lendPrj.returnType}}">{{lendPrj.returnType}}</td>
                 <td>
-                    <span ng-show="lendPrj.activated == false">未发布</span>
-                    <span ng-show="lendPrj.activated == true">已发布</span>
-                    <span class="label label-warning" ng-click="vm.activate(lendPrj)"
+                    <span ng-show="lendPrj.activated == false" class="badge">未发布</span>
+                    <span ng-show="lendPrj.activated == true" class="badge" style="background-color: #5cb85c">已发布</span>
+                    <label class="label label-primary" ng-click="vm.activate(lendPrj)"
                           ng-show="lendPrj.activated == false"
-                          style="cursor: pointer;">发布</span>
-                    <span class="label label-warning" ng-click="vm.unactivate(lendPrj)"
+                          style="cursor: pointer;">发布项目</label>
+                    <label class="label label-primary" ng-click="vm.unactivate(lendPrj)"
                           ng-show="lendPrj.activated == true"
-                          style="cursor: pointer;">取消发布</span>
+                          style="cursor: pointer;">取消发布</label>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

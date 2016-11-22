@@ -6,135 +6,147 @@
         <h4 class="modal-title" id="myLendPrjLabel" data-translate="anprjApp.lendPrj.home.createOrEditLabel">Create or
             edit a Lend Prj</h4>
     </div>
-    <div class="modal-body">
+    <div class="modal-body row">
         <jhi-alert-error></jhi-alert-error>
         <div class="form-group" ng-show="false">
             <label for="id" data-translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                    ng-model="vm.lendPrj.id" readonly/>
         </div>
-        <div class="form-group col-md-12">
-            <label class="control-label" data-translate="anprjApp.lendPrj.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                   ng-model="vm.lendPrj.name"
-                   required ng-maxlength="32"/>
-            <div ng-show="editForm.name.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.name.$error.maxlength" data-translate="entity.validation.maxlength"
-                   translate-value-max="32">
-                    This field cannot be longer than 32 characters.
-                </p>
-            </div>
-        </div>
-        <div class="form-group col-md-3">
-            <label class="control-label" data-translate="anprjApp.lendPrj.startAmount" for="field_startAmount">Start
-                Amount</label>
-            <input type="number" class="form-control" name="startAmount" id="field_startAmount"
-                   ng-model="vm.lendPrj.startAmount"
-                   required min="1"/>
-            <div ng-show="editForm.startAmount.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.startAmount.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.startAmount.$error.min" data-translate="entity.validation.min"
-                   translate-value-min="0">
-                    This field should be more than 0.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.startAmount.$error.number" data-translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
-        <div class="form-group col-md-3">
-            <label class="control-label" data-translate="anprjApp.lendPrj.rate" for="field_rate">Rate</label>
-            <input type="number" class="form-control" name="rate" id="field_rate"
-                   ng-model="vm.lendPrj.rate"
-                   required min="0" max="100"/>
-            <div ng-show="editForm.rate.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.rate.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.rate.$error.min" data-translate="entity.validation.min" translate-value-min="0">
-                    This field should be more than 0.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.rate.$error.max" data-translate="entity.validation.max" translate-value-max="1">
-                    This field cannot be more than 1.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.rate.$error.number" data-translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
-        <div class="form-group col-md-3">
-            <label class="control-label" data-translate="anprjApp.lendPrj.duration"
-                   for="field_duration">Duration</label>
-            <div id="field_duration">
-                <div class="col-md-8  no-padding-left no-padding-right">
-                    <input type="number" class="form-control" name="durationNum" id="field_durationNum"
-                           ng-model="vm.lendPrj.durationNum"
-                           required min="0"/>
-                    <div ng-show="editForm.durationNum.$invalid">
-                        <p class="help-block"
-                           ng-show="editForm.durationNum.$error.required" data-translate="entity.validation.required">
-                            This field is required.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.durationNum.$error.min" data-translate="entity.validation.min"
-                           translate-value-min="0">
-                            This field should be more than 0.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.durationNum.$error.number" data-translate="entity.validation.number">
-                            This field should be a number.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4  no-padding-left no-padding-right">
-                    <select class="form-control" name="replayType" ng-model="vm.lendPrj.durationUnit"
-                            id="field_durationUnit" required>
-                        <option value="DAYS">天</option>
-                        <option value="MONTHS">月</option>
-                        <option value="YEARS">年</option>
-                    </select>
-                    <div ng-show="editForm.durationUnit.$invalid">
-                        <p class="help-block"
-                           ng-show="editForm.durationUnit.$error.required"
-                           data-translate="entity.validation.required">
-                            This field is required.
-                        </p>
-                    </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="control-label" data-translate="anprjApp.lendPrj.name" for="field_name">Name</label>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       ng-model="vm.lendPrj.name"
+                       required ng-maxlength="32"/>
+                <div ng-show="editForm.name.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.name.$error.maxlength" data-translate="entity.validation.maxlength"
+                       translate-value-max="32">
+                        This field cannot be longer than 32 characters.
+                    </p>
                 </div>
             </div>
         </div>
-
-        <div class="form-group col-md-3">
-            <label class="control-label" data-translate="anprjApp.lendPrj.returnType" for="field_returnType">Return
-                Type</label>
-            <select class="form-control" name="returnType" ng-model="vm.lendPrj.returnType" id="field_returnType"
-                    required>
-                <option value="MONTH" data-translate="anprjApp.REPAYMENTTYPE.MONTH">MONTH</option>
-                <option value="MONTHANDDUE" data-translate="anprjApp.REPAYMENTTYPE.MONTHANDDUE">MONTHANDDUE</option>
-                <option value="QUARTER" data-translate="anprjApp.REPAYMENTTYPE.QUARTER">QUARTER</option>
-                <option value="QUARTERANDDUE" data-translate="anprjApp.REPAYMENTTYPE.QUARTERANDDUE">QUARTERANDDUE
-                </option>
-                <option value="DUE" data-translate="anprjApp.REPAYMENTTYPE.DUE">DUE</option>
-            </select>
-            <div ng-show="editForm.returnType.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.returnType.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label" data-translate="anprjApp.lendPrj.startAmount" for="field_startAmount">Start
+                    Amount</label>
+                <input type="number" class="form-control" name="startAmount" id="field_startAmount"
+                       ng-model="vm.lendPrj.startAmount"
+                       required min="1"/>
+                <div ng-show="editForm.startAmount.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.startAmount.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.startAmount.$error.min" data-translate="entity.validation.min"
+                       translate-value-min="0">
+                        This field should be more than 0.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.startAmount.$error.number" data-translate="entity.validation.number">
+                        This field should be a number.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label" data-translate="anprjApp.lendPrj.rate" for="field_rate">Rate</label>
+                <input type="number" class="form-control" name="rate" id="field_rate"
+                       ng-model="vm.lendPrj.rate"
+                       required min="0" max="100"/>
+                <div ng-show="editForm.rate.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.rate.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.rate.$error.min" data-translate="entity.validation.min"
+                       translate-value-min="0">
+                        This field should be more than 0.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.rate.$error.max" data-translate="entity.validation.max"
+                       translate-value-max="1">
+                        This field cannot be more than 1.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.rate.$error.number" data-translate="entity.validation.number">
+                        This field should be a number.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label" data-translate="anprjApp.lendPrj.duration"
+                       for="field_duration">Duration</label>
+                <div id="field_duration">
+                    <div class="col-md-8  no-padding-left no-padding-right">
+                        <input type="number" class="form-control" name="durationNum" id="field_durationNum"
+                               ng-model="vm.lendPrj.durationNum"
+                               required min="0"/>
+                        <div ng-show="editForm.durationNum.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.durationNum.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.durationNum.$error.min" data-translate="entity.validation.min"
+                               translate-value-min="0">
+                                This field should be more than 0.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.durationNum.$error.number" data-translate="entity.validation.number">
+                                This field should be a number.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4  no-padding-left no-padding-right">
+                        <select class="form-control" name="replayType" ng-model="vm.lendPrj.durationUnit"
+                                id="field_durationUnit" required>
+                            <option value="DAYS">天</option>
+                            <option value="MONTHS">月</option>
+                            <option value="YEARS">年</option>
+                        </select>
+                        <div ng-show="editForm.durationUnit.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.durationUnit.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label" data-translate="anprjApp.lendPrj.returnType" for="field_returnType">Return
+                    Type</label>
+                <select class="form-control" name="returnType" ng-model="vm.lendPrj.returnType" id="field_returnType"
+                        required>
+                    <option value="MONTH" data-translate="anprjApp.REPAYMENTTYPE.MONTH">MONTH</option>
+                    <option value="MONTHANDDUE" data-translate="anprjApp.REPAYMENTTYPE.MONTHANDDUE">MONTHANDDUE</option>
+                    <option value="QUARTER" data-translate="anprjApp.REPAYMENTTYPE.QUARTER">QUARTER</option>
+                    <option value="QUARTERANDDUE" data-translate="anprjApp.REPAYMENTTYPE.QUARTERANDDUE">QUARTERANDDUE
+                    </option>
+                    <option value="DUE" data-translate="anprjApp.REPAYMENTTYPE.DUE">DUE</option>
+                </select>
+                <div ng-show="editForm.returnType.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.returnType.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

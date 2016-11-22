@@ -33,15 +33,22 @@
                     <td>{{lendApply.lendPrjId}}</td>
                     <td>{{lendApply.amount}}</td>
                     <td>
-                        <span data-translate="{{'anprjApp.LendApplyStatu.' + lendApply.lendStatu}}">{{lendApply.lendStatu}}></span>
-                        <span class="label label-warning" ng-click="vm.auditPass(lendApply)"
-                              ng-show="lendApply.lendStatu == 'APPLYED'" style="cursor: pointer;">审核通过</span>
-                        <span class="label label-warning" ng-click="vm.auditReject(lendApply)"
-                              ng-show="lendApply.lendStatu == 'APPLYED'" style="cursor: pointer;">拒绝</span>
-                        <span class="label label-warning" ng-click="vm.lend(lendApply)"
-                              ng-show="lendApply.lendStatu == 'PASSED'" style="cursor: pointer;">起息</span>
-                        <span class="label label-warning" ng-click="vm.complete(lendApply)"
-                              ng-show="lendApply.lendStatu == 'LENDED'" style="cursor: pointer;">完成</span>
+                        <span data-translate="{{'anprjApp.LendApplyStatu.' + lendApply.lendStatu}}" class="badge" ng-style="{
+                            'background-color': (lendApply.lendStatu == 'COMPLETED' ||
+                                                    lendApply.lendStatu == 'PASSED' ||
+                                                    lendApply.lendStatu == 'LENDED')?'#5cb85c':
+                                                        (lendApply.lendStatu == 'APPLYED')?'#f0ad4e':'#d9534f'
+                                                    }">
+                            {{lendApply.lendStatu}}>
+                        </span>
+                        <label class="label label-primary" ng-click="vm.auditPass(lendApply)"
+                              ng-show="lendApply.lendStatu == 'APPLYED'" style="cursor: pointer;">审核通过</label>
+                        <label class="label label-primary" ng-click="vm.auditReject(lendApply)"
+                              ng-show="lendApply.lendStatu == 'APPLYED'" style="cursor: pointer;">拒绝</label>
+                        <label class="label label-primary" ng-click="vm.lend(lendApply)"
+                              ng-show="lendApply.lendStatu == 'PASSED'" style="cursor: pointer;">起息</label>
+                        <label class="label label-primary" ng-click="vm.complete(lendApply)"
+                              ng-show="lendApply.lendStatu == 'LENDED'" style="cursor: pointer;">完成</label>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

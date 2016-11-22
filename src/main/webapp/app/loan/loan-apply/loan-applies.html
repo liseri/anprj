@@ -33,15 +33,20 @@
                     <td>{{loanApply.loanPrjId}}</td>
                     <td>{{loanApply.amount}}</td>
                     <td>
-                        <span data-translate="{{'anprjApp.LoanApplyStatu.' + loanApply.applyStatu}}">{{loanApply.applyStatu}}></span>
-                        <span class="label label-warning" ng-click="vm.auditPass(loanApply)"
-                              ng-show="loanApply.applyStatu == 'APPLYED'" style="cursor: pointer;">审核通过</span>
-                        <span class="label label-warning" ng-click="vm.auditReject(loanApply)"
-                              ng-show="loanApply.applyStatu == 'APPLYED'" style="cursor: pointer;">拒绝</span>
-                        <span class="label label-warning" ng-click="vm.loan(loanApply)"
-                              ng-show="loanApply.applyStatu == 'PASSED'" style="cursor: pointer;">放款</span>
-                        <span class="label label-warning" ng-click="vm.repay(loanApply)"
-                              ng-show="loanApply.applyStatu == 'LOANED'" style="cursor: pointer;">还款</span>
+                        <span data-translate="{{'anprjApp.LoanApplyStatu.' + loanApply.applyStatu}}" class="badge" ng-style="{
+                            'background-color': (loanApply.applyStatu == 'COMPLETED' ||
+                                                    loanApply.applyStatu == 'PASSED' ||
+                                                    loanApply.applyStatu == 'LOANED')?'#5cb85c':
+                                                        (loanApply.applyStatu == 'APPLYED')?'#f0ad4e':'#d9534f'
+                                                    }">{{loanApply.applyStatu}}></span>
+                        <label class="label label-primary" ng-click="vm.auditPass(loanApply)"
+                              ng-show="loanApply.applyStatu == 'APPLYED'" style="cursor: pointer;">审核通过</label>
+                        <label class="label label-primary" ng-click="vm.auditReject(loanApply)"
+                              ng-show="loanApply.applyStatu == 'APPLYED'" style="cursor: pointer;">拒绝</label>
+                        <label class="label label-primary" ng-click="vm.loan(loanApply)"
+                              ng-show="loanApply.applyStatu == 'PASSED'" style="cursor: pointer;">放款</label>
+                        <label class="label label-primary" ng-click="vm.repay(loanApply)"
+                              ng-show="loanApply.applyStatu == 'LOANED'" style="cursor: pointer;">还款</label>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

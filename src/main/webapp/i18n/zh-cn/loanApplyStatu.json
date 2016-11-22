@@ -2,7 +2,7 @@
     "anprjApp": {
         "LoanApplyStatu" : {
             "null": "",
-            "APPLYED": "申请已提交",
+            "APPLYED": "未审核",
             "PASSED": "审核通过",
             "REJECTED": "审核未通过",
             "LOANED": "已放款",

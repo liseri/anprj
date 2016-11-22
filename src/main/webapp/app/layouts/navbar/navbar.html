@@ -20,6 +20,13 @@
                         <span class="hidden-sm" data-translate="global.menu.home">Home</span>
                     </a>
                 </li>
+                <!-- 我要理财 -->
+                <li ng-class="{active: vm.$state.includes('lend-user')}" ng-switch-when="true"  has-any0authority="ROLE_ADMIN,ROLE_USER">
+                    <a ui-sref="lend-user" ng-click="vm.collapseNavbar()">
+                        <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                        <span data-translate="global.menu.lend.lendUser">我要理财</span>
+                    </a>
+                </li>
                 <!-- 借款管理 -->
                 <li ng-class="{active: vm.$state.includes('loan')}" ng-switch-when="true"  has-authority="ROLE_ADMIN"
                     uib-dropdown  class="dropdown pointer">
@@ -76,12 +83,6 @@
                             <a ui-sref="lend-apply" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                 <span data-translate="global.menu.lend.lendApply">Lend Apply</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="lend-user" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                <span data-translate="global.menu.lend.lendUser">我要理财</span>
                             </a>
                         </li>
                     </ul>
